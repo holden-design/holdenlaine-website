@@ -1,0 +1,373 @@
+---
+import prefs from '../data/preferences.json';
+
+const projects = [
+  {
+    title: "Portrait Series",
+    description: "A series of portraits exploring light and emotion.",
+    images: ["sonya1.jpg", "sonya2.jpg", "sonya3.jpg", "klara1.jpg", "klara3.jpg", "klara4.jpg", "klara5.jpg", "klara6.jpg"]
+  },
+  {
+    title: "Projects",
+    description: "Various creative projects.",
+    projects: [
+      {
+        title: "Tõnise talu, Muhu",
+        description: "A video project from Muhu island.",
+        caption: "Tõnise talu, Muhu video that shows the beauty of an Estonian summer and the beauty you can find at muhutonise.ee",
+        media: [
+          {type: "video", src: "tonise-talu.mp4", poster: "tonise-talu-poster.jpg"}
+        ]
+      }
+    ]
+  }
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Holden Laine Photography</title>
+    <style is:global>
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica;
+        background: #fff;
+        color: #222;
+        display: block;
+        cursor: none;
+      }
+      * {
+        cursor: none !important;
+      }
+      /* Prevent image selection and dragging */
+      img, video {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        pointer-events: auto;
+      }
+      /* Custom circular cursor */
+      .custom-cursor {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #222;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 10001;
+        transform: translate(-50%, -50%);
+        transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+      }
+      .custom-cursor.hover {
+        width: 40px;
+        height: 40px;
+        border-color: #999;
+      }
+      .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 2rem;
+      }
+      .sidebar {
+        position: fixed;
+        left: 0.5rem;
+        top: 2rem;
+        width: 110px;
+        padding: 0;
+        display: block;
+        z-index: 100;
+      }
+      .sidebar h1 {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .sidebar nav a {
+        display: block;
+        margin: 0.5rem 0;
+        color: #222;
+        text-decoration: none;
+        font-weight: 500;
+        text-transform: lowercase;
+        font-family: inherit;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+      }
+      .sidebar nav a:hover { text-decoration: underline; }
+      .sub-nav {
+        display: none;
+        padding-left: 1rem;
+        margin-top: 0.25rem;
+      }
+      .sub-nav.active {
+        display: block;
+      }
+      .sub-nav a {
+        font-size: 0.9rem;
+        font-weight: 400;
+        margin: 0.25rem 0;
+        color: #666;
+      }
+      .sub-nav a:hover {
+        color: #222;
+      }
+      .main-content {
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .project {
+        margin-bottom: 2.5rem;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 2rem;
+        width: 100%;
+      }
+      .project summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        outline: none;
+      }
+      .project summary::-webkit-details-marker { display: none; }
+      .project summary::marker { content: ''; display: none; }
+      .project summary::before { content: ''; display: none; }
+      .project summary { -webkit-appearance: none; appearance: none; }
+      .summary-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .summary-header h2 {
+        font-size: 1.3rem;
+        margin: 0;
+      }
+      .summary-header p {
+        font-size: 0.95rem;
+        color: #555;
+        margin: 0;
+      }
+      .project .image-grid {
+        margin-top: 1.25rem;
+      }
+      .image-grid {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+        -webkit-column-gap: 0.75rem;
+        -moz-column-gap: 0.75rem;
+        column-gap: 0.75rem;
+      }
+      
+      @media (max-width: 1200px) {
+        .image-grid {
+          -webkit-column-count: 3;
+          -moz-column-count: 3;
+          column-count: 3;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .image-grid {
+          -webkit-column-count: 2;
+          -moz-column-count: 2;
+          column-count: 2;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .image-grid {
+          -webkit-column-count: 1;
+          -moz-column-count: 1;
+          column-count: 1;
+        }
+      }
+
+      .thumb {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 0.75rem;
+        break-inside: avoid;
+      }
+      
+      .thumb img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      
+      .thumb img:hover {
+        transform: scale(1.02);
+        transition: transform 0.2s ease;
+      }
+      @media (min-width: 600px) {
+        /* Pin the nav closer to the left edge on wider screens */
+        .sidebar {
+          position: fixed;
+          left: 0.5rem;
+          top: 2rem;
+          width: 110px;
+          padding: 0;
+          margin: 0;
+        }
+        /* Make room for the fixed sidebar so the centered container doesn't overlap */
+        .container {
+          padding-left: 140px;
+        }
+        /* Slightly tighten nav link spacing for a slimmer look */
+        .sidebar nav a {
+          margin: 0.35rem 0;
+          font-size: 0.95rem;
+        }
+      }
+      
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0);
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        overflow: hidden;
+      }
+      .lightbox.active {
+        display: flex !important;
+        background: rgba(0, 0, 0, 0.95);
+      }
+      .lightbox-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 95vw;
+        max-height: 95vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .lightbox img, .lightbox video {
+        max-width: 95vw;
+        max-height: 95vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      .lightbox.active img, .lightbox.active video {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .lightbox-close {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #fff;
+        transition: background 0.2s ease;
+        z-index: 10000;
+      }
+      .lightbox-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      body.lightbox-open {
+        overflow: hidden;
+      }
+
+      @media (max-width: 480px) {
+        #portrait-series .image-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+        .container { padding-left: 1rem; }
+        .sidebar { position: static; width: auto; }
+      }
+    </style>
+  </head>
+    <body>
+		
+    <div class="container">
+      <div class="custom-cursor"></div>
+      <div class="sidebar">
+      <nav>
+        <a href="/home">Home</a>
+        <div>
+          <a href="#portrait-series" data-slug="portrait-series" class="main-nav-link">Portraits</a>
+          <div class="sub-nav" id="portraits-subnav">
+            <a href="#portrait-series" data-slug="portrait-series">portrait series</a>
+          </div>
+        </div>
+        <div>
+          <a href="#projects" data-slug="projects" class="main-nav-link">Projects</a>
+          <div class="sub-nav" id="projects-subnav">
+            <a href="#tonise-talu-muhu" data-slug="tonise-talu-muhu">tõnise talu</a>
+          </div>
+        </div>
+        <a href="/contact">Contact</a>
+      </nav>
+      </div>
+      <div id="main-content" class="main-content"></div>
+      <script type="module" src="/scripts/lazy-projects.js"></script>
+      <script>
+        // Custom cursor movement
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top = e.clientY + 'px';
+        });
+        
+        // Expand cursor on hover over clickable elements
+        document.addEventListener('mouseover', (e) => {
+          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+            cursor.classList.add('hover');
+          }
+        });
+        
+        document.addEventListener('mouseout', (e) => {
+          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+            cursor.classList.remove('hover');
+          }
+        });
+
+        // Prevent right-click context menu on images and videos
+        document.addEventListener('contextmenu', (e) => {
+          if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+            e.preventDefault();
+            return false;
+          }
+        });
+
+        // Prevent drag and drop of images
+        document.addEventListener('dragstart', (e) => {
+          if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+            e.preventDefault();
+            return false;
+          }
+        });
+      </script>
+    </div>
+  </body>
+</html>

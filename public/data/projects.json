@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Portrait Series",
+    "description": "A series of portraits exploring light and emotion.",
+    "images": ["sonya1.jpg", "sonya2.jpg", "sonya3.jpg", "sonya5.jpg", "sonya6.jpg", "sonya7.jpg", "sonya8.jpg", "sonya9.jpg", "sonya10.jpg", "sonya11.jpg", "sonya12.jpg", "sonya13.jpg", "sonya14.jpg", "sonya15.jpg", "sonya16.jpg", "sonya17.jpg", "sonya18.jpg", "sonyaa.jpg", "sonyaa1.jpg", "karin1.jpg", "victoria1.jpg", "more1.jpg", "more2.jpg", "mad1.jpg", "mad2.jpg", "july1.jpg", "july2.jpg", "col1.jpg", "matcha1.jpg", "matcha2.jpg", "matcha3.jpg", "matcha4.jpg", "matcha5.jpg", "himatcha.jpg", "adventure.jpg", "adventure1.jpg", "holden2.jpg", "holden3.jpg", "damn.jpg", "fucku.jpg", "fucku2.jpg", "marielle1.jpg", "eve1.jpg", "1x1spotify.jpg", "1X1X2 copy.jpg", "edit-1.jpg", "edit-2.jpg", "edit-3.jpg", "edit-4.jpg", "edit-5.jpg", "edit-6.jpg", "edit-7.jpg", "edit-8.jpg", "edit-9.jpg", "edit-10.jpg", "edit-11.jpg", "klara1.jpg", "klara3.jpg", "klara4.jpg", "klara5.jpg", "klara6.jpg"]
+  },
+  {
+    "title": "Street Photography",
+    "description": "Capturing candid moments from everyday life.",
+    "images": ["street1.jpg", "street2.jpg", "street3.jpg"]
+  },
+  {
+    "title": "Projects",
+    "description": "Various creative projects.",
+    "projects": [
+      {
+        "title": "Tõnise talu, Muhu",
+        "description": "A video project from Muhu island.",
+        "caption": "Tõnise talu, Muhu video that shows the beauty of an Estonian summer and the beauty you can find at muhutonise.ee",
+        "media": [
+          {"type": "video", "src": "tonise-talu.mp4", "poster": "tonise-talu-poster.jpg"}
+        ]
+      }
+    ]
+  }
+]

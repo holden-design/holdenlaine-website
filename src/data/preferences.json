@@ -1,0 +1,9 @@
+{
+  "source": "https://everythingandsomethingelse.com",
+  "layout": "centered-minimal",
+  "font": "Georgia, 'Times New Roman', serif",
+  "preferredColors": ["#111111", "#ffffff"],
+  "highlightedProjects": ["Portrait Series"],
+  "imageSize": "large",
+  "imageGrid": { "minWidth": 260, "gap": "1.5rem" }
+}
