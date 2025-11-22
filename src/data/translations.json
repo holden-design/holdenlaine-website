@@ -1,0 +1,96 @@
+{
+  "en": {
+    "nav": {
+      "home": "Home",
+      "portraits": "Photos",
+      "portraitSeries": "portrait series",
+      "projects": "Projects",
+      "toniseTalu": "tõnise talu",
+      "contact": "Contact"
+    },
+    "contact": {
+      "pageTitle": "Contact - Holden Laine Photography",
+      "heading": "Contact",
+      "bookSession": "Book a Session",
+      "availabilityCalendar": "Availability Calendar",
+      "availableTimes": "Available Times",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "preferredDate": "Preferred Date",
+      "preferredTime": "Preferred Time",
+      "sessionType": "Session Type",
+      "message": "Message",
+      "selectSessionType": "Select a session type",
+      "portraitSession": "Portrait Session",
+      "eventPhotography": "Event Photography",
+      "commercialProject": "Commercial Project",
+      "other": "Other",
+      "requestBooking": "Request Booking",
+      "sending": "Sending...",
+      "successMessage": "Thank you! Your booking request has been sent successfully. We'll get back to you soon.",
+      "errorMessage": "Oops! Something went wrong. Please try again or email us directly at holdenlaine@outlook.com",
+      "selectFromCalendar": "Select from calendar",
+      "selectDateFirst": "Select a date first",
+      "selectTimeBelow": "Select a time below",
+      "messagePlaceholder": "Tell me about your project or any specific requirements...",
+      "required": "*"
+    },
+    "index": {
+      "portraitSeriesTitle": "Portrait Series",
+      "portraitSeriesDesc": "A series of portraits exploring light and emotion.",
+      "projectsTitle": "Projects",
+      "projectsDesc": "Various creative projects.",
+      "toniseTaluTitle": "Tõnise talu, Muhu",
+      "toniseTaluDesc": "A video project from Muhu island.",
+      "toniseTaluCaption": "Tõnise talu, Muhu video that shows the beauty of an Estonian summer and the beauty you can find at muhutonise.ee"
+    }
+  },
+  "et": {
+    "nav": {
+      "home": "Avaleht",
+      "portraits": "Fotod",
+      "portraitSeries": "portreede seeria",
+      "projects": "Projektid",
+      "toniseTalu": "tõnise talu",
+      "contact": "Kontakt"
+    },
+    "contact": {
+      "pageTitle": "Kontakt - Holden Laine Fotograafia",
+      "heading": "Kontakt",
+      "bookSession": "Broneeri Sessioon",
+      "availabilityCalendar": "Saadavuse Kalender",
+      "availableTimes": "Saadaolevad Ajad",
+      "name": "Nimi",
+      "email": "E-post",
+      "phone": "Telefon",
+      "preferredDate": "Eelistatud Kuupäev",
+      "preferredTime": "Eelistatud Aeg",
+      "sessionType": "Sessiooni Tüüp",
+      "message": "Sõnum",
+      "selectSessionType": "Vali sessiooni tüüp",
+      "portraitSession": "Portreesessioon",
+      "eventPhotography": "Ürituse Fotograafia",
+      "commercialProject": "Kommertsprojekt",
+      "other": "Muu",
+      "requestBooking": "Saada Taotlus",
+      "sending": "Saadan...",
+      "successMessage": "Täname! Teie broneerimise taotlus on edukalt saadetud. Võtame teiega peagi ühendust.",
+      "errorMessage": "Oih! Midagi läks valesti. Palun proovige uuesti või kirjutage meile otse aadressil holdenlaine@outlook.com",
+      "selectFromCalendar": "Vali kalendrist",
+      "selectDateFirst": "Vali esmalt kuupäev",
+      "selectTimeBelow": "Vali aeg allpool",
+      "messagePlaceholder": "Rääkige oma projektist või konkreetsetest nõuetest...",
+      "required": "*"
+    },
+    "index": {
+      "portraitSeriesTitle": "Portreede Seeria",
+      "portraitSeriesDesc": "Portreede seeria, mis uurib valgust ja emotsioone.",
+      "projectsTitle": "Projektid",
+      "projectsDesc": "Erinevad loovprojektid.",
+      "toniseTaluTitle": "Tõnise talu, Muhu",
+      "toniseTaluDesc": "Videoprojekt Muhu saarelt.",
+      "toniseTaluCaption": "Tõnise talu, Muhu video, mis näitab Eesti suve ilu ja ilu, mida leiate aadressil muhutonise.ee"
+    }
+  }
+}

@@ -21,10 +21,10 @@ async function init() {
       projectEl.className = 'project';
       projectEl.id = slugify(project.title);
 
-      // If this project contains sub-projects, render them
+      // If this project contains sub-projects, render them WITHOUT captions
       if (project.projects && project.projects.length > 0) {
         project.projects.forEach(subProject => {
-          const subProjectContent = createSubProjectContent(subProject);
+          const subProjectContent = createSubProjectContent(subProject, true); // Pass true to skip caption
           projectEl.appendChild(subProjectContent);
         });
         return projectEl;
@@ -98,7 +98,8 @@ async function init() {
       return projectEl;
     }
 
-    function createSubProjectContent(subProject) {
+    function createSubProjectContent(subProject, skipCaption = false) {
+      console.log('createSubProjectContent called with skipCaption:', skipCaption, 'for:', subProject.title);
       const grid = document.createElement('div');
       grid.className = 'image-grid';
 
@@ -140,8 +141,8 @@ async function init() {
           grid.appendChild(thumb);
       });
 
-      // Add caption if provided
-      if (subProject.caption) {
+      // Add caption only if not skipped and caption exists
+      if (!skipCaption && subProject.caption) {
         const caption = document.createElement('p');
         caption.className = 'project-caption';
         caption.textContent = subProject.caption;
@@ -163,16 +164,47 @@ async function init() {
     }
 
     function renderProjectBySlug(slug) {
-      const project = projects.find(p => slugify(p.title) === slug);
       const container = document.getElementById('main-content');
-      console.log('Rendering project:', slug, 'Found:', project);
-      if (!project || !container) {
-        console.error('Project not found or container missing:', {slug, project, container});
+      console.log('Rendering project:', slug);
+      if (!container) {
+        console.error('Container missing');
         return;
       }
-      container.innerHTML = '';
-      container.appendChild(createProjectElement(project));
-      history.replaceState(null, '', `#${slug}`);
+      
+      // First try to find a top-level project
+      let project = projects.find(p => slugify(p.title) === slug);
+      
+      // If not found, search in sub-projects
+      if (!project) {
+        for (const p of projects) {
+          if (p.projects && p.projects.length > 0) {
+            const subProject = p.projects.find(sp => slugify(sp.title) === slug);
+            if (subProject) {
+              // Found a sub-project, render just this one
+              console.log('Found sub-project:', subProject);
+              container.innerHTML = '';
+              const wrapper = document.createElement('div');
+              wrapper.className = 'project';
+              wrapper.id = slug;
+              const content = createSubProjectContent(subProject);
+              wrapper.appendChild(content);
+              container.appendChild(wrapper);
+              history.replaceState(null, '', `#${slug}`);
+              return;
+            }
+          }
+        }
+      }
+      
+      // Render top-level project
+      if (project) {
+        console.log('Found project:', project);
+        container.innerHTML = '';
+        container.appendChild(createProjectElement(project));
+        history.replaceState(null, '', `#${slug}`);
+      } else {
+        console.error('Project not found:', slug);
+      }
     }
 
     function openLightbox(mediaElement) {
@@ -243,25 +275,24 @@ async function init() {
         e.preventDefault();
         const slug = a.getAttribute('data-slug');
         
-        // If it's a main nav link, show sub-nav on first click, navigate on second
+        // If it's a main nav link with a sub-nav, only show/hide the submenu, never navigate
         if (a.classList.contains('main-nav-link')) {
           const parent = a.parentElement;
           const subNav = parent.querySelector('.sub-nav');
-          const wasActive = subNav && subNav.classList.contains('active');
           
-          // Close all other sub-navs
-          document.querySelectorAll('.sub-nav').forEach(s => {
-            if (s !== subNav) s.classList.remove('active');
-          });
-          
-          if (subNav && !wasActive) {
-            // First click: show sub-nav
-            subNav.classList.add('active');
-            return;
+          if (subNav) {
+            // Close all other sub-navs
+            document.querySelectorAll('.sub-nav').forEach(s => {
+              if (s !== subNav) s.classList.remove('active');
+            });
+            
+            // Toggle this sub-nav
+            subNav.classList.toggle('active');
+            return; // Don't navigate, just toggle submenu
           }
         }
         
-        // Navigate to project (second click on parent, or any sub-item click)
+        // Navigate to project (only for sub-items or main items without sub-nav)
         renderProjectBySlug(slug);
       });
     });

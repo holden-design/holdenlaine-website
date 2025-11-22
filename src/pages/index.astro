@@ -1,11 +1,29 @@
 ---
 import prefs from '../data/preferences.json';
+import translations from '../data/translations.json';
 
 const projects = [
   {
     title: "Portrait Series",
     description: "A series of portraits exploring light and emotion.",
-    images: ["sonya1.jpg", "sonya2.jpg", "sonya3.jpg", "klara1.jpg", "klara3.jpg", "klara4.jpg", "klara5.jpg", "klara6.jpg"]
+    images: [
+      "portraits/1x1spotify.jpg", "portraits/1X1X2 copy.jpg", "portraits/adventure.jpg", "portraits/adventure1.jpg",
+      "portraits/col1.jpg", "portraits/damn.jpg", "portraits/DSC00681.jpg", "portraits/edit-1.jpg",
+      "portraits/edit-2.jpg", "portraits/edit-3.jpg", "portraits/edit-4.jpg", "portraits/edit-5.jpg",
+      "portraits/edit-6.jpg", "portraits/edit-7.jpg", "portraits/edit-8.jpg", "portraits/edit-9.jpg",
+      "portraits/edit-10.jpg", "portraits/edit-11.jpg", "portraits/edit.jpg", "portraits/eve1.jpg",
+      "portraits/fucku.jpg", "portraits/fucku2.jpg", "portraits/himatcha.jpg", "portraits/holden2.jpg",
+      "portraits/holden3.jpg", "portraits/july1.jpg", "portraits/july2.jpg", "portraits/karin1.jpg",
+      "portraits/klara1.jpg", "portraits/klara3.jpg", "portraits/klara4.jpg", "portraits/klara5.jpg",
+      "portraits/klara6.jpg", "portraits/mad1.jpg", "portraits/mad2.jpg", "portraits/marielle1.jpg",
+      "portraits/matcha1.jpg", "portraits/matcha2.jpg", "portraits/matcha3.jpg", "portraits/matcha4.jpg",
+      "portraits/matcha5.jpg", "portraits/more1.jpg", "portraits/more2.jpg", "portraits/sonya1.jpg",
+      "portraits/sonya2.jpg", "portraits/sonya3.jpg", "portraits/sonya5.jpg", "portraits/sonya6.jpg",
+      "portraits/sonya7.jpg", "portraits/sonya8.jpg", "portraits/sonya9.jpg", "portraits/sonya10.jpg",
+      "portraits/sonya11.jpg", "portraits/sonya12.jpg", "portraits/sonya13.jpg", "portraits/sonya14.jpg",
+      "portraits/sonya15.jpg", "portraits/sonya16.jpg", "portraits/sonya17.jpg", "portraits/sonya18.jpg",
+      "portraits/sonyaa.jpg", "portraits/sonyaa1.jpg"
+    ]
   },
   {
     title: "Projects",
@@ -299,6 +317,35 @@ const projects = [
       body.lightbox-open {
         overflow: hidden;
       }
+      .lang-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 10000;
+        display: flex;
+        gap: 0.5rem;
+        background: #fff;
+        padding: 0.25rem;
+        border-radius: 20px;
+        border: 1px solid #ddd;
+      }
+      .lang-toggle button {
+        background: transparent;
+        border: none;
+        padding: 0.4rem 0.6rem;
+        border-radius: 15px;
+        font-size: 1.4rem;
+        transition: all 0.2s ease;
+        opacity: 0.5;
+        line-height: 1;
+      }
+      .lang-toggle button:hover {
+        opacity: 0.8;
+      }
+      .lang-toggle button.active {
+        opacity: 1;
+        transform: scale(1.1);
+      }
 
       @media (max-width: 480px) {
         #portrait-series .image-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
@@ -311,50 +358,103 @@ const projects = [
 		
     <div class="container">
       <div class="custom-cursor"></div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">🇬🇧</button>
+        <button class="lang-btn" data-lang="et">🇪🇪</button>
+      </div>
       <div class="sidebar">
       <nav>
-        <a href="/home">Home</a>
+        <a href="/home" data-i18n="nav.home">Home</a>
         <div>
-          <a href="#portrait-series" data-slug="portrait-series" class="main-nav-link">Portraits</a>
+          <a href="#portrait-series" data-slug="portrait-series" class="main-nav-link" data-i18n="nav.portraits">Portraits</a>
           <div class="sub-nav" id="portraits-subnav">
-            <a href="#portrait-series" data-slug="portrait-series">portrait series</a>
+            <a href="#portrait-series" data-slug="portrait-series" data-i18n="nav.portraitSeries">portrait series</a>
           </div>
         </div>
         <div>
-          <a href="#projects" data-slug="projects" class="main-nav-link">Projects</a>
+          <a href="#projects" data-slug="projects" class="main-nav-link" data-i18n="nav.projects">Projects</a>
           <div class="sub-nav" id="projects-subnav">
-            <a href="#tonise-talu-muhu" data-slug="tonise-talu-muhu">tõnise talu</a>
+            <a href="#tonise-talu-muhu" data-slug="tonise-talu-muhu" data-i18n="nav.toniseTalu">tõnise talu</a>
           </div>
         </div>
-        <a href="/contact">Contact</a>
+        <a href="/contact" data-i18n="nav.contact">Contact</a>
       </nav>
       </div>
       <div id="main-content" class="main-content"></div>
       <script type="module" src="/scripts/lazy-projects.js"></script>
+      <script define:vars={{ translations }}>
+        const t = translations;
+        let currentLang = localStorage.getItem('language') || 'en';
+
+        // Update page text based on language
+        function updateLanguage(lang) {
+          currentLang = lang;
+          localStorage.setItem('language', lang);
+          
+          // Update all elements with data-i18n attribute
+          document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            const keys = key.split('.');
+            let value = t[lang];
+            for (const k of keys) {
+              value = value[k];
+            }
+            if (value) {
+              el.textContent = value;
+            }
+          });
+
+          // Update active language button
+          document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+          });
+
+          // Update HTML lang attribute
+          document.documentElement.lang = lang;
+        }
+
+        // Language toggle buttons
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            if (lang) {
+              updateLanguage(lang);
+            }
+          });
+        });
+
+        // Initialize with saved language
+        updateLanguage(currentLang);
+      </script>
       <script>
         // Custom cursor movement
         const cursor = document.querySelector('.custom-cursor');
         document.addEventListener('mousemove', (e) => {
-          cursor.style.left = e.clientX + 'px';
-          cursor.style.top = e.clientY + 'px';
+          if (cursor) {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+          }
         });
         
         // Expand cursor on hover over clickable elements
         document.addEventListener('mouseover', (e) => {
-          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+          const target = e.target;
+          if (target && cursor && (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button'))) {
             cursor.classList.add('hover');
           }
         });
         
         document.addEventListener('mouseout', (e) => {
-          if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+          const target = e.target;
+          if (target && cursor && (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button'))) {
             cursor.classList.remove('hover');
           }
         });
 
         // Prevent right-click context menu on images and videos
         document.addEventListener('contextmenu', (e) => {
-          if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+          const target = e.target;
+          if (target && (target.tagName === 'IMG' || target.tagName === 'VIDEO')) {
             e.preventDefault();
             return false;
           }
@@ -362,7 +462,8 @@ const projects = [
 
         // Prevent drag and drop of images
         document.addEventListener('dragstart', (e) => {
-          if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+          const target = e.target;
+          if (target && (target.tagName === 'IMG' || target.tagName === 'VIDEO')) {
             e.preventDefault();
             return false;
           }
