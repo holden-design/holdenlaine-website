@@ -66,10 +66,21 @@ async function init() {
             mediaElement.loading = 'lazy';
             mediaElement.draggable = false;
             mediaElement.oncontextmenu = () => false;
-            // Images fill width for masonry layout
-            mediaElement.style.width = '100%';
-            mediaElement.style.height = 'auto';
-            mediaElement.style.display = 'block';
+            
+            // Add loading state
+            thumb.classList.add('loading');
+            
+            // Remove loading state and add fade-in when image loads
+            mediaElement.addEventListener('load', () => {
+              thumb.classList.remove('loading');
+              mediaElement.classList.add('loaded');
+            });
+            
+            // Handle error state
+            mediaElement.addEventListener('error', () => {
+              thumb.classList.remove('loading');
+              console.error('Failed to load image:', item.src || item);
+            });
           }
           
           mediaElement.alt = project.title;
@@ -131,9 +142,21 @@ async function init() {
             mediaElement.loading = 'lazy';
             mediaElement.draggable = false;
             mediaElement.oncontextmenu = () => false;
-            mediaElement.style.width = '100%';
-            mediaElement.style.height = 'auto';
-            mediaElement.style.display = 'block';
+            
+            // Add loading state
+            thumb.classList.add('loading');
+            
+            // Remove loading state and add fade-in when image loads
+            mediaElement.addEventListener('load', () => {
+              thumb.classList.remove('loading');
+              mediaElement.classList.add('loaded');
+            });
+            
+            // Handle error state
+            mediaElement.addEventListener('error', () => {
+              thumb.classList.remove('loading');
+              console.error('Failed to load image:', item.src || item);
+            });
           }
           
           mediaElement.alt = subProject.title;
