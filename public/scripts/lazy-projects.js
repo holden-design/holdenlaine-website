@@ -56,7 +56,7 @@ async function init() {
             // Full native video dimensions
             mediaElement.style.width = '100%';
             mediaElement.style.height = 'auto';
-            mediaElement.style.maxWidth = '1920px';
+            mediaElement.style.maxWidth = '2560px';
             mediaElement.style.display = 'block';
             console.log('Video element created:', mediaElement);
           } else {
@@ -123,7 +123,7 @@ async function init() {
             }
             mediaElement.style.width = '100%';
             mediaElement.style.height = 'auto';
-            mediaElement.style.maxWidth = '1920px';
+            mediaElement.style.maxWidth = '2560px';
             mediaElement.style.display = 'block';
           } else {
             mediaElement = document.createElement('img');
