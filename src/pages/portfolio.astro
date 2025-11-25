@@ -55,7 +55,6 @@ const projects = [
         color: #222;
         display: block;
         cursor: none;
-        overflow: hidden;
       }
       * {
         cursor: none !important;
@@ -199,6 +198,37 @@ const projects = [
           -webkit-column-count: 1;
           -moz-column-count: 1;
           column-count: 1;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .sidebar {
+          position: relative;
+          left: 0;
+          top: 0;
+          width: 100%;
+          padding: 1rem;
+          margin-bottom: 1rem;
+        }
+        .sidebar nav {
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .sidebar nav a {
+          font-size: 0.9rem;
+        }
+        .container {
+          padding: 1rem;
+        }
+        .main-content {
+          padding-top: 0;
+        }
+        .custom-cursor {
+          display: none;
+        }
+        body, * {
+          cursor: auto !important;
         }
       }
 

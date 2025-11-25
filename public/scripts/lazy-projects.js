@@ -323,6 +323,15 @@ async function init() {
     const hash = location.hash.replace('#', '');
     if (hash) {
       renderProjectBySlug(hash);
+    } else {
+      // Show all projects by default
+      const container = document.getElementById('main-content');
+      if (container) {
+        container.innerHTML = '';
+        projects.forEach(project => {
+          container.appendChild(createProjectElement(project));
+        });
+      }
     }
   } catch (err) {
     console.error('Failed to load projects or prefs', err);
