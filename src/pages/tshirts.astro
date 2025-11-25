@@ -1,0 +1,248 @@
+---
+import translations from '../data/translations.json';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="tshirts.pageTitle">T-Shirts - Holden Laine Photography</title>
+    <style is:global>
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica;
+        background: #fff;
+        color: #222;
+        display: block;
+        overflow: hidden;
+      }
+      #letterfall-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      .sidebar {
+        position: fixed;
+        left: 2rem;
+        top: 2rem;
+        width: auto;
+        z-index: 1000;
+        padding: 0;
+        margin-bottom: 0;
+      }
+      .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .sidebar nav a {
+        display: block;
+        color: #222;
+        text-decoration: none;
+        font-weight: 500;
+        text-transform: lowercase;
+        font-family: inherit;
+        letter-spacing: 0.02em;
+        font-size: 1rem;
+      }
+      .sidebar nav a:hover { text-decoration: underline; }
+      .main-content {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .tshirt-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      .tshirt-item {
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+        transition: transform 0.2s ease;
+      }
+      .tshirt-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+      .tshirt-image {
+        width: 100%;
+        aspect-ratio: 1;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+      }
+      .tshirt-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .tshirt-info {
+        padding: 1rem;
+      }
+      .tshirt-name {
+        font-weight: 500;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+      .tshirt-description {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 0.75rem;
+      }
+      .tshirt-price {
+        font-weight: 500;
+        font-size: 1.1rem;
+      }
+      .language-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 10000;
+        background: white;
+        border: 1px solid #ddd;
+        padding: 0.25rem;
+        border-radius: 20px;
+        display: flex;
+        gap: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .language-toggle button {
+        background: transparent;
+        border: none;
+        padding: 0.4rem 0.6rem;
+        border-radius: 15px;
+        font-size: 1.4rem;
+        transition: all 0.2s ease;
+        opacity: 0.5;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .language-toggle button:hover {
+        opacity: 0.8;
+      }
+      .language-toggle button.active {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="letterfall-canvas"></canvas>
+    <div class="language-toggle">
+      <button class="lang-btn active" data-lang="en">🇬🇧</button>
+      <button class="lang-btn" data-lang="et">🇪🇪</button>
+    </div>
+    <div class="container">
+      <div class="sidebar">
+        <nav>
+          <a href="/" data-i18n="nav.home">home</a>
+          <a href="/photos" data-i18n="nav.portraits">photos</a>
+          <a href="/portfolio" data-i18n="nav.projects">projects</a>
+          <a href="/prices" data-i18n="nav.prices">prices</a>
+          <a href="/tshirts" data-i18n="nav.tshirts">t-shirts</a>
+          <a href="/contact" data-i18n="nav.contact">contact</a>
+        </nav>
+      </div>
+      <div class="main-content">
+        <h1 data-i18n="tshirts.heading">T-Shirts</h1>
+        <p data-i18n="tshirts.intro">Photography-inspired t-shirt designs. Each shirt features original artwork.</p>
+        
+        <div class="tshirt-grid">
+          <div class="tshirt-item">
+            <div class="tshirt-image">👕</div>
+            <div class="tshirt-info">
+              <div class="tshirt-name" data-i18n="tshirts.design1Name">Classic Portrait Tee</div>
+              <div class="tshirt-description" data-i18n="tshirts.design1Desc">Black and white minimalist design</div>
+              <div class="tshirt-price" data-i18n="tshirts.design1Price">€25</div>
+            </div>
+          </div>
+          
+          <div class="tshirt-item">
+            <div class="tshirt-image">👕</div>
+            <div class="tshirt-info">
+              <div class="tshirt-name" data-i18n="tshirts.design2Name">Light Study Tee</div>
+              <div class="tshirt-description" data-i18n="tshirts.design2Desc">Gradient design inspired by natural light</div>
+              <div class="tshirt-price" data-i18n="tshirts.design2Price">€25</div>
+            </div>
+          </div>
+          
+          <div class="tshirt-item">
+            <div class="tshirt-image">👕</div>
+            <div class="tshirt-info">
+              <div class="tshirt-name" data-i18n="tshirts.design3Name">Muhu Collection</div>
+              <div class="tshirt-description" data-i18n="tshirts.design3Desc">Inspired by Estonian summer landscapes</div>
+              <div class="tshirt-price" data-i18n="tshirts.design3Price">€30</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline define:vars={{ translations }}>
+      const currentLang = localStorage.getItem('language') || 'en';
+      
+      function applyTranslations(lang) {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+          const key = element.getAttribute('data-i18n');
+          const keys = key.split('.');
+          let value = translations[lang];
+          
+          for (const k of keys) {
+            value = value?.[k];
+          }
+          
+          if (value) {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+              element.placeholder = value;
+            } else if (element.tagName === 'OPTION') {
+              element.textContent = value;
+            } else if (element.tagName === 'TITLE') {
+              document.title = value;
+            } else {
+              element.textContent = value;
+            }
+          }
+        });
+        
+        // Update active language button
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
+        
+        document.documentElement.lang = lang;
+      }
+      
+      applyTranslations(currentLang);
+      
+      // Language toggle buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.getAttribute('data-lang');
+          if (lang) {
+            localStorage.setItem('language', lang);
+            applyTranslations(lang);
+          }
+        });
+      });
+    </script>
+    <script is:inline src="/scripts/letterfall.js"></script>
+  </body>
+</html>

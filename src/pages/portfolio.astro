@@ -1,0 +1,473 @@
+---
+import prefs from '../data/preferences.json';
+import translations from '../data/translations.json';
+
+const projects = [
+  {
+    title: "Portrait Series",
+    description: "A series of portraits exploring light and emotion.",
+    images: [
+      "portraits/1x1spotify.jpg", "portraits/1X1X2 copy.jpg", "portraits/adventure.jpg", "portraits/adventure1.jpg",
+      "portraits/col1.jpg", "portraits/damn.jpg", "portraits/DSC00681.jpg", "portraits/edit-1.jpg",
+      "portraits/edit-2.jpg", "portraits/edit-3.jpg", "portraits/edit-4.jpg", "portraits/edit-5.jpg",
+      "portraits/edit-6.jpg", "portraits/edit-7.jpg", "portraits/edit-8.jpg", "portraits/edit-9.jpg",
+      "portraits/edit-10.jpg", "portraits/edit-11.jpg", "portraits/edit.jpg", "portraits/eve1.jpg",
+      "portraits/fucku.jpg", "portraits/fucku2.jpg", "portraits/himatcha.jpg", "portraits/holden2.jpg",
+      "portraits/holden3.jpg", "portraits/july1.jpg", "portraits/july2.jpg", "portraits/karin1.jpg",
+      "portraits/klara1.jpg", "portraits/klara3.jpg", "portraits/klara4.jpg", "portraits/klara5.jpg",
+      "portraits/klara6.jpg", "portraits/mad1.jpg", "portraits/mad2.jpg", "portraits/marielle1.jpg",
+      "portraits/matcha1.jpg", "portraits/matcha2.jpg", "portraits/matcha3.jpg", "portraits/matcha4.jpg",
+      "portraits/matcha5.jpg", "portraits/more1.jpg", "portraits/more2.jpg", "portraits/sonya1.jpg",
+      "portraits/sonya2.jpg", "portraits/sonya3.jpg", "portraits/sonya5.jpg", "portraits/sonya6.jpg",
+      "portraits/sonya7.jpg", "portraits/sonya8.jpg", "portraits/sonya9.jpg", "portraits/sonya10.jpg",
+      "portraits/sonya11.jpg", "portraits/sonya12.jpg", "portraits/sonya13.jpg", "portraits/sonya14.jpg",
+      "portraits/sonya15.jpg", "portraits/sonya16.jpg", "portraits/sonya17.jpg", "portraits/sonya18.jpg",
+      "portraits/sonyaa.jpg", "portraits/sonyaa1.jpg"
+    ]
+  },
+  {
+    title: "Projects",
+    description: "Various creative projects.",
+    projects: [
+      {
+        title: "Tõnise talu, Muhu",
+        description: "A video project from Muhu island.",
+        caption: "Tõnise talu, Muhu video that shows the beauty of an Estonian summer and the beauty you can find at muhutonise.ee",
+        media: [
+          {type: "video", src: "tonise-talu.mp4", poster: "tonise-talu-poster.jpg"}
+        ]
+      }
+    ]
+  }
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Holden Laine Photography</title>
+    <style is:global>
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica;
+        background: #fff;
+        color: #222;
+        display: block;
+        cursor: none;
+        overflow: hidden;
+      }
+      * {
+        cursor: none !important;
+      }
+      #letterfall-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      /* Prevent image selection and dragging */
+      img, video {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        pointer-events: auto;
+      }
+      /* Custom circular cursor */
+      .custom-cursor {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #222;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 10001;
+        transform: translate(-50%, -50%);
+        transition: width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+      }
+      .custom-cursor.hover {
+        width: 40px;
+        height: 40px;
+        border-color: #999;
+      }
+      .container {
+        max-width: 100%;
+        margin: 0;
+        padding: 2rem;
+      }
+      .sidebar {
+        position: fixed;
+        left: 2rem;
+        top: 2rem;
+        width: auto;
+        z-index: 1000;
+        padding: 0;
+        margin-bottom: 0;
+      }
+      .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .sidebar nav a {
+        display: block;
+        color: #222;
+        text-decoration: none;
+        font-weight: 500;
+        text-transform: lowercase;
+        font-family: inherit;
+        letter-spacing: 0.02em;
+        font-size: 1rem;
+      }
+      .sidebar nav a:hover { text-decoration: underline; }
+      .main-content {
+        max-width: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .project {
+        margin-bottom: 2.5rem;
+        border-bottom: 1px solid #f0f0f0;
+        padding-bottom: 2rem;
+        width: 100%;
+      }
+      .project summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 0;
+        margin: 0;
+        outline: none;
+      }
+      .project summary::-webkit-details-marker { display: none; }
+      .project summary::marker { content: ''; display: none; }
+      .project summary::before { content: ''; display: none; }
+      .project summary { -webkit-appearance: none; appearance: none; }
+      .summary-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .summary-header h2 {
+        font-size: 1.3rem;
+        margin: 0;
+      }
+      .summary-header p {
+        font-size: 0.95rem;
+        color: #555;
+        margin: 0;
+      }
+      .project .image-grid {
+        margin-top: 1.25rem;
+      }
+      .image-grid {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+        -webkit-column-gap: 0.75rem;
+        -moz-column-gap: 0.75rem;
+        column-gap: 0.75rem;
+      }
+      
+      @media (max-width: 1200px) {
+        .image-grid {
+          -webkit-column-count: 3;
+          -moz-column-count: 3;
+          column-count: 3;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .image-grid {
+          -webkit-column-count: 2;
+          -moz-column-count: 2;
+          column-count: 2;
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .image-grid {
+          -webkit-column-count: 1;
+          -moz-column-count: 1;
+          column-count: 1;
+        }
+      }
+
+      .thumb {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 0.75rem;
+        break-inside: avoid;
+        position: relative;
+        background: #f5f5f5;
+        overflow: hidden;
+      }
+      
+      .thumb img {
+        width: 100%;
+        height: auto;
+        display: block;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      
+      .thumb img.loaded {
+        opacity: 1;
+      }
+      
+      .thumb img:hover {
+        transform: scale(1.02);
+        transition: transform 0.2s ease, opacity 0.3s ease;
+      }
+      
+      .thumb.loading::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+      }
+      
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+      @media (min-width: 600px) {
+        /* Make room for the fixed sidebar so the centered container doesn't overlap */
+        .container {
+          padding-left: 140px;
+        }
+      }
+      
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0);
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        overflow: hidden;
+      }
+      .lightbox.active {
+        display: flex !important;
+        background: rgba(0, 0, 0, 0.95);
+      }
+      .lightbox-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 95vw;
+        max-height: 95vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .lightbox img, .lightbox video {
+        max-width: 95vw;
+        max-height: 95vh;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+      .lightbox.active img, .lightbox.active video {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .lightbox-close {
+        position: fixed;
+        top: 2rem;
+        right: 2rem;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: #fff;
+        transition: background 0.2s ease;
+        z-index: 10000;
+      }
+      .lightbox-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      body.lightbox-open {
+        overflow: hidden;
+      }
+      .lang-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 10000;
+        display: flex;
+        gap: 0.5rem;
+        background: #fff;
+        padding: 0.25rem;
+        border-radius: 20px;
+        border: 1px solid #ddd;
+      }
+      .lang-toggle button {
+        background: transparent;
+        border: none;
+        padding: 0.4rem 0.6rem;
+        border-radius: 15px;
+        font-size: 1.4rem;
+        transition: all 0.2s ease;
+        opacity: 0.5;
+        line-height: 1;
+      }
+      .lang-toggle button:hover {
+        opacity: 0.8;
+      }
+      .lang-toggle button.active {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      @media (max-width: 480px) {
+        #portrait-series .image-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+        .container { padding-left: 1rem; }
+        .sidebar { position: static; width: auto; }
+      }
+    </style>
+  </head>
+    <body>
+    <canvas id="letterfall-canvas"></canvas>
+		
+    <div class="container">
+      <div class="custom-cursor"></div>
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en">🇬🇧</button>
+        <button class="lang-btn" data-lang="et">🇪🇪</button>
+      </div>
+      <div class="sidebar">
+      <nav>
+        <a href="/" data-i18n="nav.home">home</a>
+        <a href="/photos" data-i18n="nav.portraits">photos</a>
+        <a href="/portfolio" data-i18n="nav.projects">projects</a>
+        <a href="/prices" data-i18n="nav.prices">prices</a>
+        <a href="/tshirts" data-i18n="nav.tshirts">t-shirts</a>
+        <a href="/contact" data-i18n="nav.contact">contact</a>
+      </nav>
+      </div>
+      <div id="main-content" class="main-content"></div>
+      <script type="module" src="/scripts/lazy-projects.js"></script>
+      <script define:vars={{ translations }}>
+        const t = translations;
+        let currentLang = localStorage.getItem('language') || 'en';
+
+        // Update page text based on language
+        function updateLanguage(lang) {
+          currentLang = lang;
+          localStorage.setItem('language', lang);
+          
+          // Update all elements with data-i18n attribute
+          document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            const keys = key.split('.');
+            let value = t[lang];
+            for (const k of keys) {
+              value = value[k];
+            }
+            if (value) {
+              el.textContent = value;
+            }
+          });
+
+          // Update active language button
+          document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+          });
+
+          // Update HTML lang attribute
+          document.documentElement.lang = lang;
+        }
+
+        // Language toggle buttons
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            if (lang) {
+              updateLanguage(lang);
+            }
+          });
+        });
+
+        // Initialize with saved language
+        updateLanguage(currentLang);
+      </script>
+      <script>
+        // Custom cursor movement
+        const cursor = document.querySelector('.custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+          if (cursor) {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+          }
+        });
+        
+        // Expand cursor on hover over clickable elements
+        document.addEventListener('mouseover', (e) => {
+          const target = e.target;
+          if (target && cursor && (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button'))) {
+            cursor.classList.add('hover');
+          }
+        });
+        
+        document.addEventListener('mouseout', (e) => {
+          const target = e.target;
+          if (target && cursor && (target.tagName === 'A' || target.tagName === 'BUTTON' || target.closest('a') || target.closest('button'))) {
+            cursor.classList.remove('hover');
+          }
+        });
+
+        // Prevent right-click context menu on images and videos
+        document.addEventListener('contextmenu', (e) => {
+          const target = e.target;
+          if (target && (target.tagName === 'IMG' || target.tagName === 'VIDEO')) {
+            e.preventDefault();
+            return false;
+          }
+        });
+
+        // Prevent drag and drop of images
+        document.addEventListener('dragstart', (e) => {
+          const target = e.target;
+          if (target && (target.tagName === 'IMG' || target.tagName === 'VIDEO')) {
+            e.preventDefault();
+            return false;
+          }
+        });
+      </script>
+      <script is:inline src="/scripts/letterfall.js"></script>
+    </div>
+  </body>
+</html>

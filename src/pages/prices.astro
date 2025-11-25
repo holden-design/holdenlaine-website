@@ -1,0 +1,256 @@
+---
+import translations from '../data/translations.json';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="prices.pageTitle">Prices - Holden Laine Photography</title>
+    <style is:global>
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica;
+        background: #fff;
+        color: #222;
+        display: block;
+        overflow: hidden;
+      }
+      #letterfall-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      .sidebar {
+        position: fixed;
+        left: 2rem;
+        top: 2rem;
+        width: auto;
+        z-index: 1000;
+        padding: 0;
+        margin-bottom: 0;
+      }
+      .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .sidebar nav a {
+        display: block;
+        color: #222;
+        text-decoration: none;
+        font-weight: 500;
+        text-transform: lowercase;
+        font-family: inherit;
+        letter-spacing: 0.02em;
+        font-size: 1rem;
+      }
+      .sidebar nav a:hover { text-decoration: underline; }
+      .main-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .price-section {
+        margin-bottom: 3rem;
+      }
+      .price-section h2 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        font-weight: 500;
+      }
+      .price-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .price-item:last-child {
+        border-bottom: none;
+      }
+      .price-name {
+        font-weight: 500;
+      }
+      .price-description {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: 0.25rem;
+      }
+      .price-amount {
+        font-weight: 500;
+        white-space: nowrap;
+        margin-left: 2rem;
+      }
+      .language-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 10000;
+        background: white;
+        border: 1px solid #ddd;
+        padding: 0.25rem;
+        border-radius: 20px;
+        display: flex;
+        gap: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+      .language-toggle button {
+        background: transparent;
+        border: none;
+        padding: 0.4rem 0.6rem;
+        border-radius: 15px;
+        font-size: 1.4rem;
+        transition: all 0.2s ease;
+        opacity: 0.5;
+        line-height: 1;
+        cursor: pointer;
+      }
+      .language-toggle button:hover {
+        opacity: 0.8;
+      }
+      .language-toggle button.active {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="letterfall-canvas"></canvas>
+    <div class="language-toggle">
+      <button class="lang-btn active" data-lang="en">🇬🇧</button>
+      <button class="lang-btn" data-lang="et">🇪🇪</button>
+    </div>
+    <div class="container">
+      <div class="sidebar">
+        <nav>
+          <a href="/" data-i18n="nav.home">home</a>
+          <a href="/photos" data-i18n="nav.portraits">photos</a>
+          <a href="/portfolio" data-i18n="nav.projects">projects</a>
+          <a href="/prices" data-i18n="nav.prices">prices</a>
+          <a href="/tshirts" data-i18n="nav.tshirts">t-shirts</a>
+          <a href="/contact" data-i18n="nav.contact">contact</a>
+        </nav>
+      </div>
+      <div class="main-content">
+        <h1 data-i18n="prices.heading">Prices</h1>
+        
+        <div class="price-section">
+          <h2 data-i18n="prices.portraitSessions">Portrait Sessions</h2>
+          <div class="price-item">
+            <div>
+              <div class="price-name" data-i18n="prices.individualPortrait">Individual Portrait</div>
+              <div class="price-description" data-i18n="prices.individualPortraitDesc">1 hour session, 10+ edited photos</div>
+            </div>
+            <div class="price-amount" data-i18n="prices.individualPortraitPrice">€150</div>
+          </div>
+          <div class="price-item">
+            <div>
+              <div class="price-name" data-i18n="prices.couplePortrait">Couple Portrait</div>
+              <div class="price-description" data-i18n="prices.couplePortraitDesc">1.5 hour session, 15+ edited photos</div>
+            </div>
+            <div class="price-amount" data-i18n="prices.couplePortraitPrice">€200</div>
+          </div>
+          <div class="price-item">
+            <div>
+              <div class="price-name" data-i18n="prices.familyPortrait">Family Portrait</div>
+              <div class="price-description" data-i18n="prices.familyPortraitDesc">2 hour session, 20+ edited photos</div>
+            </div>
+            <div class="price-amount" data-i18n="prices.familyPortraitPrice">€250</div>
+          </div>
+        </div>
+
+        <div class="price-section">
+          <h2 data-i18n="prices.eventPhotography">Event Photography</h2>
+          <div class="price-item">
+            <div>
+              <div class="price-name" data-i18n="prices.halfDay">Half Day</div>
+              <div class="price-description" data-i18n="prices.halfDayDesc">Up to 4 hours coverage</div>
+            </div>
+            <div class="price-amount" data-i18n="prices.halfDayPrice">€400</div>
+          </div>
+          <div class="price-item">
+            <div>
+              <div class="price-name" data-i18n="prices.fullDay">Full Day</div>
+              <div class="price-description" data-i18n="prices.fullDayDesc">Up to 8 hours coverage</div>
+            </div>
+            <div class="price-amount" data-i18n="prices.fullDayPrice">€700</div>
+          </div>
+        </div>
+
+        <div class="price-section">
+          <h2 data-i18n="prices.commercialProjects">Commercial Projects</h2>
+          <div class="price-item">
+            <div>
+              <div class="price-name" data-i18n="prices.commercial">Commercial Rate</div>
+              <div class="price-description" data-i18n="prices.commercialDesc">Custom quote based on project scope</div>
+            </div>
+            <div class="price-amount" data-i18n="prices.commercialPrice">Contact for quote</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline define:vars={{ translations }}>
+      const currentLang = localStorage.getItem('language') || 'en';
+      
+      function applyTranslations(lang) {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+          const key = element.getAttribute('data-i18n');
+          const keys = key.split('.');
+          let value = translations[lang];
+          
+          for (const k of keys) {
+            value = value?.[k];
+          }
+          
+          if (value) {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+              element.placeholder = value;
+            } else if (element.tagName === 'OPTION') {
+              element.textContent = value;
+            } else if (element.tagName === 'TITLE') {
+              document.title = value;
+            } else {
+              element.textContent = value;
+            }
+          }
+        });
+        
+        // Update active language button
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
+        
+        document.documentElement.lang = lang;
+      }
+      
+      applyTranslations(currentLang);
+      
+      // Language toggle buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.getAttribute('data-lang');
+          if (lang) {
+            localStorage.setItem('language', lang);
+            applyTranslations(lang);
+          }
+        });
+      });
+    </script>
+    <script is:inline src="/scripts/letterfall.js"></script>
+  </body>
+</html>

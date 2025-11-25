@@ -6,7 +6,9 @@
       "portraitSeries": "portrait series",
       "projects": "Projects",
       "toniseTalu": "tõnise talu",
-      "contact": "Contact"
+      "contact": "Contact",
+      "prices": "Prices",
+      "tshirts": "T-Shirts"
     },
     "contact": {
       "pageTitle": "Contact - Holden Laine Photography",
@@ -44,6 +46,53 @@
       "toniseTaluTitle": "Tõnise talu, Muhu",
       "toniseTaluDesc": "A video project from Muhu island.",
       "toniseTaluCaption": "Tõnise talu, Muhu video that shows the beauty of an Estonian summer and the beauty you can find at muhutonise.ee"
+    },
+    "prices": {
+      "pageTitle": "Prices - Holden Laine Photography",
+      "heading": "Prices",
+      "portraitSessions": "Portrait Sessions",
+      "individualPortrait": "Individual Portrait",
+      "individualPortraitDesc": "1 hour session, 10+ edited photos",
+      "individualPortraitPrice": "€150",
+      "couplePortrait": "Couple Portrait",
+      "couplePortraitDesc": "1.5 hour session, 15+ edited photos",
+      "couplePortraitPrice": "€200",
+      "familyPortrait": "Family Portrait",
+      "familyPortraitDesc": "2 hour session, 20+ edited photos",
+      "familyPortraitPrice": "€250",
+      "eventPhotography": "Event Photography",
+      "halfDay": "Half Day",
+      "halfDayDesc": "Up to 4 hours coverage",
+      "halfDayPrice": "€400",
+      "fullDay": "Full Day",
+      "fullDayDesc": "Up to 8 hours coverage",
+      "fullDayPrice": "€700",
+      "commercialProjects": "Commercial Projects",
+      "commercial": "Commercial Rate",
+      "commercialDesc": "Custom quote based on project scope",
+      "commercialPrice": "Contact for quote"
+    },
+    "tshirts": {
+      "pageTitle": "T-Shirts - Holden Laine Photography",
+      "heading": "T-Shirts",
+      "intro": "Photography-inspired t-shirt designs. Each shirt features original artwork.",
+      "design1Name": "Classic Portrait Tee",
+      "design1Desc": "Black and white minimalist design",
+      "design1Price": "€25",
+      "design2Name": "Light Study Tee",
+      "design2Desc": "Gradient design inspired by natural light",
+      "design2Price": "€25",
+      "design3Name": "Muhu Collection",
+      "design3Desc": "Inspired by Estonian summer landscapes",
+      "design3Price": "€30"
+    },
+    "photos": {
+      "pageTitle": "Photos - Holden Laine Photography",
+      "heading": "Photos",
+      "fashion": "fashion",
+      "editorial": "editorial",
+      "portrait": "portrait",
+      "street": "street"
     }
   },
   "et": {
@@ -53,7 +102,9 @@
       "portraitSeries": "portreede seeria",
       "projects": "Projektid",
       "toniseTalu": "tõnise talu",
-      "contact": "Kontakt"
+      "contact": "Kontakt",
+      "prices": "Hinnakiri",
+      "tshirts": "T-särgid"
     },
     "contact": {
       "pageTitle": "Kontakt - Holden Laine Fotograafia",
@@ -91,6 +142,53 @@
       "toniseTaluTitle": "Tõnise talu, Muhu",
       "toniseTaluDesc": "Videoprojekt Muhu saarelt.",
       "toniseTaluCaption": "Tõnise talu, Muhu video, mis näitab Eesti suve ilu ja ilu, mida leiate aadressil muhutonise.ee"
+    },
+    "prices": {
+      "pageTitle": "Hinnad - Holden Laine Fotograafia",
+      "heading": "Hinnakiri",
+      "portraitSessions": "Portreesessioonid",
+      "individualPortrait": "Individuaalne Portree",
+      "individualPortraitDesc": "1 tunni sessioon, 10+ töödeldud fotot",
+      "individualPortraitPrice": "€150",
+      "couplePortrait": "Paari Portree",
+      "couplePortraitDesc": "1,5 tunni sessioon, 15+ töödeldud fotot",
+      "couplePortraitPrice": "€200",
+      "familyPortrait": "Perekonna Portree",
+      "familyPortraitDesc": "2 tunni sessioon, 20+ töödeldud fotot",
+      "familyPortraitPrice": "€250",
+      "eventPhotography": "Ürituse Fotograafia",
+      "halfDay": "Pool Päeva",
+      "halfDayDesc": "Kuni 4 tundi kajastust",
+      "halfDayPrice": "€400",
+      "fullDay": "Terve Päev",
+      "fullDayDesc": "Kuni 8 tundi kajastust",
+      "fullDayPrice": "€700",
+      "commercialProjects": "Kommertsprojektid",
+      "commercial": "Kommertshinnad",
+      "commercialDesc": "Kohandatud pakkumine projekti ulatuse põhjal",
+      "commercialPrice": "Võtke ühendust pakkumiseks"
+    },
+    "tshirts": {
+      "pageTitle": "T-särgid - Holden Laine Fotograafia",
+      "heading": "T-särgid",
+      "intro": "Fotograafiast inspireeritud t-särgi disainid. Igal särgil on originaalne kunstiteos.",
+      "design1Name": "Klassikaline Portree Särk",
+      "design1Desc": "Must-valge minimalistlik disain",
+      "design1Price": "€25",
+      "design2Name": "Valgusuuringu Särk",
+      "design2Desc": "Loodusliku valguse inspireeritud gradiendidisain",
+      "design2Price": "€25",
+      "design3Name": "Muhu Kollektsioon",
+      "design3Desc": "Inspireeritud Eesti suvemaastikest",
+      "design3Price": "€30"
+    },
+    "photos": {
+      "pageTitle": "Fotod - Holden Laine Fotograafia",
+      "heading": "Fotod",
+      "fashion": "mood",
+      "editorial": "toimetuslik",
+      "portrait": "portree",
+      "street": "tänav"
     }
   }
 }
