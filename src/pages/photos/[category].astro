@@ -1,5 +1,6 @@
 ---
 import SEO from '../../components/SEO.astro';
+import Cursor from '../../components/Cursor.astro';
 
 // Photo categories with their images
 const PHOTO_CATEGORIES = {
@@ -228,6 +229,7 @@ const translations = categoryTranslations[category as string] || { titleEt: cate
   </head>
   <body>
     <canvas id="letterfall-canvas"></canvas>
+    <Cursor />
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="en">ENG</button>
       <button class="lang-btn" data-lang="et">EST</button>

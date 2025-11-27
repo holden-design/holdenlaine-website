@@ -1,6 +1,7 @@
 
 ---
 import SEO from '../components/SEO.astro';
+import Cursor from '../components/Cursor.astro';
 import projects from '../../public/data/projects.json';
 ---
 
@@ -212,6 +213,7 @@ import projects from '../../public/data/projects.json';
   </head>
   <body>
     <canvas id="letterfall-canvas"></canvas>
+    <Cursor />
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="en">ENG</button>
       <button class="lang-btn" data-lang="et">EST</button>
