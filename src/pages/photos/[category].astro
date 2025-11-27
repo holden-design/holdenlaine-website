@@ -47,6 +47,28 @@ const categoryTitle = categoryData?.title || 'Photos';
 const categoryDescription = categoryData?.description || 'Photography gallery';
 const images = categoryData?.images || [];
 const ogImage = images[0] ? `/images/${images[0]}` : '/images/og-image.jpg';
+
+// Estonian translations for categories
+const categoryTranslations: {[key: string]: {titleEt: string, descriptionEt: string}} = {
+  'fashion': {
+    titleEt: 'Mood',
+    descriptionEt: 'Moofotograafia ja stiliseeritud fotosessioond'
+  },
+  'portrait': {
+    titleEt: 'Portreede Seeria',
+    descriptionEt: 'Portreede seeria, mis uurib valgust ja emotsioone'
+  },
+  'editorial': {
+    titleEt: 'Toimetuslik',
+    descriptionEt: 'Toimetuslik fotograafia ja stiliseeritud pildistamised'
+  },
+  'street': {
+    titleEt: 'Tänavafotograafia',
+    descriptionEt: 'Spontaansed hetked igapäevaelust'
+  }
+};
+
+const translations = categoryTranslations[category as string] || { titleEt: categoryTitle, descriptionEt: categoryDescription };
 ---
 
 <html lang="en">
@@ -55,7 +77,9 @@ const ogImage = images[0] ? `/images/${images[0]}` : '/images/og-image.jpg';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <SEO 
       title={categoryTitle}
+      titleEt={translations.titleEt}
       description={categoryDescription}
+      descriptionEt={translations.descriptionEt}
       image={ogImage}
       type="website"
     />

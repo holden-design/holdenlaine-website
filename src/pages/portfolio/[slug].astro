@@ -19,6 +19,33 @@ const { sub, mainProjectTitle } = Astro.props;
 const ogImage = sub.media?.find((item: any) => item.type !== 'video')?.src || 
                 sub.images?.[0] || 
                 '/images/og-image.jpg';
+
+// Estonian translations for project descriptions
+const projectTranslations: {[key: string]: {en: string, et: string}} = {
+  'tõnise-talu': {
+    en: 'A video project from Muhu island showcasing Estonian summer beauty',
+    et: 'Videoprojekt Muhu saarelt, mis näitab Eesti suve ilu'
+  },
+  'ugc': {
+    en: 'User Generated Content creation and collaborations',
+    et: 'Kasutaja loodud sisu loomine ja koostööd'
+  },
+  'peugeot': {
+    en: 'Professional social media content creation for Peugeot',
+    et: 'Professionaalne sotsiaalmeedia sisutootmine Peugeot\'ile'
+  },
+  'lexus': {
+    en: 'Automotive photography for Lexus campaigns',
+    et: 'Autofotograafia Lexuse kampaaniatele'
+  },
+  'roseni-maja': {
+    en: 'Architecture and interior photography of Roseni maja in Tallinn',
+    et: 'Roseni maja arhitektuuri ja sisustuse fotograafia Tallinnas'
+  }
+};
+
+const slug = sub.title.toLowerCase().replace(/\s+/g, '-');
+const translations = projectTranslations[slug] || { en: sub.description || '', et: sub.description || '' };
 ---
 
 <html lang="en">
@@ -27,7 +54,9 @@ const ogImage = sub.media?.find((item: any) => item.type !== 'video')?.src ||
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <SEO 
       title={sub.title}
-      description={sub.description || `${sub.title} - Professional photography project by Holden Laine`}
+      titleEt={sub.title}
+      description={translations.en}
+      descriptionEt={translations.et}
       image={ogImage ? `/images/${ogImage}` : '/images/og-image.jpg'}
       type="article"
     />

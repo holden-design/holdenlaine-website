@@ -1,7 +1,9 @@
 ---
 interface Props {
   title: string;
+  titleEt: string;
   description: string;
+  descriptionEt: string;
   image?: string;
   url?: string;
   type?: 'website' | 'article' | 'profile';
@@ -12,7 +14,9 @@ interface Props {
 
 const {
   title,
+  titleEt,
   description,
+  descriptionEt,
   image = '/images/og-image.jpg',
   url = Astro.url.href,
   type = 'website',
@@ -23,17 +27,28 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteTitle = 'Holden Laine - Photography';
+const siteTitleEt = 'Holden Laine - Fotograafia';
 const fullTitle = title === 'Holden Laine' ? title : `${title} - ${siteTitle}`;
+const fullTitleEt = titleEt === 'Holden Laine' ? titleEt : `${titleEt} - ${siteTitleEt}`;
+
+// Get current language from localStorage (default to en)
+const currentLang = Astro.params.lang || 'en';
+const isEstonian = currentLang === 'et' || Astro.url.pathname.includes('/et/');
+const displayTitle = isEstonian ? fullTitleEt : fullTitle;
+const displayDescription = isEstonian ? descriptionEt : description;
+const siteName = isEstonian ? 'Holden Laine Fotograafia' : 'Holden Laine Photography';
+const locale = isEstonian ? 'et_EE' : 'en_US';
 
 // Schema.org structured data
 const schemaData = {
   '@context': 'https://schema.org',
   '@type': type === 'website' ? 'WebSite' : type === 'article' ? 'NewsArticle' : 'Person',
   ...(type === 'website' && {
-    name: fullTitle,
-    description: description,
+    name: displayTitle,
+    description: displayDescription,
     url: Astro.site?.href || 'https://www.holdenlaine.com',
     image: image,
+    inLanguage: isEstonian ? 'et' : 'en',
     creator: {
       '@type': 'Person',
       name: 'Holden Laine',
@@ -41,9 +56,10 @@ const schemaData = {
     }
   }),
   ...(type === 'article' && {
-    headline: title,
-    description: description,
+    headline: displayTitle,
+    description: displayDescription,
     image: image,
+    inLanguage: isEstonian ? 'et' : 'en',
     author: {
       '@type': 'Person',
       name: author
@@ -54,10 +70,11 @@ const schemaData = {
   ...(type === 'profile' && {
     '@type': 'Person',
     name: 'Holden Laine',
-    description: description,
+    description: displayDescription,
     image: image,
     url: 'https://www.holdenlaine.com',
-    jobTitle: 'Photographer',
+    jobTitle: isEstonian ? 'Fotograaf' : 'Photographer',
+    inLanguage: isEstonian ? 'et' : 'en',
     sameAs: [
       'https://www.instagram.com/holdenlaine',
       'https://www.linkedin.com/in/holdenlaine'
@@ -67,29 +84,29 @@ const schemaData = {
 ---
 
 <!-- Primary Meta Tags -->
-<meta name="title" content={fullTitle} />
-<meta name="description" content={description} />
-<meta name="keywords" content="photography, portrait, fashion, editorial, video, content creation" />
+<meta name="title" content={displayTitle} />
+<meta name="description" content={displayDescription} />
+<meta name="keywords" content={isEstonian ? "fotograafia, portree, mood, toimetuslik, video, sisutootmine" : "photography, portrait, fashion, editorial, video, content creation"} />
 <meta name="author" content={author} />
 <meta name="robots" content="index, follow" />
-<meta name="language" content="English" />
+<meta name="language" content={isEstonian ? "Estonian" : "English"} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type === 'article' ? 'article' : 'website'} />
 <meta property="og:url" content={canonicalURL} />
-<meta property="og:title" content={fullTitle} />
-<meta property="og:description" content={description} />
+<meta property="og:title" content={displayTitle} />
+<meta property="og:description" content={displayDescription} />
 <meta property="og:image" content={image} />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
-<meta property="og:site_name" content="Holden Laine Photography" />
-<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content={locale} />
 
 <!-- Twitter / X -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:url" content={canonicalURL} />
-<meta name="twitter:title" content={fullTitle} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:title" content={displayTitle} />
+<meta name="twitter:description" content={displayDescription} />
 <meta name="twitter:image" content={image} />
 
 <!-- Canonical URL -->
@@ -106,3 +123,4 @@ const schemaData = {
 <!-- Preconnect to CDNs -->
 <link rel="preconnect" href="https://vjs.zencdn.net" />
 <link rel="dns-prefetch" href="https://vjs.zencdn.net" />
+
