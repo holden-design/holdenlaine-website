@@ -1,5 +1,6 @@
 
 ---
+import SEO from '../components/SEO.astro';
 import projects from '../../public/data/projects.json';
 ---
 
@@ -7,7 +8,11 @@ import projects from '../../public/data/projects.json';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Projektid - Holden Laine Photography</title>
+    <SEO 
+      title="Portfolio - Projects"
+      description="Explore my professional photography portfolio featuring portrait, fashion, editorial, social media content creation, and commercial projects."
+      type="website"
+    />
     <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style is:global>
       body {

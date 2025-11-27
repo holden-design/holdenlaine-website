@@ -1,4 +1,5 @@
 ---
+import SEO from '../components/SEO.astro';
 import translations from '../data/translations.json';
 ---
 
@@ -6,7 +7,11 @@ import translations from '../data/translations.json';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title data-i18n="prices.pageTitle">Prices - Holden Laine Photography</title>
+    <SEO 
+      title="Pricing"
+      description="Photography services pricing for portraits, fashion shoots, editorial projects, social media content creation, and commercial work."
+      type="website"
+    />
     <style is:global>
       body {
         margin: 0;

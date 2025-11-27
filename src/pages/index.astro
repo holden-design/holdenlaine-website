@@ -1,4 +1,5 @@
 ---
+import SEO from '../components/SEO.astro';
 import translations from '../data/translations.json';
 ---
 
@@ -6,7 +7,12 @@ import translations from '../data/translations.json';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Home</title>
+    <SEO 
+      title="Holden Laine"
+      description="Professional photography portfolio featuring portrait, fashion, editorial, and commercial content creation. Specialized in social media content, UGC, and automotive photography."
+      type="profile"
+      image="/images/og-image.jpg"
+    />
     <style>
       html,body{height:100%;overflow:hidden}
       body{margin:0;font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;display:flex;align-items:center;justify-content:center;background:#fff;color:#111;cursor:none;position:relative}

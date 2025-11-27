@@ -1,0 +1,18 @@
+# robots.txt for Holden Laine Photography
+User-agent: *
+Allow: /
+Allow: /images/
+Allow: /portfolio/
+Allow: /photos/
+Allow: /prices/
+Allow: /shop/
+Allow: /contact/
+Disallow: /admin/
+Disallow: /*.json$
+Disallow: /*.astro$
+
+# Crawl delay
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://www.holdenlaine.com/sitemap.xml

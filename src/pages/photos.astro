@@ -1,4 +1,5 @@
 ---
+import SEO from '../components/SEO.astro';
 import translations from '../data/translations.json';
 ---
 
@@ -6,7 +7,11 @@ import translations from '../data/translations.json';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title data-i18n="photos.pageTitle">Photos - Holden Laine Photography</title>
+    <SEO 
+      title="Photography Gallery"
+      description="Browse my photography collections including fashion, portrait, editorial, and street photography galleries."
+      type="website"
+    />
     <style is:global>
       body {
         margin: 0;
