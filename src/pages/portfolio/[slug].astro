@@ -1,0 +1,433 @@
+---
+import projects from '../../../public/data/projects.json';
+
+export async function getStaticPaths() {
+  const projectsWithSubs = projects.filter((p: any) => p.projects && p.projects.length > 0);
+  const allSubs = projectsWithSubs.flatMap((p: any) => 
+    p.projects.map((sub: any) => ({
+      params: { slug: sub.title.toLowerCase().replace(/\s+/g, '-') },
+      props: { sub, mainProjectTitle: p.title }
+    }))
+  );
+  return allSubs;
+}
+
+const { sub, mainProjectTitle } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{sub.title} - Holden Laine Photography</title>
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+    <style is:global>
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica;
+        background: #fff;
+        color: #222;
+        display: block;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      img, video {
+        -webkit-user-drag: none;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      #letterfall-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 2rem 2rem 2rem;
+      }
+      .sidebar {
+        position: fixed;
+        left: 2rem;
+        top: 2rem;
+        width: auto;
+        z-index: 1000;
+        padding: 0;
+        margin-bottom: 0;
+      }
+      .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .sidebar nav a {
+        display: block;
+        color: #222;
+        text-decoration: none;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-family: inherit;
+        letter-spacing: 0.01em;
+        font-size: 0.85rem;
+      }
+      .sidebar nav a:hover { 
+        text-decoration: underline; 
+      }
+      .main-content {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
+      }
+      .breadcrumb {
+        margin-bottom: 1.5rem;
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+      }
+      .breadcrumb a {
+        color: #222;
+        text-decoration: none;
+      }
+      .breadcrumb a:hover {
+        text-decoration: underline;
+      }
+      .project-header {
+        margin-bottom: 1.5rem;
+      }
+      .project-header h1 {
+        font-size: 1.75rem;
+        margin: 0 0 0.3rem 0;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+      .project-header p {
+        color: #555;
+        font-size: 0.9rem;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+      }
+      .project-content {
+        display: grid;
+        grid-template-columns: 450px 1fr;
+        gap: 2rem;
+        align-items: start;
+      }
+      /* When there are only videos and no images, keep video on left with text on right */
+      .project-content.video-only {
+        grid-template-columns: 450px 1fr;
+      }
+      .project-content.video-only .project-media {
+        display: none;
+      }
+      .project-content.video-only .project-videos {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .project-content.video-only .project-text {
+        grid-column: 2;
+        grid-row: 1;
+      }
+      .project-text {
+        max-width: 800px;
+        margin: 0;
+      }
+      .project-media {
+        width: 100%;
+        margin: 0;
+      }
+      .video-container {
+        width: 100%;
+        max-width: 450px;
+      }
+      .video-container video {
+        width: 100%;
+        height: auto;
+        display: block;
+        position: relative;
+        z-index: 10;
+      }
+      .video-js {
+        width: 100% !important;
+        max-width: 450px !important;
+        height: auto;
+      }
+      .video-js .vjs-video-container {
+        position: relative;
+      }
+      /* Default 16:9 aspect ratio */
+      .video-js .vjs-video-container {
+        padding-top: 56.25%;
+      }
+      /* Portrait video (9:16 aspect ratio) */
+      .video-js[data-portrait="true"] .vjs-video-container {
+        padding-top: 177.78%;
+      }
+      .video-js .vjs-tech {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .video-js .vjs-big-play-button {
+        display: block;
+      }
+      .project-description {
+        color: #777;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+      }
+      .image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-auto-rows: auto;
+        gap: 0.5rem;
+        margin-top: 0;
+      }
+      .image-grid img,
+      .image-grid video {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+        box-shadow: none;
+        display: block;
+        position: relative;
+        z-index: 10;
+      }
+      .project-caption {
+        color: #999;
+        font-size: 0.75rem;
+        margin-top: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        white-space: pre-line;
+        line-height: 1.4;
+      }
+      .lang-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 10000;
+        display: flex;
+        gap: 0.5rem;
+      }
+      .lang-toggle button {
+        background: transparent;
+        border: none;
+        padding: 0;
+        font-size: 0.75rem;
+        transition: opacity 0.2s ease;
+        opacity: 0.3;
+        cursor: pointer;
+        font-weight: 500;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .lang-toggle button:hover {
+        opacity: 0.6;
+      }
+      .lang-toggle button.active {
+        opacity: 1;
+      }
+      /* Video.js custom styling - hide context menu completely */
+      .vjs-contextmenu-ui {
+        display: none !important;
+      }
+      .video-js .vjs-control-bar {
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      @media (max-width: 900px) {
+        .project-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+      }
+      @media (max-width: 768px) {
+        .sidebar {
+          position: relative;
+          left: 0;
+          top: 0;
+          width: 100%;
+          padding: 1rem;
+          margin-bottom: 1rem;
+        }
+        .sidebar nav {
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .sidebar nav a {
+          font-size: 0.9rem;
+        }
+        .container {
+          padding: 1rem;
+        }
+      }
+      @media (min-width: 600px) {
+        .container {
+          padding-left: 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="letterfall-canvas"></canvas>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en">ENG</button>
+      <button class="lang-btn" data-lang="et">EST</button>
+    </div>
+    <div class="container">
+      <div class="sidebar">
+        <nav>
+          <a href="/">AVALEHT</a>
+          <a href="/photos">FOTOD</a>
+          <a href="/portfolio">PROJEKTID</a>
+          <a href="/prices">HINNAKIRI</a>
+          <a href="/shop">E-POOD</a>
+          <a href="/contact">KONTAKT</a>
+        </nav>
+      </div>
+      <main class="main-content">
+        <div class="project-header">
+          <h1>{sub.title}</h1>
+          {sub.description && <p>{sub.description}</p>}
+        </div>
+
+        <div class="project-content" class:list={{ 'video-only': sub.media && sub.media.some((item: any) => item.type === 'video') && (!sub.images || sub.images.length === 0) && (!sub.media.some((item: any) => item.type !== 'video')) }}>
+          <div class="project-media">
+            {sub.media && sub.media.length > 0 && (
+              <div class="image-grid">
+                {sub.media.map((item: any) => (
+                  item.type !== 'video' ? (
+                    <img 
+                      src={`/images/${item.src}`} 
+                      alt={sub.title} 
+                      loading="lazy" 
+                    />
+                  ) : null
+                ))}
+              </div>
+            )}
+            
+            {sub.images && sub.images.length > 0 && (
+              <div class="image-grid">
+                {sub.images.map((img: any) => (
+                  <img 
+                    src={`/images/${img}`} 
+                    alt={sub.title} 
+                    loading="lazy" 
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+          
+          <div class="project-videos">
+            {sub.media && sub.media.length > 0 && (
+              <div class="video-container">
+                {sub.media.map((item: any) => (
+                  item.type === 'video' ? (
+                    <video 
+                      class="video-js vjs-big-play-centered"
+                      controls
+                      playsinline
+                      preload="metadata"
+                      data-portrait={item.portrait === true ? "true" : "false"}
+                      poster={item.poster ? `/images/${item.poster}` : undefined}
+                    >
+                      <source src={`/images/${item.src}`} type="video/mp4" />
+                    </video>
+                  ) : null
+                ))}
+              </div>
+            )}
+            <div class="project-text">
+              {sub.caption && <p class="project-caption">{sub.caption}</p>}
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="https://vjs.zencdn.net/7.20.3/video.js" is:inline></script>
+    <script is:inline>
+      // Setup event listeners first
+      document.addEventListener('contextmenu', (e) => {
+        const target = e.target;
+        if (target.tagName === 'IMG' || target.tagName === 'VIDEO' || target.closest('video') || target.closest('.video-js')) {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      document.addEventListener('dragstart', (e) => {
+        if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      document.addEventListener('copy', (e) => {
+        if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      // Initialize Video.js
+      function setupVideojs() {
+        if (typeof videojs === 'undefined') {
+          setTimeout(setupVideojs, 50);
+          return;
+        }
+        
+        const videoElements = document.querySelectorAll('.video-js');
+        videoElements.forEach((el) => {
+          try {
+            if (!el.player) {
+              videojs(el, {
+                controls: true,
+                autoplay: false,
+                preload: 'metadata',
+                fluid: true,
+                aspectRatio: '16:9',
+                controlBar: {
+                  children: [
+                    'playToggle',
+                    'progressControl',
+                    'volumePanel',
+                    'fullscreenToggle'
+                  ]
+                }
+              });
+            }
+          } catch (e) {
+            console.error('Video.js init error:', e);
+          }
+        });
+      }
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupVideojs);
+      } else {
+        setupVideojs();
+      }
+    </script>
+    <script is:inline src="/scripts/letterfall.js"></script>
+  </body>
+</html>

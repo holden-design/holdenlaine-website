@@ -8,7 +8,7 @@
       "toniseTalu": "tõnise talu",
       "contact": "Contact",
       "prices": "Prices",
-      "tshirts": "T-Shirts"
+      "tshirts": "Shop"
     },
     "contact": {
       "pageTitle": "Contact - Holden Laine Photography",
@@ -84,7 +84,17 @@
       "design2Price": "€25",
       "design3Name": "Muhu Collection",
       "design3Desc": "Inspired by Estonian summer landscapes",
-      "design3Price": "€30"
+      "design3Price": "€30",
+      "postersHeading": "Posters",
+      "poster1Name": "Muhu Landscape",
+      "poster1Desc": "A3 print, premium paper",
+      "poster1Price": "€35",
+      "poster2Name": "Portrait Series",
+      "poster2Desc": "A3 print, premium paper",
+      "poster2Price": "€35",
+      "poster3Name": "Light Study",
+      "poster3Desc": "A3 print, premium paper",
+      "poster3Price": "€35"
     },
     "photos": {
       "pageTitle": "Photos - Holden Laine Photography",
@@ -104,7 +114,7 @@
       "toniseTalu": "tõnise talu",
       "contact": "Kontakt",
       "prices": "Hinnakiri",
-      "tshirts": "T-särgid"
+      "tshirts": "E-pood"
     },
     "contact": {
       "pageTitle": "Kontakt - Holden Laine Fotograafia",
@@ -180,7 +190,17 @@
       "design2Price": "€25",
       "design3Name": "Muhu Kollektsioon",
       "design3Desc": "Inspireeritud Eesti suvemaastikest",
-      "design3Price": "€30"
+      "design3Price": "€30",
+      "postersHeading": "Plakatid",
+      "poster1Name": "Muhu Maastik",
+      "poster1Desc": "A3 print, premium paber",
+      "poster1Price": "€35",
+      "poster2Name": "Portreede Seeria",
+      "poster2Desc": "A3 print, premium paber",
+      "poster2Price": "€35",
+      "poster3Name": "Valgusuuringud",
+      "poster3Desc": "A3 print, premium paber",
+      "poster3Price": "€35"
     },
     "photos": {
       "pageTitle": "Fotod - Holden Laine Fotograafia",

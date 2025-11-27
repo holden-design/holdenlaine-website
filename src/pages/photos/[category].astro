@@ -1,0 +1,230 @@
+---
+// Photo categories with their images
+const PHOTO_CATEGORIES = {
+  'fashion': {
+    title: 'Fashion',
+    images: [
+      "portraits/sonya15.jpg",
+      "portraits/sonya16.jpg",
+      "portraits/sonya17.jpg",
+      "portraits/sonya18.jpg",
+      "portraits/sonyaa.jpg",
+      "portraits/sonyaa1.jpg"
+    ]
+  },
+  'portrait': {
+    title: 'Portrait Series',
+    images: ["portraits/_F5A0743.jpg", "portraits/_F5A0975.jpg", "portraits/_F5A3447.jpg", "portraits/_F5A3477-2.jpg", "portraits/_F5A3510.jpg", "portraits/_F5A3518.jpg", "portraits/_F5A9374.jpg", "portraits/_F5A9493.jpg", "portraits/1x1spotify.jpg", "portraits/1X1X2 copy.jpg", "portraits/adventure.jpg", "portraits/adventure1.jpg", "portraits/col1.jpg", "portraits/damn.jpg", "portraits/DSC00681.jpg", "portraits/edit-1.jpg", "portraits/edit-10.jpg", "portraits/edit-11.jpg", "portraits/edit-2.jpg", "portraits/edit-3.jpg", "portraits/edit-4.jpg", "portraits/edit-5.jpg", "portraits/edit-6.jpg", "portraits/edit-7.jpg", "portraits/edit-8.jpg", "portraits/edit-9.jpg", "portraits/edit.jpg", "portraits/eve1.jpg", "portraits/fucku.jpg", "portraits/fucku2.jpg", "portraits/himatcha.jpg", "portraits/holden2.jpg", "portraits/holden3.jpg", "portraits/images:background.jpg", "portraits/july1.jpg", "portraits/july2.jpg", "portraits/karin1.jpg", "portraits/klara1.jpg", "portraits/klara3.jpg", "portraits/klara4.jpg", "portraits/klara5.jpg", "portraits/klara6.jpg", "portraits/mad1.jpg", "portraits/mad2.jpg", "portraits/marielle1.jpg", "portraits/matcha1.jpg", "portraits/matcha2.jpg", "portraits/matcha3.jpg", "portraits/matcha4.jpg", "portraits/matcha5.jpg", "portraits/more1.jpg", "portraits/more2.jpg", "portraits/P1100300.jpg", "portraits/P1100345.jpg", "portraits/P1100418.jpg", "portraits/P1100561.jpg", "portraits/P1100570.jpg", "portraits/P1100594.jpg", "portraits/P1100864.jpg", "portraits/sonya1.jpg", "portraits/sonya10.jpg", "portraits/sonya11.jpg", "portraits/sonya12.jpg", "portraits/sonya13.jpg", "portraits/sonya14.jpg", "portraits/sonya2.jpg", "portraits/sonya3.jpg", "portraits/sonya5.jpg", "portraits/sonya6.jpg", "portraits/sonya7.jpg", "portraits/sonya8.jpg", "portraits/sonya9.jpg"]
+  },
+  'editorial': {
+    title: 'Editorial',
+    images: ["portraits/Screenshot 2025-11-25 at 21.20.01.png", "portraits/Screenshot 2025-11-25 at 21.20.15.png", "portraits/Screenshot 2025-11-25 at 21.20.22.png"]
+  },
+  'street': {
+    title: 'Street Photography',
+    images: ["portraits/_F5A9263.jpg", "portraits/_F5A9268.jpg", "portraits/_F5A9274.jpg", "portraits/_F5A9279.jpg", "portraits/_F5A9283-2.jpg", "portraits/_F5A9285.jpg", "portraits/_F5A9298.jpg", "portraits/_F5A9310.jpg", "portraits/_F5A9486.jpg", "portraits/_F5A9492.jpg", "portraits/_F5A9496-2.jpg", "portraits/_F5A9497.jpg", "portraits/_F5A9500.jpg", "portraits/_F5A9503.jpg"]
+  }
+} as const;
+
+export function getStaticPaths() {
+  return [
+    { params: { category: 'fashion' } },
+    { params: { category: 'portrait' } },
+    { params: { category: 'editorial' } },
+    { params: { category: 'street' } }
+  ];
+}
+
+const { category } = Astro.params;
+const categoryData = PHOTO_CATEGORIES[category as keyof typeof PHOTO_CATEGORIES];
+const categoryTitle = categoryData?.title || 'Photos';
+const images = categoryData?.images || [];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{categoryTitle} - Holden Laine Photography</title>
+    <style is:global>
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica;
+        background: #fff;
+        color: #222;
+        display: block;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      img {
+        -webkit-user-drag: none;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      #letterfall-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 2rem 2rem 2rem;
+      }
+      .sidebar {
+        position: fixed;
+        left: 2rem;
+        top: 2rem;
+        width: auto;
+        z-index: 1000;
+        padding: 0;
+        margin-bottom: 0;
+      }
+      .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .sidebar nav a {
+        display: block;
+        color: #222;
+        text-decoration: none;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-family: inherit;
+        letter-spacing: 0.01em;
+        font-size: 0.85rem;
+      }
+      .sidebar nav a:hover { 
+        text-decoration: underline; 
+      }
+      .main-content {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
+      }
+      .page-header {
+        margin-bottom: 2rem;
+        margin-top: 0;
+      }
+      .page-header h1 {
+        font-size: 1.75rem;
+        margin: 0 0 0.5rem 0;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+      .image-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-auto-rows: auto;
+        gap: 0.5rem;
+        margin-top: 0;
+      }
+      .image-grid img {
+        width: 100%;
+        height: auto;
+        border-radius: 0;
+        box-shadow: none;
+        display: block;
+        position: relative;
+        z-index: 10;
+      }
+      .lang-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 10000;
+        display: flex;
+        gap: 0.5rem;
+      }
+      .lang-toggle button {
+        background: transparent;
+        border: none;
+        padding: 0;
+        font-size: 0.75rem;
+        transition: opacity 0.2s ease;
+        opacity: 0.3;
+        cursor: pointer;
+        font-weight: 500;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .lang-toggle button:hover {
+        opacity: 0.6;
+      }
+      .lang-toggle button.active {
+        opacity: 1;
+      }
+      @media (max-width: 768px) {
+        .sidebar {
+          position: relative;
+          left: 0;
+          top: 0;
+          width: 100%;
+          padding: 1rem;
+          margin-bottom: 1rem;
+        }
+        .sidebar nav {
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .sidebar nav a {
+          font-size: 0.9rem;
+        }
+        .container {
+          padding: 1rem;
+        }
+      }
+      @media (min-width: 600px) {
+        .container {
+          padding-left: 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="letterfall-canvas"></canvas>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en">ENG</button>
+      <button class="lang-btn" data-lang="et">EST</button>
+    </div>
+    <div class="container">
+      <div class="sidebar">
+        <nav>
+          <a href="/">AVALEHT</a>
+          <a href="/photos">FOTOD</a>
+          <a href="/portfolio">PROJEKTID</a>
+          <a href="/prices">HINNAKIRI</a>
+          <a href="/shop">E-POOD</a>
+          <a href="/contact">KONTAKT</a>
+        </nav>
+      </div>
+      <main class="main-content">
+        <div class="page-header">
+          <h1>{categoryTitle}</h1>
+        </div>
+
+        {images.length > 0 && (
+          <div class="image-grid">
+            {images.map((img: string) => (
+              <img 
+                src={`/images/${img}`} 
+                alt={categoryTitle} 
+                loading="lazy" 
+              />
+            ))}
+          </div>
+        )}
+      </main>
+    </div>
+
+    <script is:inline src="/scripts/letterfall.js"></script>
+  </body>
+</html>

@@ -63,17 +63,17 @@ import translations from '../data/translations.json';
       .sidebar nav {
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 0.3rem;
       }
       .sidebar nav a {
         display: block;
         color: #222;
         text-decoration: none;
         font-weight: 500;
-        text-transform: lowercase;
+        text-transform: uppercase;
         font-family: inherit;
-        letter-spacing: 0.02em;
-        font-size: 1rem;
+        letter-spacing: 0.01em;
+        font-size: 0.85rem;
       }
       .sidebar nav a:hover { text-decoration: underline; }
       .main-content {
@@ -320,7 +320,7 @@ import translations from '../data/translations.json';
         font-weight: 500;
         cursor: pointer;
         font-family: "Helvetica Neue", Helvetica;
-        text-transform: lowercase;
+        text-transform: uppercase;
         letter-spacing: 0.02em;
       }
       .submit-btn:hover {
@@ -355,28 +355,25 @@ import translations from '../data/translations.json';
         z-index: 10000;
         display: flex;
         gap: 0.5rem;
-        background: #fff;
-        padding: 0.25rem;
-        border-radius: 20px;
-        border: 1px solid #ddd;
       }
       .lang-toggle button {
         background: transparent;
         border: none;
-        padding: 0.4rem 0.6rem;
-        border-radius: 15px;
-        font-size: 1.4rem;
-        transition: all 0.2s ease;
-        opacity: 0.5;
+        padding: 0;
+        font-size: 0.75rem;
+        transition: opacity 0.2s ease;
+        opacity: 0.3;
         cursor: pointer;
-        line-height: 1;
+        font-weight: 500;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
       }
       .lang-toggle button:hover {
-        opacity: 0.8;
+        opacity: 0.6;
       }
       .lang-toggle button.active {
         opacity: 1;
-        transform: scale(1.1);
       }
       @media (max-width: 900px) {
         .content-wrapper {
@@ -399,18 +396,18 @@ import translations from '../data/translations.json';
   <body>
     <canvas id="letterfall-canvas"></canvas>
     <div class="lang-toggle">
-      <button class="lang-btn active" data-lang="en">🇬🇧</button>
-      <button class="lang-btn" data-lang="et">🇪🇪</button>
+      <button class="lang-btn active" data-lang="en">ENG</button>
+      <button class="lang-btn" data-lang="et">EST</button>
     </div>
     <div class="container">
       <div class="sidebar">
         <nav>
-          <a href="/" data-i18n="nav.home">home</a>
-          <a href="/photos" data-i18n="nav.portraits">photos</a>
-          <a href="/portfolio" data-i18n="nav.projects">projects</a>
-          <a href="/prices" data-i18n="nav.prices">prices</a>
-          <a href="/tshirts" data-i18n="nav.tshirts">t-shirts</a>
-          <a href="/contact" data-i18n="nav.contact">contact</a>
+          <a href="/">HOME</a>
+          <a href="/photos">PHOTOS</a>
+          <a href="/portfolio">PROJECTS</a>
+          <a href="/prices">PRICES</a>
+          <a href="/shop">SHOP</a>
+          <a href="/contact">CONTACT</a>
         </nav>
       </div>
       <div class="main-content">

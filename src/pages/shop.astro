@@ -1,0 +1,335 @@
+---
+import translations from '../data/translations.json';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="tshirts.pageTitle">T-Shirts - Holden Laine Photography</title>
+    <style is:global>
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica;
+        background: #fff;
+        color: #222;
+        display: block;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      img {
+        -webkit-user-drag: none;
+        user-select: none;
+        -webkit-user-select: none;
+      }
+      #letterfall-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      
+      @media (max-width: 768px) {
+        .sidebar {
+          position: relative !important;
+          left: 0 !important;
+          top: 0 !important;
+          width: 100% !important;
+          padding: 1rem !important;
+          margin-bottom: 1rem !important;
+        }
+        .sidebar nav {
+          flex-direction: row !important;
+          flex-wrap: wrap !important;
+          gap: 0.5rem !important;
+        }
+        .sidebar nav a {
+          font-size: 0.9rem !important;
+        }
+        .container {
+          padding: 1rem !important;
+        }
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      .sidebar {
+        position: fixed;
+        left: 2rem;
+        top: 2rem;
+        width: auto;
+        z-index: 1000;
+        padding: 0;
+        margin-bottom: 0;
+      }
+      .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .sidebar nav a {
+        display: block;
+        color: #222;
+        text-decoration: none;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-family: inherit;
+        letter-spacing: 0.01em;
+        font-size: 0.85rem;
+      }
+      .sidebar nav a:hover { text-decoration: underline; }
+      .main-content {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0;
+      }
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+      }
+      .tshirt-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+      .tshirt-item {
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        overflow: hidden;
+        transition: transform 0.2s ease;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+      .tshirt-item:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+      .tshirt-image {
+        width: 100%;
+        aspect-ratio: 1;
+        background: #f5f5f5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+      }
+      .tshirt-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .tshirt-info {
+        padding: 1rem;
+      }
+      .tshirt-name {
+        font-weight: 500;
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+      }
+      .tshirt-description {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 0.75rem;
+      }
+      .tshirt-price {
+        font-weight: 500;
+        font-size: 1.1rem;
+      }
+      .language-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 10000;
+        display: flex;
+        gap: 0.5rem;
+      }
+      .language-toggle button {
+        background: transparent;
+        border: none;
+        padding: 0;
+        font-size: 0.75rem;
+        transition: opacity 0.2s ease;
+        opacity: 0.3;
+        cursor: pointer;
+        font-weight: 500;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .language-toggle button:hover {
+        opacity: 0.6;
+      }
+      .language-toggle button.active {
+        opacity: 1;
+      }
+      /* Hide context menu on images to prevent downloads */
+      img {
+        pointer-events: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="letterfall-canvas"></canvas>
+    <div class="language-toggle">
+      <button class="lang-btn active" data-lang="en">ENG</button>
+      <button class="lang-btn" data-lang="et">EST</button>
+    </div>
+    <div class="container">
+      <div class="sidebar">
+        <nav>
+          <a href="/">HOME</a>
+          <a href="/photos">PHOTOS</a>
+          <a href="/portfolio">PROJECTS</a>
+          <a href="/prices">PRICES</a>
+          <a href="/shop">SHOP</a>
+          <a href="/contact">CONTACT</a>
+        </nav>
+      </div>
+      <div class="main-content">
+        <h1 data-i18n="tshirts.heading">T-Shirts</h1>
+        
+        <div class="tshirt-grid">
+          <a href="https://raemstudio.com/products/creative-series-s01e01-1" target="_blank" rel="noopener noreferrer" class="tshirt-item">
+            <div class="tshirt-image"><img src="/1568999197096245512_2048.webp" alt="Creative Series S01E01" /></div>
+            <div class="tshirt-info">
+              <div class="tshirt-name">Creative Series S01E01</div>
+            </div>
+          </a>
+          
+          <a href="https://raemstudio.com/products/creative-series-s01e02" target="_blank" rel="noopener noreferrer" class="tshirt-item">
+            <div class="tshirt-image"><img src="/creative series S01E02.webp" alt="Creative Series S01E02" /></div>
+            <div class="tshirt-info">
+              <div class="tshirt-name">Creative Series S01E02</div>
+            </div>
+          </a>
+          
+          <a href="https://raemstudio.com/products/leaders-of-the-new-society-graphic-t-shirt" target="_blank" rel="noopener noreferrer" class="tshirt-item">
+            <div class="tshirt-image"><img src="/leadersofthenewsociety.webp" alt="Leaders of the New Society" /></div>
+            <div class="tshirt-info">
+              <div class="tshirt-name">Leaders of the New Society</div>
+            </div>
+          </a>
+        </div>
+        
+        <h2 style="margin-top: 3rem; margin-bottom: 1rem; font-size: 1.5rem; display: none;" data-i18n="tshirts.postersHeading">Posters</h2>
+        
+        <div class="tshirt-grid" style="display: none;">
+          <div class="tshirt-item">
+            <div class="tshirt-image">🖼️</div>
+            <div class="tshirt-info">
+              <div class="tshirt-name" data-i18n="tshirts.poster1Name">Muhu Landscape</div>
+              <div class="tshirt-description" data-i18n="tshirts.poster1Desc">A3 print, premium paper</div>
+              <div class="tshirt-price" data-i18n="tshirts.poster1Price">€35</div>
+            </div>
+          </div>
+          
+          <div class="tshirt-item">
+            <div class="tshirt-image">🖼️</div>
+            <div class="tshirt-info">
+              <div class="tshirt-name" data-i18n="tshirts.poster2Name">Portrait Series</div>
+              <div class="tshirt-description" data-i18n="tshirts.poster2Desc">A3 print, premium paper</div>
+              <div class="tshirt-price" data-i18n="tshirts.poster2Price">€35</div>
+            </div>
+          </div>
+          
+          <div class="tshirt-item">
+            <div class="tshirt-image">🖼️</div>
+            <div class="tshirt-info">
+              <div class="tshirt-name" data-i18n="tshirts.poster3Name">Light Study</div>
+              <div class="tshirt-description" data-i18n="tshirts.poster3Desc">A3 print, premium paper</div>
+              <div class="tshirt-price" data-i18n="tshirts.poster3Price">€35</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script is:inline define:vars={{ translations }}>
+      // Disable right-click context menu on images
+      document.addEventListener('contextmenu', (e) => {
+        if (e.target.tagName === 'IMG') {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      // Disable drag and drop on images
+      document.addEventListener('dragstart', (e) => {
+        if (e.target.tagName === 'IMG') {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      // Prevent save shortcuts (Cmd+S, Ctrl+S)
+      document.addEventListener('keydown', (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      // Prevent copy of images
+      document.addEventListener('copy', (e) => {
+        if (e.target.tagName === 'IMG') {
+          e.preventDefault();
+          return false;
+        }
+      });
+      
+      const currentLang = localStorage.getItem('language') || 'en';
+      
+      function applyTranslations(lang) {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+          const key = element.getAttribute('data-i18n');
+          const keys = key.split('.');
+          let value = translations[lang];
+          
+          for (const k of keys) {
+            value = value?.[k];
+          }
+          
+          if (value) {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+              element.placeholder = value;
+            } else if (element.tagName === 'OPTION') {
+              element.textContent = value;
+            } else if (element.tagName === 'TITLE') {
+              document.title = value;
+            } else {
+              element.textContent = value;
+            }
+          }
+        });
+        
+        // Update active language button
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
+        
+        document.documentElement.lang = lang;
+      }
+      
+      applyTranslations(currentLang);
+      
+      // Language toggle buttons
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.getAttribute('data-lang');
+          if (lang) {
+            localStorage.setItem('language', lang);
+            applyTranslations(lang);
+          }
+        });
+      });
+    </script>
+    <script is:inline src="/scripts/letterfall.js"></script>
+  </body>
+</html>

@@ -2,23 +2,80 @@
   {
     "title": "Portrait Series",
     "description": "A series of portraits exploring light and emotion.",
-    "images": ["portraits/_F5A0743.jpg", "portraits/_F5A0975.jpg", "portraits/_F5A3447.jpg", "portraits/_F5A3477-2.jpg", "portraits/_F5A3510.jpg", "portraits/_F5A3518.jpg", "portraits/_F5A9263.jpg", "portraits/_F5A9268.jpg", "portraits/_F5A9274.jpg", "portraits/_F5A9279.jpg", "portraits/_F5A9283-2.jpg", "portraits/_F5A9285.jpg", "portraits/_F5A9298.jpg", "portraits/_F5A9310.jpg", "portraits/_F5A9374.jpg", "portraits/_F5A9486.jpg", "portraits/_F5A9492.jpg", "portraits/_F5A9493.jpg", "portraits/_F5A9496-2.jpg", "portraits/_F5A9497.jpg", "portraits/_F5A9500.jpg", "portraits/_F5A9503.jpg", "portraits/1x1spotify.jpg", "portraits/1X1X2 copy.jpg", "portraits/adventure.jpg", "portraits/adventure1.jpg", "portraits/col1.jpg", "portraits/damn.jpg", "portraits/DSC00681.jpg", "portraits/edit-1.jpg", "portraits/edit-10.jpg", "portraits/edit-11.jpg", "portraits/edit-2.jpg", "portraits/edit-3.jpg", "portraits/edit-4.jpg", "portraits/edit-5.jpg", "portraits/edit-6.jpg", "portraits/edit-7.jpg", "portraits/edit-8.jpg", "portraits/edit-9.jpg", "portraits/edit.jpg", "portraits/eve1.jpg", "portraits/fucku.jpg", "portraits/fucku2.jpg", "portraits/himatcha.jpg", "portraits/holden2.jpg", "portraits/holden3.jpg", "portraits/images:background.jpg", "portraits/july1.jpg", "portraits/july2.jpg", "portraits/karin1.jpg", "portraits/klara1.jpg", "portraits/klara3.jpg", "portraits/klara4.jpg", "portraits/klara5.jpg", "portraits/klara6.jpg", "portraits/mad1.jpg", "portraits/mad2.jpg", "portraits/marielle1.jpg", "portraits/matcha1.jpg", "portraits/matcha2.jpg", "portraits/matcha3.jpg", "portraits/matcha4.jpg", "portraits/matcha5.jpg", "portraits/more1.jpg", "portraits/more2.jpg", "portraits/P1100300.jpg", "portraits/P1100345.jpg", "portraits/P1100418.jpg", "portraits/P1100561.jpg", "portraits/P1100570.jpg", "portraits/P1100594.jpg", "portraits/P1100864.jpg", "portraits/sonya1.jpg", "portraits/sonya10.jpg", "portraits/sonya11.jpg", "portraits/sonya12.jpg", "portraits/sonya13.jpg", "portraits/sonya14.jpg", "portraits/sonya15.jpg", "portraits/sonya16.jpg", "portraits/sonya17.jpg", "portraits/sonya18.jpg", "portraits/sonya2.jpg", "portraits/sonya3.jpg", "portraits/sonya5.jpg", "portraits/sonya6.jpg", "portraits/sonya7.jpg", "portraits/sonya8.jpg", "portraits/sonya9.jpg", "portraits/sonyaa.jpg", "portraits/sonyaa1.jpg", "portraits/victoria1.jpg"]
+    "images": ["portraits/_F5A0743.jpg", "portraits/_F5A0975.jpg", "portraits/_F5A3447.jpg", "portraits/_F5A3477-2.jpg", "portraits/_F5A3510.jpg", "portraits/_F5A3518.jpg", "portraits/_F5A9374.jpg", "portraits/_F5A9493.jpg", "portraits/1x1spotify.jpg", "portraits/1X1X2 copy.jpg", "portraits/adventure.jpg", "portraits/adventure1.jpg", "portraits/col1.jpg", "portraits/damn.jpg", "portraits/DSC00681.jpg", "portraits/edit-1.jpg", "portraits/edit-10.jpg", "portraits/edit-11.jpg", "portraits/edit-2.jpg", "portraits/edit-3.jpg", "portraits/edit-4.jpg", "portraits/edit-5.jpg", "portraits/edit-6.jpg", "portraits/edit-7.jpg", "portraits/edit-8.jpg", "portraits/edit-9.jpg", "portraits/edit.jpg", "portraits/eve1.jpg", "portraits/fucku.jpg", "portraits/fucku2.jpg", "portraits/himatcha.jpg", "portraits/holden2.jpg", "portraits/holden3.jpg", "portraits/images:background.jpg", "portraits/july1.jpg", "portraits/july2.jpg", "portraits/karin1.jpg", "portraits/klara1.jpg", "portraits/klara3.jpg", "portraits/klara4.jpg", "portraits/klara5.jpg", "portraits/klara6.jpg", "portraits/mad1.jpg", "portraits/mad2.jpg", "portraits/marielle1.jpg", "portraits/matcha1.jpg", "portraits/matcha2.jpg", "portraits/matcha3.jpg", "portraits/matcha4.jpg", "portraits/matcha5.jpg", "portraits/more1.jpg", "portraits/more2.jpg", "portraits/P1100300.jpg", "portraits/P1100345.jpg", "portraits/P1100418.jpg", "portraits/P1100561.jpg", "portraits/P1100570.jpg", "portraits/P1100594.jpg", "portraits/P1100864.jpg", "portraits/sonya1.jpg", "portraits/sonya10.jpg", "portraits/sonya11.jpg", "portraits/sonya12.jpg", "portraits/sonya13.jpg", "portraits/sonya14.jpg", "portraits/sonya15.jpg", "portraits/sonya16.jpg", "portraits/sonya17.jpg", "portraits/sonya18.jpg", "portraits/sonya2.jpg", "portraits/sonya3.jpg", "portraits/sonya5.jpg", "portraits/sonya6.jpg", "portraits/sonya7.jpg", "portraits/sonya8.jpg", "portraits/sonya9.jpg", "portraits/sonyaa.jpg", "portraits/sonyaa1.jpg", "portraits/victoria1.jpg"]
   },
   {
     "title": "Street Photography",
     "description": "Capturing candid moments from everyday life.",
-    "images": ["street1.jpg", "street2.jpg", "street3.jpg"]
+    "images": ["street1.jpg", "street2.jpg", "street3.jpg", "portraits/_F5A9263.jpg", "portraits/_F5A9268.jpg", "portraits/_F5A9274.jpg", "portraits/_F5A9279.jpg", "portraits/_F5A9283-2.jpg", "portraits/_F5A9285.jpg", "portraits/_F5A9298.jpg", "portraits/_F5A9310.jpg", "portraits/_F5A9486.jpg", "portraits/_F5A9492.jpg", "portraits/_F5A9496-2.jpg", "portraits/_F5A9497.jpg", "portraits/_F5A9500.jpg", "portraits/_F5A9503.jpg"]
+  },
+  {
+    "title": "Editorial",
+    "description": "Editorial photography and styled shoots.",
+    "images": ["portraits/Screenshot 2025-11-25 at 21.20.01.png", "portraits/Screenshot 2025-11-25 at 21.20.15.png", "portraits/Screenshot 2025-11-25 at 21.20.22.png"]
+  },
+  {
+    "title": "Fashion",
+    "description": "Fashion photography and styled shoots.",
+    "images": [
+      "portraits/sonya15.jpg",
+      "portraits/sonya16.jpg",
+      "portraits/sonya17.jpg",
+      "portraits/sonya18.jpg",
+      "portraits/sonyaa.jpg",
+      "portraits/sonyaa1.jpg"
+    ]
   },
   {
     "title": "Projects",
     "description": "Various creative projects.",
     "projects": [
       {
-        "title": "Tõnise talu, Muhu",
+        "title": "Tõnise talu",
         "description": "A video project from Muhu island.",
         "caption": "Tõnise talu, Muhu video that shows the beauty of an Estonian summer and the beauty you can find at muhutonise.ee",
         "media": [
           {"type": "video", "src": "tonise-talu.mp4", "poster": "tonise-talu-poster.jpg"}
+        ]
+      },
+      {
+        "title": "UGC",
+        "description": "User Generated Content projects.",
+        "caption": "User generated content and collaborations",
+        "images": []
+      },
+      {
+        "title": "Peugeot",
+        "description": "Social media content creation",
+        "caption": "Peugeot social media video creation\nDirected by Holden Laine\nStyled by Kadri Kukk\nBTS - Andre Merilo\nModel - Christin Sandra Topkin",
+          "media": [
+            {"type": "video", "src": "portraits/01_Peugeot_social_web.mp4", "portrait": true},
+            {"type": "image", "src": "portraits/Peugeot1.jpg"},
+            {"type": "image", "src": "portraits/Peugeot2.jpg"},
+            {"type": "image", "src": "portraits/Peugeot4.jpg"},
+            {"type": "image", "src": "portraits/Peugeot5.jpg"},
+            {"type": "image", "src": "portraits/Peugeot6.jpg"},
+            {"type": "image", "src": "portraits/Peugeot7.jpg"},
+            {"type": "image", "src": "portraits/Peugeot8.jpg"},
+            {"type": "image", "src": "portraits/Peugeot9.jpg"},
+            {"type": "image", "src": "portraits/Peugeot10.jpg"},
+            {"type": "image", "src": "portraits/Peugeot11.jpg"}
+          ]
+      },
+      {
+        "title": "Lexus",
+        "description": "Lexus campaign.",
+        "caption": "Lexus automotive photography",
+        "images": []
+      },
+      {
+        "title": "Roseni maja",
+        "description": "Roseni maja architecture and interior photography.",
+        "caption": "Roseni maja project in Tallinn.",
+        "media": [
+          {"type": "image", "src": "portraits/Roseni1.jpg"},
+          {"type": "image", "src": "portraits/Roseni2.jpg"},
+          {"type": "image", "src": "portraits/Roseni3.jpg"}
         ]
       }
     ]
