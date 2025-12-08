@@ -163,12 +163,12 @@ import translations from '../data/translations.json';
     <div class="container">
       <div class="sidebar">
         <nav>
-          <a href="/">HOME</a>
-          <a href="/photos">PHOTOS</a>
-          <a href="/portfolio">PROJECTS</a>
-          <a href="/prices">PRICES</a>
-          <a href="/shop">SHOP</a>
-          <a href="/contact">CONTACT</a>
+          <a href="/" data-i18n="nav.home">HOME</a>
+          <a href="/photos" data-i18n="nav.portraits">PHOTOS</a>
+          <a href="/portfolio" data-i18n="nav.projects">PROJECTS</a>
+          <a href="/prices" data-i18n="nav.prices">PRICES</a>
+          <a href="/shop" data-i18n="nav.tshirts">SHOP</a>
+          <a href="/contact" data-i18n="nav.contact">CONTACT</a>
         </nav>
       </div>
       <div class="main-content">
@@ -278,21 +278,5 @@ import translations from '../data/translations.json';
       });
     </script>
     <script is:inline src="/scripts/letterfall.js"></script>
-    <script is:inline>
-      // Language toggle functionality
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const lang = btn.getAttribute('data-lang');
-          if (lang) {
-            localStorage.setItem('language', lang);
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-btn').forEach(b => {
-              b.classList.toggle('active', b.getAttribute('data-lang') === lang);
-            });
-          }
-        });
-      });
-    </script>
   </body>
 </html>

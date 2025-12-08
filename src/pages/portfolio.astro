@@ -221,12 +221,12 @@ import projects from '../../public/data/projects.json';
     <div class="container">
       <div class="sidebar">
         <nav>
-          <a href="/">AVALEHT</a>
-          <a href="/photos">FOTOD</a>
-          <a href="/portfolio">PROJEKTID</a>
-          <a href="/prices">HINNAKIRI</a>
-          <a href="/shop">E-POOD</a>
-          <a href="/contact">KONTAKT</a>
+          <a href="/" data-i18n="nav.home">AVALEHT</a>
+          <a href="/photos" data-i18n="nav.portraits">FOTOD</a>
+          <a href="/portfolio" data-i18n="nav.projects">PROJEKTID</a>
+          <a href="/prices" data-i18n="nav.prices">HINNAKIRI</a>
+          <a href="/shop" data-i18n="nav.tshirts">E-POOD</a>
+          <a href="/contact" data-i18n="nav.contact">KONTAKT</a>
         </nav>
       </div>
       <main class="main-content">
@@ -337,9 +337,49 @@ import projects from '../../public/data/projects.json';
             document.querySelectorAll('.lang-btn').forEach(b => {
               b.classList.toggle('active', b.getAttribute('data-lang') === lang);
             });
+            // Update all elements with data-i18n attribute
+            updateTranslations(lang);
           }
         });
       });
+      
+      // Function to update translations
+      function updateTranslations(lang) {
+        const translations = {
+          'en': {
+            'nav.home': 'HOME',
+            'nav.portraits': 'PHOTOS',
+            'nav.projects': 'PROJECTS',
+            'nav.prices': 'PRICES',
+            'nav.tshirts': 'SHOP',
+            'nav.contact': 'CONTACT'
+          },
+          'et': {
+            'nav.home': 'AVALEHT',
+            'nav.portraits': 'FOTOD',
+            'nav.projects': 'PROJEKTID',
+            'nav.prices': 'HINNAKIRI',
+            'nav.tshirts': 'E-POOD',
+            'nav.contact': 'KONTAKT'
+          }
+        };
+        
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.getAttribute('data-i18n');
+          if (translations[lang] && translations[lang][key]) {
+            el.textContent = translations[lang][key];
+          }
+        });
+      }
+      
+      // Initialize translations on page load
+      const savedLang = localStorage.getItem('language') || 'en';
+      if (savedLang === 'et') {
+        updateTranslations('et');
+        document.querySelectorAll('.lang-btn').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-lang') === 'et');
+        });
+      }
     </script>
   </body>
 </html>
