@@ -278,5 +278,21 @@ import translations from '../data/translations.json';
       });
     </script>
     <script is:inline src="/scripts/letterfall.js"></script>
+    <script is:inline>
+      // Language toggle functionality
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const lang = btn.getAttribute('data-lang');
+          if (lang) {
+            localStorage.setItem('language', lang);
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => {
+              b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
