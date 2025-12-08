@@ -3,6 +3,7 @@
     "nav": {
       "home": "Home",
       "portraits": "Photos",
+      "studio": "Studio",
       "portraitSeries": "portrait series",
       "projects": "Projects",
       "toniseTalu": "tõnise talu",
@@ -103,6 +104,24 @@
       "editorial": "editorial",
       "portrait": "portrait",
       "street": "street"
+    },
+    "studio": {
+      "pageTitle": "Studio - Holden Laine Photography",
+    "nav": {
+      "home": "Avaleht",
+      "portraits": "Fotod",
+      "studio": "Stuudio",
+      "portraitSeries": "portreede seeria",
+      "projects": "Projektid",
+      "toniseTalu": "tõnise talu",
+      "contact": "Kontakt",
+      "prices": "Hinnakiri",
+      "tshirts": "E-pood"
+    },"amenity5": "Digital and instant photo delivery",
+      "sessions": "Studio Sessions",
+      "sessionsText": "Whether you're looking for a professional headshot, family portrait, or creative fashion shoot, the studio is fully equipped to bring your vision to life. All sessions include professional editing and high-resolution digital files.",
+      "booking": "Booking a Session",
+      "bookingText": "To book a studio session or inquire about availability, please visit the contact page or reach out directly via email or phone."
     }
   },
   "et": {
@@ -201,7 +220,6 @@
       "poster3Name": "Valgusuuringud",
       "poster3Desc": "A3 print, premium paber",
       "poster3Price": "€35"
-    },
     "photos": {
       "pageTitle": "Fotod - Holden Laine Fotograafia",
       "heading": "Fotod",
@@ -209,6 +227,24 @@
       "editorial": "toimetuslik",
       "portrait": "portree",
       "street": "tänav"
+    },
+    "studio": {
+      "pageTitle": "Stuudio - Holden Laine Fotograafia",
+      "heading": "Stuudio",
+      "subtitle": "Professionaalne Fotograafiaruum",
+      "about": "Stuudio Kohta",
+      "aboutText": "Tere tulemast minu professionaalsesse fotograafiastuudiosse, loomingulisse ruumi, mis on kujundatud portreesessiooni, tootefotograafia ja koostööliste loominguliste projektide jaoks. Stuudio on varustatud professionaalse valgustusseadmega, mitmekesiste taustade ja muude asjadega ning hubaste keskkonnaga kõigi fotograafialiikide jaoks.",
+      "amenities": "Stuudio Hüved",
+      "amenity1": "Professionaalne valgustusseade kohandatava intensiivsusega",
+      "amenity2": "Erinevad taustapildid ja stsenografid",
+      "amenity3": "Kliimamuudeldud mugav ruum",
+      "amenity4": "Juuste ja meigistuse ettevalmistuse ala",
+      "amenity5": "Digitaalne ja hetke fotoderivatsioon",
+      "sessions": "Stuudio Sessioonid",
+      "sessionsText": "Kas otsite professionaalset peakaamerat, perekonna portreed või loovat moeshooti, on stuudio täielikult varustatud teie visiooni ellu viimiseks. Kõik sessioonid sisaldavad professionaalset redigeerimist ja kõrge eraldusvõimega digitaalfaile.",
+      "booking": "Sessiooni Broneerimine",
+      "bookingText": "Stuudio sessiooni broneerimiseks või saadavuse kohta pärimiseks külastage palun kontaktlehte või võtke otseselt ühendust meili või telefoni teel."
     }
   }
+} }
 }

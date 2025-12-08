@@ -9,10 +9,10 @@ import translations from '../data/translations.json';
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <SEO 
-      title="Pricing"
-      titleEt="Hinnakiri"
-      description="Photography services pricing for portraits, fashion shoots, editorial projects, social media content creation, and commercial work."
-      descriptionEt="Fotograafia teenuste hinnad portreede, moofotode, toimetuslike projektide, sotsiaalmeedia sisutootmise ja kommertsprojektide jaoks."
+      title="Studio"
+      titleEt="Stuudio"
+      description="Welcome to Holden Laine's photography studio. Experience professional photography services in a creative space."
+      descriptionEt="Tere tulemast Holden Laine'i fotograafiastuudiosse. Koges professionaalset fotograafiateeninust loomingulises keskkonnas."
       type="website"
     />
     <style is:global>
@@ -22,6 +22,13 @@ import translations from '../data/translations.json';
         background: #fff;
         color: #222;
         display: block;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+      img {
+        -webkit-user-drag: none;
+        user-select: none;
+        -webkit-user-select: none;
       }
       #letterfall-canvas {
         position: fixed;
@@ -31,28 +38,6 @@ import translations from '../data/translations.json';
         height: 100%;
         z-index: 0;
         pointer-events: none;
-      }
-      
-      @media (max-width: 768px) {
-        .sidebar {
-          position: relative !important;
-          left: 0 !important;
-          top: 0 !important;
-          width: 100% !important;
-          padding: 1rem !important;
-          margin-bottom: 1rem !important;
-        }
-        .sidebar nav {
-          flex-direction: row !important;
-          flex-wrap: wrap !important;
-          gap: 0.5rem !important;
-        }
-        .sidebar nav a {
-          font-size: 0.9rem !important;
-        }
-        .container {
-          padding: 1rem !important;
-        }
       }
       .container {
         max-width: 1200px;
@@ -83,46 +68,67 @@ import translations from '../data/translations.json';
         letter-spacing: 0.01em;
         font-size: 0.85rem;
       }
-      .sidebar nav a:hover { text-decoration: underline; }
+      .sidebar nav a:hover { 
+        text-decoration: underline; 
+      }
       .main-content {
-        max-width: 800px;
+        max-width: 100%;
         margin: 0 auto;
         padding: 0;
       }
-      h1 {
-        font-size: 1.5rem;
+      .studio-header {
         margin-bottom: 2rem;
+        margin-top: 0;
       }
-      .price-section {
+      .studio-header h1 {
+        font-size: 1.75rem;
+        margin: 0 0 0.5rem 0;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+      .studio-header p {
+        color: #555;
+        font-size: 0.9rem;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+      }
+      .studio-content {
         margin-bottom: 3rem;
+        line-height: 1.8;
       }
-      .price-section h2 {
+      .studio-content p {
+        color: #555;
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+      }
+      .studio-section {
+        margin-bottom: 2.5rem;
+      }
+      .studio-section h2 {
         font-size: 1.2rem;
         margin-bottom: 1rem;
-        font-weight: 500;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
       }
-      .price-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        padding: 0.75rem 0;
-        border-bottom: 1px solid #e0e0e0;
+      .studio-section ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
       }
-      .price-item:last-child {
-        border-bottom: none;
-      }
-      .price-name {
-        font-weight: 500;
-      }
-      .price-description {
+      .studio-section li {
+        color: #555;
         font-size: 0.9rem;
-        color: #666;
-        margin-top: 0.25rem;
+        margin-bottom: 0.75rem;
+        padding-left: 1.5rem;
+        position: relative;
       }
-      .price-amount {
-        font-weight: 500;
-        white-space: nowrap;
-        margin-left: 2rem;
+      .studio-section li:before {
+        content: "—";
+        position: absolute;
+        left: 0;
       }
       .language-toggle {
         position: fixed;
@@ -151,6 +157,53 @@ import translations from '../data/translations.json';
       .language-toggle button.active {
         opacity: 1;
       }
+      @media (max-width: 900px) {
+        .container {
+          padding: 1.5rem;
+        }
+      }
+      @media (max-width: 768px) {
+        .sidebar {
+          position: relative;
+          left: 0;
+          top: 0;
+          width: 100%;
+          padding: 1rem;
+          margin-bottom: 1rem;
+        }
+        .sidebar nav {
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .sidebar nav a {
+          font-size: 0.75rem;
+        }
+        .container {
+          padding: 1rem;
+          max-width: 100%;
+          margin: 0;
+        }
+        .studio-header h1 {
+          font-size: 1.3rem;
+        }
+        .language-toggle {
+          top: 0.5rem;
+          right: 0.5rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .sidebar nav a {
+          font-size: 0.65rem;
+        }
+        .container {
+          padding: 0.75rem;
+        }
+        .studio-header h1 {
+          font-size: 1.1rem;
+          margin-bottom: 1rem;
+        }
+      }
     </style>
   </head>
   <body>
@@ -173,64 +226,42 @@ import translations from '../data/translations.json';
         </nav>
       </div>
       <div class="main-content">
-        <h1 data-i18n="prices.heading">Prices</h1>
-        
-        <div class="price-section">
-          <h2 data-i18n="prices.portraitSessions">Portrait Sessions</h2>
-          <div class="price-item">
-            <div>
-              <div class="price-name" data-i18n="prices.individualPortrait">Individual Portrait</div>
-              <div class="price-description" data-i18n="prices.individualPortraitDesc">1 hour session, 10+ edited photos</div>
-            </div>
-            <div class="price-amount" data-i18n="prices.individualPortraitPrice">€150</div>
-          </div>
-          <div class="price-item">
-            <div>
-              <div class="price-name" data-i18n="prices.couplePortrait">Couple Portrait</div>
-              <div class="price-description" data-i18n="prices.couplePortraitDesc">1.5 hour session, 15+ edited photos</div>
-            </div>
-            <div class="price-amount" data-i18n="prices.couplePortraitPrice">€200</div>
-          </div>
-          <div class="price-item">
-            <div>
-              <div class="price-name" data-i18n="prices.familyPortrait">Family Portrait</div>
-              <div class="price-description" data-i18n="prices.familyPortraitDesc">2 hour session, 20+ edited photos</div>
-            </div>
-            <div class="price-amount" data-i18n="prices.familyPortraitPrice">€250</div>
-          </div>
+        <div class="studio-header">
+          <h1 data-i18n="studio.heading">Studio</h1>
+          <p data-i18n="studio.subtitle">Professional Photography Space</p>
         </div>
 
-        <div class="price-section">
-          <h2 data-i18n="prices.eventPhotography">Event Photography</h2>
-          <div class="price-item">
-            <div>
-              <div class="price-name" data-i18n="prices.halfDay">Half Day</div>
-              <div class="price-description" data-i18n="prices.halfDayDesc">Up to 4 hours coverage</div>
-            </div>
-            <div class="price-amount" data-i18n="prices.halfDayPrice">€400</div>
+        <div class="studio-content">
+          <div class="studio-section">
+            <h2 data-i18n="studio.about">About the Studio</h2>
+            <p data-i18n="studio.aboutText">Welcome to my professional photography studio, a creative space designed for portrait sessions, product photography, and collaborative creative projects. The studio features professional lighting equipment, diverse backdrops, and a comfortable environment for all types of photography.</p>
           </div>
-          <div class="price-item">
-            <div>
-              <div class="price-name" data-i18n="prices.fullDay">Full Day</div>
-              <div class="price-description" data-i18n="prices.fullDayDesc">Up to 8 hours coverage</div>
-            </div>
-            <div class="price-amount" data-i18n="prices.fullDayPrice">€700</div>
-          </div>
-        </div>
 
-        <div class="price-section">
-          <h2 data-i18n="prices.commercialProjects">Commercial Projects</h2>
-          <div class="price-item">
-            <div>
-              <div class="price-name" data-i18n="prices.commercial">Commercial Rate</div>
-              <div class="price-description" data-i18n="prices.commercialDesc">Custom quote based on project scope</div>
-            </div>
-            <div class="price-amount" data-i18n="prices.commercialPrice">Contact for quote</div>
+          <div class="studio-section">
+            <h2 data-i18n="studio.amenities">Studio Amenities</h2>
+            <ul>
+              <li data-i18n="studio.amenity1">Professional lighting setup with adjustable intensity</li>
+              <li data-i18n="studio.amenity2">Variety of backdrops and set pieces</li>
+              <li data-i18n="studio.amenity3">Climate-controlled comfortable space</li>
+              <li data-i18n="studio.amenity4">Hair and makeup preparation area</li>
+              <li data-i18n="studio.amenity5">Digital and instant photo delivery</li>
+            </ul>
+          </div>
+
+          <div class="studio-section">
+            <h2 data-i18n="studio.sessions">Studio Sessions</h2>
+            <p data-i18n="studio.sessionsText">Whether you're looking for a professional headshot, family portrait, or creative fashion shoot, the studio is fully equipped to bring your vision to life. All sessions include professional editing and high-resolution digital files.</p>
+          </div>
+
+          <div class="studio-section">
+            <h2 data-i18n="studio.booking">Booking a Session</h2>
+            <p data-i18n="studio.bookingText">To book a studio session or inquire about availability, please visit the <a href="/contact" style="text-decoration: underline; color: #222;">contact page</a> or reach out directly via email or phone.</p>
           </div>
         </div>
       </div>
     </div>
 
+    <script is:inline src="/scripts/letterfall.js"></script>
     <script is:inline define:vars={{ translations }}>
       const currentLang = localStorage.getItem('language') || 'en';
       
@@ -278,6 +309,5 @@ import translations from '../data/translations.json';
         });
       });
     </script>
-    <script is:inline src="/scripts/letterfall.js"></script>
   </body>
 </html>
