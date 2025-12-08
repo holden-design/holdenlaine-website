@@ -6,15 +6,23 @@
   <!-- Homepage -->
   <url>
     <loc>https://www.holdenlaine.com/</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  
+  <!-- Studio -->
+  <url>
+    <loc>https://www.holdenlaine.com/studio</loc>
+    <lastmod>2025-12-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   
   <!-- Portfolio -->
   <url>
     <loc>https://www.holdenlaine.com/portfolio</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -22,7 +30,7 @@
   <!-- Portfolio Projects -->
   <url>
     <loc>https://www.holdenlaine.com/portfolio/tõnise-talu</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <video:video>
@@ -35,14 +43,14 @@
   
   <url>
     <loc>https://www.holdenlaine.com/portfolio/ugc</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.holdenlaine.com/portfolio/peugeot</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <video:video>
@@ -59,14 +67,14 @@
   
   <url>
     <loc>https://www.holdenlaine.com/portfolio/lexus</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.holdenlaine.com/portfolio/roseni-maja</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -78,7 +86,7 @@
   <!-- Photos -->
   <url>
     <loc>https://www.holdenlaine.com/photos</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -86,28 +94,28 @@
   <!-- Photo Categories -->
   <url>
     <loc>https://www.holdenlaine.com/photos/fashion</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.holdenlaine.com/photos/portrait</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.holdenlaine.com/photos/editorial</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://www.holdenlaine.com/photos/street</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -115,21 +123,21 @@
   <!-- Other Pages -->
   <url>
     <loc>https://www.holdenlaine.com/prices</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>https://www.holdenlaine.com/shop</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>https://www.holdenlaine.com/contact</loc>
-    <lastmod>2025-11-27</lastmod>
+    <lastmod>2025-12-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

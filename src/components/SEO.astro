@@ -40,19 +40,41 @@ const siteName = isEstonian ? 'Holden Laine Fotograafia' : 'Holden Laine Photogr
 const locale = isEstonian ? 'et_EE' : 'en_US';
 
 // Schema.org structured data
+const baseUrl = Astro.site?.href || 'https://www.holdenlaine.com';
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  'name': 'Holden Laine Photography',
+  'url': baseUrl,
+  'description': displayDescription,
+  'image': image,
+  'telephone': '',
+  'priceRange': '€€',
+  'areaServed': ['EE', 'EU'],
+  'contactPoint': {
+    '@type': 'ContactPoint',
+    'telephone': '',
+    'contactType': 'Customer Service'
+  },
+  'sameAs': [
+    'https://www.instagram.com/holdenlaine',
+    'https://www.linkedin.com/in/holdenlaine'
+  ]
+};
+
 const schemaData = {
   '@context': 'https://schema.org',
   '@type': type === 'website' ? 'WebSite' : type === 'article' ? 'NewsArticle' : 'Person',
   ...(type === 'website' && {
     name: displayTitle,
     description: displayDescription,
-    url: Astro.site?.href || 'https://www.holdenlaine.com',
+    url: baseUrl,
     image: image,
     inLanguage: isEstonian ? 'et' : 'en',
     creator: {
       '@type': 'Person',
       name: 'Holden Laine',
-      url: 'https://www.holdenlaine.com'
+      url: baseUrl
     }
   }),
   ...(type === 'article' && {
@@ -72,7 +94,7 @@ const schemaData = {
     name: 'Holden Laine',
     description: displayDescription,
     image: image,
-    url: 'https://www.holdenlaine.com',
+    url: baseUrl,
     jobTitle: isEstonian ? 'Fotograaf' : 'Photographer',
     inLanguage: isEstonian ? 'et' : 'en',
     sameAs: [
@@ -81,6 +103,9 @@ const schemaData = {
     ]
   })
 };
+
+// Organization schema for homepage
+const homeOrgSchema = type === 'profile' ? organizationSchema : null;
 ---
 
 <!-- Primary Meta Tags -->
@@ -119,8 +144,45 @@ const schemaData = {
 
 <!-- Structured Data (JSON-LD) -->
 <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+{homeOrgSchema && (
+  <script type="application/ld+json" set:html={JSON.stringify(homeOrgSchema)} />
+)}
 
 <!-- Preconnect to CDNs -->
 <link rel="preconnect" href="https://vjs.zencdn.net" />
 <link rel="dns-prefetch" href="https://vjs.zencdn.net" />
+
+<!-- Web App Manifest -->
+<link rel="manifest" href="/manifest.json" />
+
+<!-- hreflang for Multilingual SEO -->
+<link rel="alternate" hreflang="en" href={canonicalURL} />
+<link rel="alternate" hreflang="et" href={new URL(Astro.url.pathname.replace(/^\//, '/et/'), Astro.site)} />
+<link rel="alternate" hreflang="x-default" href={canonicalURL} />
+
+<!-- Additional Open Graph for Multilingual -->
+<meta property="og:locale:alternate" content="et_EE" />
+<meta property="og:locale:alternate" content="en_US" />
+
+<!-- Additional SEO Enhancements -->
+<meta name="revisit-after" content="14 days" />
+<meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+<meta property="og:url" content={canonicalURL} />
+
+<!-- Breadcrumb Schema -->
+{type === 'website' && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': Astro.site?.href || 'https://www.holdenlaine.com'
+      }
+    ]
+  })} />
+)}
 
