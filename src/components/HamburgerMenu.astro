@@ -224,10 +224,12 @@ document.addEventListener('DOMContentLoaded', () => {
       langButtons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const lang = btn.getAttribute('data-lang');
-      document.documentElement.lang = lang;
-      localStorage.setItem('language', lang);
-      // Dispatch custom event for other components
-      window.dispatchEvent(new CustomEvent('languageChange', { detail: { language: lang } }));
+      if (lang) {
+        document.documentElement.lang = lang;
+        localStorage.setItem('language', lang);
+        // Dispatch custom event for other components
+        window.dispatchEvent(new CustomEvent('languageChange', { detail: { language: lang } }));
+      }
     });
   });
 });

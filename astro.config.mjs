@@ -7,8 +7,6 @@ export default defineConfig({
   site: 'https://www.holdenlaine.com',
   output: 'server',
   adapter: vercel({
-    webAnalytics: {
-      enabled: true,
-    },
+    functionPerRoute: false,
   }),
 });
