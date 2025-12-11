@@ -11,7 +11,7 @@
   "dependencies": {
     "@astrojs/vercel": "^8.2.11",
     "@stripe/stripe-js": "^8.5.3",
-    "astro": "^5.16.5",
+    "astro": "^5.15.0",
     "stripe": "^20.0.0"
   }
 }

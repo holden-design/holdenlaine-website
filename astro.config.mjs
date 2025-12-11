@@ -6,7 +6,5 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   site: 'https://www.holdenlaine.com',
   output: 'server',
-  adapter: vercel({
-    functionPerRoute: false,
-  }),
+  adapter: vercel(),
 });
