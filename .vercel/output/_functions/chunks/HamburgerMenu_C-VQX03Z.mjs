@@ -1,6 +1,7 @@
-import { e as createAstro, f as createComponent, r as renderTemplate, u as unescapeHTML, h as addAttribute } from './astro/server_CXTV551O.mjs';
+import { e as createAstro, f as createComponent, r as renderTemplate, u as unescapeHTML, h as addAttribute, m as maybeRenderHead, o as renderScript } from './astro/server_CXTV551O.mjs';
 import 'piccolore';
 import 'clsx';
+/* empty css                           */
 
 var __freeze = Object.freeze;
 var __defProp = Object.defineProperty;
@@ -112,4 +113,8 @@ const $$SEO = createComponent(($$result, $$props, $$slots) => {
   }))));
 }, "/Users/holdenlaine/holdenlaine-website/src/components/SEO.astro", void 0);
 
-export { $$SEO as $ };
+const $$HamburgerMenu = createComponent(($$result, $$props, $$slots) => {
+  return renderTemplate`${maybeRenderHead()}<header class="mobile-header"> <div class="header-content"> <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle navigation menu"> <span></span> <span></span> <span></span> </button> <a href="/" class="header-logo" title="Go to home"> <img src="/logo.svg" alt="Holden Laine Logo" class="logo-image"> </a> <div class="header-lang-toggle"> <button class="lang-btn active" data-lang="en">ENG</button> <button class="lang-btn" data-lang="et">EST</button> </div> </div> </header> <nav class="mobile-menu" id="mobile-menu"> <a href="/">HOME</a> <a href="/studio">STUDIO</a> <a href="/photos">PHOTOS</a> <a href="/projects">PROJECTS</a> <a href="/prices">PRICES</a> <a href="/shop">SHOP</a> <a href="/gift-cards">GIFT CARDS</a> <a href="/contact">CONTACT</a> </nav>  ${renderScript($$result, "/Users/holdenlaine/holdenlaine-website/src/components/HamburgerMenu.astro?astro&type=script&index=0&lang.ts")}`;
+}, "/Users/holdenlaine/holdenlaine-website/src/components/HamburgerMenu.astro", void 0);
+
+export { $$HamburgerMenu as $, $$SEO as a };

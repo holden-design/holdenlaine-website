@@ -1,7 +1,7 @@
 import { f as createComponent, r as renderTemplate, o as renderScript, l as renderComponent, p as Fragment, n as renderHead, h as addAttribute } from '../chunks/astro/server_CXTV551O.mjs';
 import 'piccolore';
-import { $ as $$SEO } from '../chunks/SEO_CDnf78ti.mjs';
-import { $ as $$HamburgerMenu, a as $$Cursor } from '../chunks/HamburgerMenu_ycGF1s4J.mjs';
+import { $ as $$HamburgerMenu, a as $$SEO } from '../chunks/HamburgerMenu_C-VQX03Z.mjs';
+import { $ as $$Cursor } from '../chunks/Cursor_Ccdw4jWW.mjs';
 import { $ as $$Logo } from '../chunks/Logo_DiKPKTim.mjs';
 import { p as projects } from '../chunks/projects_DH79UWsp.mjs';
 /* empty css                                    */
