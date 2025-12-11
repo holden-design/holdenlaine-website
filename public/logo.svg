@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <!-- Center vertical line -->
+  <line x1="100" y1="20" x2="100" y2="180" stroke="black" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Top circle -->
+  <circle cx="100" cy="30" r="20" fill="black"/>
+  
+  <!-- Left middle circle -->
+  <circle cx="40" cy="100" r="20" fill="black"/>
+  
+  <!-- Right middle circle -->
+  <circle cx="160" cy="100" r="20" fill="black"/>
+  
+  <!-- Bottom teardrop/organic shape -->
+  <path d="M 100 160 Q 85 175 85 190 Q 85 200 100 200 Q 115 200 115 190 Q 115 175 100 160 Z" fill="black"/>
+  
+  <!-- Left curved connector -->
+  <path d="M 60 100 Q 50 85 40 70" stroke="black" stroke-width="8" fill="none" stroke-linecap="round"/>
+  
+  <!-- Right curved connector -->
+  <path d="M 140 100 Q 150 85 160 70" stroke="black" stroke-width="8" fill="none" stroke-linecap="round"/>
+</svg>

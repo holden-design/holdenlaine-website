@@ -163,6 +163,10 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
       .project-content.video-only {
         grid-template-columns: 450px 1fr;
       }
+      /* Portrait video - keep left/right layout */
+      .project-content.video-only[data-portrait="true"] {
+        grid-template-columns: 360px 1fr;
+      }
       .project-content.video-only .project-media {
         display: none;
       }
@@ -175,6 +179,10 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
         grid-column: 2;
         grid-row: 1;
       }
+      .project-content.video-only[data-portrait="true"] .project-text {
+        grid-column: 2;
+        grid-row: 1;
+      }
       .project-text {
         max-width: 800px;
         margin: 0;
@@ -183,9 +191,17 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
         width: 100%;
         margin: 0;
       }
+      /* Regular landscape videos */
       .video-container {
         width: 100%;
         max-width: 450px;
+        margin: 0 auto;
+      }
+      /* Portrait videos - phone format (Instagram-like) */
+      .video-container[data-portrait="true"] {
+        width: 360px;
+        max-width: 100%;
+        margin: 0;
       }
       .video-container video {
         width: 100%;
@@ -194,10 +210,23 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
         position: relative;
         z-index: 10;
       }
+      /* Portrait video - native element styling */
+      video[data-portrait="true"] {
+        width: 100%;
+        max-width: 360px !important;
+        height: auto !important;
+      }
+      /* Regular video.js styling */
       .video-js {
         width: 100% !important;
         max-width: 450px !important;
         height: auto;
+      }
+      /* Portrait video.js styling - override width constraint */
+      .video-js[data-portrait="true"] {
+        width: 100% !important;
+        max-width: 360px !important;
+        height: auto !important;
       }
       .video-js .vjs-video-container {
         position: relative;
@@ -206,9 +235,9 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
       .video-js .vjs-video-container {
         padding-top: 56.25%;
       }
-      /* Portrait video (9:16 aspect ratio) */
+      /* Portrait video (9:16 aspect ratio) - override padding */
       .video-js[data-portrait="true"] .vjs-video-container {
-        padding-top: 177.78%;
+        padding-top: 177.78% !important;
       }
       .video-js .vjs-tech {
         position: absolute;
@@ -246,7 +275,8 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
       .project-caption {
         color: #999;
         font-size: 0.75rem;
-        margin-top: 0.8rem;
+        margin-top: 28rem;
+        margin-left: 0;
         text-transform: uppercase;
         letter-spacing: 0.01em;
         white-space: pre-line;
@@ -294,6 +324,12 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
         .project-content.video-only {
           grid-template-columns: 1fr;
         }
+        .project-content.video-only .project-videos {
+          grid-column: 1;
+        }
+        .project-content.video-only .project-text {
+          grid-column: 1;
+        }
       }
       @media (max-width: 768px) {
         .sidebar {
@@ -314,6 +350,16 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
         }
         .container {
           padding: 1rem;
+        }
+        .project-content {
+          grid-template-columns: 1fr;
+        }
+        .project-content.video-only {
+          grid-template-columns: 1fr;
+        }
+        /* Portrait videos on mobile - make full width with proper spacing */
+        .video-container[data-portrait="true"] {
+          max-width: min(100vw - 2rem, 360px);
         }
       }
       @media (min-width: 600px) {
@@ -339,6 +385,7 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
           <a href="/portfolio" data-i18n="nav.projects">PROJEKTID</a>
           <a href="/prices" data-i18n="nav.prices">HINNAKIRI</a>
           <a href="/shop" data-i18n="nav.tshirts">E-POOD</a>
+          <a href="/gift-cards">GIFT CARDS</a>
           <a href="/contact" data-i18n="nav.contact">KONTAKT</a>
         </nav>
       </div>
@@ -348,7 +395,7 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
           {sub.description && <p>{sub.description}</p>}
         </div>
 
-        <div class="project-content" class:list={{ 'video-only': sub.media && sub.media.some((item: any) => item.type === 'video') && (!sub.images || sub.images.length === 0) && (!sub.media.some((item: any) => item.type !== 'video')) }}>
+        <div class="project-content" data-portrait={sub.media && sub.media[0]?.portrait === true ? "true" : "false"} class:list={{ 'video-only': sub.media && sub.media.some((item: any) => item.type === 'video') && (!sub.images || sub.images.length === 0) && (!sub.media.some((item: any) => item.type !== 'video')) }}>
           <div class="project-media">
             {sub.media && sub.media.length > 0 && (
               <div class="image-grid">
@@ -379,7 +426,7 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
           
           <div class="project-videos">
             {sub.media && sub.media.length > 0 && (
-              <div class="video-container">
+              <div class="video-container" data-portrait={sub.media[0]?.portrait === true ? "true" : "false"}>
                 {sub.media.map((item: any) => (
                   item.type === 'video' ? (
                     <video 

@@ -42,7 +42,9 @@
         "title": "UGC",
         "description": "User Generated Content projects.",
         "caption": "User generated content and collaborations",
-        "images": []
+        "media": [
+          {"type": "video", "src": "portraits/matcha_UGC.mp4", "portrait": true}
+        ]
       },
       {
         "title": "Peugeot",

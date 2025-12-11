@@ -356,6 +356,65 @@ import translations from '../data/translations.json';
         border: 1px solid #f5c6cb;
         display: block;
       }
+      .giftcard-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 10001;
+        align-items: center;
+        justify-content: center;
+      }
+      .giftcard-modal.open {
+        display: flex;
+      }
+      .giftcard-modal-content {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .giftcard-modal-content h2 {
+        margin-top: 0;
+      }
+      .giftcard-modal-content .form-group {
+        margin-bottom: 1rem;
+      }
+      .giftcard-modal-content .close-btn {
+        float: right;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #999;
+      }
+      .giftcard-modal-content .close-btn:hover {
+        color: #333;
+      }
+      .giftcard-modal-content .checkout-btn {
+        background: #222;
+        color: #fff;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+        width: 100%;
+      }
+      .giftcard-modal-content .checkout-btn:hover {
+        opacity: 0.7;
+      }
+      .giftcard-modal-content .checkout-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
       .lang-toggle {
         position: fixed;
         top: 1rem;
@@ -417,19 +476,22 @@ import translations from '../data/translations.json';
           <a href="/portfolio" data-i18n="nav.projects">PROJECTS</a>
           <a href="/prices" data-i18n="nav.prices">PRICES</a>
           <a href="/shop" data-i18n="nav.tshirts">SHOP</a>
+          <a href="/gift-cards">GIFT CARDS</a>
           <a href="/contact" data-i18n="nav.contact">CONTACT</a>
         </nav>
       </div>
       <div class="main-content">
         <h1 data-i18n="contact.heading">Contact</h1>
         
+        <!-- Gift Card Section at Top -->
+        <div style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+          <h2 style="margin-top: 0;" data-i18n="contact.giftCards">Gift Cards</h2>
+          <p data-i18n="contact.giftCardDescription">Purchase a gift card for photography sessions and share the gift of professional photography with someone special.</p>
+          <button class="giftcard-btn" id="buyGiftcardBtn" data-i18n="contact.buyGiftCard">Buy a Gift Card</button>
+        </div>
+        
         <div class="content-wrapper">
           <div class="contact-section">
-            <div class="contact-info">
-              <p><a href="mailto:holdenlaine@outlook.com">holdenlaine@outlook.com</a></p>
-              <p><a href="tel:+37255569043">+372 555 69043</a></p>
-            </div>
-
         <h2 data-i18n="contact.bookSession">Book a Session</h2>
         <form class="booking-form" id="bookingForm">
           <input type="hidden" name="access_key" value="dff7794e-dac3-4702-8fb9-bc764d21f727" />
@@ -479,6 +541,11 @@ import translations from '../data/translations.json';
                 <textarea id="message" name="message" data-placeholder-i18n="contact.messagePlaceholder" placeholder="Tell me about your project or any specific requirements..."></textarea>
               </div>
 
+              <div class="form-group">
+                <label for="giftcard" data-i18n="contact.giftcardCode">Gift Card Code (Optional)</label>
+                <input type="text" id="giftcard" name="giftcard" data-placeholder-i18n="contact.giftcardCodePlaceholder" placeholder="Enter your gift card code if you have one" />
+              </div>
+
               <button type="submit" class="submit-btn" data-i18n="contact.requestBooking">Request Booking</button>
               
               <div class="form-message" id="formMessage"></div>
@@ -494,14 +561,62 @@ import translations from '../data/translations.json';
                 <div class="time-grid" id="timeGrid"></div>
               </div>
             </div>
+            <!-- Contact Details Under Calendar -->
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #ddd;">
+              <h3 style="margin-top: 0;">Direct Contact</h3>
+              <p style="margin: 0.5rem 0;">
+                <a href="mailto:holdenlaine@outlook.com" style="color: #222; text-decoration: none;">holdenlaine@outlook.com</a>
+              </p>
+              <p style="margin: 0.5rem 0;">
+                <a href="tel:+37255569043" style="color: #222; text-decoration: none;">+372 555 69043</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gift Card Modal -->
+        <div class="giftcard-modal" id="giftcardModal">
+          <div class="giftcard-modal-content">
+            <button class="close-btn" id="closeModal">&times;</button>
+            <h2 data-i18n="contact.selectGiftCardAmount">Select Gift Card Amount</h2>
+            <div class="form-group">
+              <label for="giftcardAmount" data-i18n="contact.amount">Amount</label>
+              <select id="giftcardAmount" name="giftcardAmount">
+                <option value="100">€100</option>
+                <option value="150">€150</option>
+              </select>
+            </div>
+            <button class="checkout-btn" id="checkoutBtn" data-i18n="contact.proceedToPayment">Proceed to Payment</button>
+            <div id="giftcardMessage" class="form-message"></div>
           </div>
         </div>
       </div>
     </div>
 
+    <style>
+      .giftcard-btn {
+        background: #222;
+        color: #fff;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
+      .giftcard-btn:hover {
+        opacity: 0.7;
+      }
+    </style>
+
     <script define:vars={{ translations }}>
-      const t = translations;
-      let currentLang = localStorage.getItem('language') || 'en';
+      console.log('Translations loaded:', translations);
+      window.t = translations || {};
+      window.currentLang = localStorage.getItem('language') || 'en';
+      console.log('Current language:', window.currentLang);
+      const t = window.t;
+      let currentLang = window.currentLang;
 
       // Get DOM elements first
       const form = document.getElementById('bookingForm');
@@ -779,7 +894,54 @@ import translations from '../data/translations.json';
 
       // Form submission
       if (form && formMessage) {
-        form.addEventListener('submit', async (e) => {
+      // Gift Card Validation
+      const giftcardInput = document.getElementById('giftcard');
+      const giftcardDisplay = document.createElement('div');
+      giftcardDisplay.id = 'giftcardDisplay';
+      giftcardDisplay.style.cssText = 'margin-top: 0.5rem; padding: 0.75rem; background: #f0f0f0; border-left: 3px solid #222; display: none; font-weight: 700;';
+      if (giftcardInput) {
+        giftcardInput.parentNode.insertBefore(giftcardDisplay, giftcardInput.nextSibling);
+
+        giftcardInput.addEventListener('change', async (e) => {
+          const code = e.target.value.trim();
+          
+          if (!code) {
+            giftcardDisplay.style.display = 'none';
+            return;
+          }
+
+          try {
+            // Import gift cards data
+            const giftcards = await fetch('/src/data/giftcards.json').then(r => r.json());
+            const giftcard = giftcards.find(gc => gc.code.toUpperCase() === code.toUpperCase());
+
+            if (giftcard) {
+              if (giftcard.status === 'redeemed') {
+                giftcardDisplay.style.background = '#f8d7da';
+                giftcardDisplay.style.borderLeftColor = '#721c24';
+                giftcardDisplay.style.color = '#721c24';
+                giftcardDisplay.textContent = '❌ This gift card has already been redeemed';
+              } else {
+                giftcardDisplay.style.background = '#d4edda';
+                giftcardDisplay.style.borderLeftColor = '#155724';
+                giftcardDisplay.style.color = '#155724';
+                giftcardDisplay.textContent = `✓ Valid gift card - €${giftcard.amount} credit`;
+              }
+              giftcardDisplay.style.display = 'block';
+            } else {
+              giftcardDisplay.style.background = '#f8d7da';
+              giftcardDisplay.style.borderLeftColor = '#721c24';
+              giftcardDisplay.style.color = '#721c24';
+              giftcardDisplay.textContent = '❌ Invalid gift card code';
+              giftcardDisplay.style.display = 'block';
+            }
+          } catch (error) {
+            console.error('Gift card validation error:', error);
+          }
+        });
+      }
+
+      form.addEventListener('submit', async (e) => {
           e.preventDefault();
           
           const submitBtn = form.querySelector('.submit-btn');
@@ -885,6 +1047,8 @@ import translations from '../data/translations.json';
           e.preventDefault();
           const lang = btn.getAttribute('data-lang');
           if (lang) {
+            window.currentLang = lang;
+            currentLang = lang;
             localStorage.setItem('language', lang);
             document.documentElement.lang = lang;
             updateTranslations(lang);
@@ -894,6 +1058,81 @@ import translations from '../data/translations.json';
           }
         });
       });
+
+      // Gift Card Modal Functionality
+      const buyGiftcardBtn = document.getElementById('buyGiftcardBtn');
+      const giftcardModal = document.getElementById('giftcardModal');
+      const closeModal = document.getElementById('closeModal');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+      const giftcardAmount = document.getElementById('giftcardAmount');
+      const giftcardMessage = document.getElementById('giftcardMessage');
+
+      if (buyGiftcardBtn) {
+        buyGiftcardBtn.addEventListener('click', () => {
+          giftcardModal.classList.add('open');
+        });
+      }
+
+      if (closeModal) {
+        closeModal.addEventListener('click', () => {
+          giftcardModal.classList.remove('open');
+          giftcardMessage.className = 'form-message';
+          giftcardMessage.textContent = '';
+        });
+      }
+
+      if (giftcardModal) {
+        giftcardModal.addEventListener('click', (e) => {
+          if (e.target === giftcardModal) {
+            giftcardModal.classList.remove('open');
+            giftcardMessage.className = 'form-message';
+            giftcardMessage.textContent = '';
+          }
+        });
+      }
+
+      if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', async () => {
+          const amount = parseInt(giftcardAmount.value);
+          checkoutBtn.disabled = true;
+          giftcardMessage.className = 'form-message';
+          
+          try {
+            giftcardMessage.textContent = (window.t && window.t[window.currentLang] && window.t[window.currentLang].contact && window.t[window.currentLang].contact.sending) || 'Processing...';
+
+            const response = await fetch('/api/stripe-checkout.json', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                giftCardAmount: amount,
+                successUrl: window.location.origin + '/gift-card-success',
+                cancelUrl: window.location.origin + '/contact',
+              }),
+            });
+
+            if (!response.ok) {
+              throw new Error('Failed to create checkout session');
+            }
+
+            const data = await response.json();
+            console.log('Checkout response:', data);
+
+            if (!data.url) {
+              throw new Error('No checkout URL received from server');
+            }
+
+            // Redirect to Stripe hosted checkout
+            window.location.href = data.url;
+          } catch (error) {
+            console.error('Error:', error);
+            giftcardMessage.className = 'form-message error';
+            giftcardMessage.textContent = (window.t && window.t[window.currentLang] && window.t[window.currentLang].contact && window.t[window.currentLang].contact.errorMessage) || 'Something went wrong. Please try again.';
+            checkoutBtn.disabled = false;
+          }
+        });
+      }
     </script>
   </body>
 </html>

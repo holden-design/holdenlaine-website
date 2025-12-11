@@ -88,6 +88,7 @@ import translations from '../data/translations.json';
         text-align:left;
         position:relative;
         line-height:1.2;
+        min-height: 20rem;
       }
       nav a{
         display:inline-block;
@@ -103,12 +104,26 @@ import translations from '../data/translations.json';
         opacity: 0.5;
         transform: translateX(10px);
       }
+      .logo-container {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        z-index: 10000;
+        width: 60px;
+        height: 60px;
+      }
+      .logo-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
       nav a:nth-child(1) { margin-left: 0; }
       nav a:nth-child(2) { margin-left: 15%; }
       nav a:nth-child(3) { margin-left: 30%; }
       nav a:nth-child(4) { margin-left: 10%; }
       nav a:nth-child(5) { margin-left: 25%; }
       nav a:nth-child(6) { margin-left: 5%; }
+      nav a:nth-child(7) { position: absolute; bottom: 0; margin-left: 0; left: 40%; }
       
       @media (max-width: 768px) {
         .wrap {
@@ -143,6 +158,9 @@ import translations from '../data/translations.json';
   <body>
     <canvas id="letterfall-canvas"></canvas>
     <div class="custom-cursor"></div>
+    <div class="logo-container">
+      <img src="/logo.svg" alt="Holden Laine Logo" />
+    </div>
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="en">ENG</button>
       <button class="lang-btn" data-lang="et">EST</button>

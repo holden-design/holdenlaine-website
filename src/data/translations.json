@@ -7,7 +7,7 @@
       "portraitSeries": "portrait series",
       "projects": "Projects",
       "toniseTalu": "tõnise talu",
-      "contact": "Contact",
+      "contact": "CONTACT",
       "prices": "Prices",
       "tshirts": "Shop"
     },
@@ -37,7 +37,15 @@
       "selectDateFirst": "Select a date first",
       "selectTimeBelow": "Select a time below",
       "messagePlaceholder": "Tell me about your project or any specific requirements...",
-      "required": "*"
+      "required": "*",
+      "giftcardCode": "Gift Card Code",
+      "giftcardCodePlaceholder": "Enter your gift card code if you have one",
+      "giftCards": "Gift Cards",
+      "giftCardDescription": "Purchase a gift card for photography sessions and share the gift of professional photography with someone special.",
+      "buyGiftCard": "Buy a Gift Card",
+      "selectGiftCardAmount": "Select Gift Card Amount",
+      "amount": "Amount",
+      "proceedToPayment": "Proceed to Payment"
     },
     "index": {
       "portraitSeriesTitle": "Portrait Series",
@@ -71,7 +79,10 @@
       "commercialProjects": "Commercial Projects",
       "commercial": "Commercial Rate",
       "commercialDesc": "Custom quote based on project scope",
-      "commercialPrice": "Contact for quote"
+      "commercialPrice": "Contact for quote",
+      "giftCards": "Gift Cards",
+      "giftCardDescription": "Purchase a gift card for photography sessions and share the gift of professional photography with someone special.",
+      "buyGiftCard": "Buy a Gift Card"
     },
     "tshirts": {
       "pageTitle": "T-Shirts - Holden Laine Photography",
@@ -125,15 +136,15 @@
   },
   "et": {
     "nav": {
-      "home": "Avaleht",
-      "portraits": "Fotod",
-      "studio": "Stuudio",
+      "home": "AVALEHT",
+      "portraits": "FOTOD",
+      "studio": "STUUDIO",
       "portraitSeries": "portreede seeria",
-      "projects": "Projektid",
+      "projects": "PROJEKTID",
       "toniseTalu": "tõnise talu",
-      "contact": "Kontakt",
-      "prices": "Hinnakiri",
-      "tshirts": "E-pood"
+      "contact": "KONTAKT",
+      "prices": "HINNAKIRI",
+      "tshirts": "E-POOD"
     },
     "contact": {
       "pageTitle": "Kontakt - Holden Laine Fotograafia",
@@ -161,7 +172,15 @@
       "selectDateFirst": "Vali esmalt kuupäev",
       "selectTimeBelow": "Vali aeg allpool",
       "messagePlaceholder": "Rääkige oma projektist või konkreetsetest nõuetest...",
-      "required": "*"
+      "required": "*",
+      "giftcardCode": "Kinkekaardi Kood",
+      "giftcardCodePlaceholder": "Sisestage oma kinkekaardi kood, kui teil on üks olemas",
+      "giftCards": "Kinkekaardid",
+      "giftCardDescription": "Ostke kinkekaart fotograafusessioone jaoks ja jagage professionaalse fotograafia kingi inimesega, kes teile kallis on.",
+      "buyGiftCard": "Osta Kinkekaart",
+      "selectGiftCardAmount": "Valige kinkekaardi summa",
+      "amount": "Summa",
+      "proceedToPayment": "Jätka maksega"
     },
     "index": {
       "portraitSeriesTitle": "Portreede Seeria",
@@ -195,7 +214,10 @@
       "commercialProjects": "Kommertsprojektid",
       "commercial": "Kommertshinnad",
       "commercialDesc": "Kohandatud pakkumine projekti ulatuse põhjal",
-      "commercialPrice": "Võtke ühendust pakkumiseks"
+      "commercialPrice": "Võtke ühendust pakkumiseks",
+      "giftCards": "Kinkekaardid",
+      "giftCardDescription": "Ostke kinkekaart fotograafusessioone jaoks ja jagage professionaalse fotograafia kingi inimesega, kes teile kallis on.",
+      "buyGiftCard": "Osta Kinkekaart"
     },
     "tshirts": {
       "pageTitle": "T-särgid - Holden Laine Fotograafia",

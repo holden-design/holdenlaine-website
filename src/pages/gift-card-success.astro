@@ -1,0 +1,231 @@
+---
+import SEO from '../components/SEO.astro';
+import Cursor from '../components/Cursor.astro';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <SEO 
+      title="Gift Card Purchase Successful"
+      titleEt="Kinkekaardi ost edukas"
+      description="Your gift card has been purchased successfully."
+      descriptionEt="Teie kinkekaart on edukalt ostetud."
+      type="website"
+    />
+    <style is:global>
+      body {
+        margin: 0;
+        font-family: "Helvetica Neue", Helvetica;
+        background: #fff;
+        color: #222;
+        display: block;
+      }
+      #letterfall-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      .sidebar {
+        position: fixed;
+        left: 2rem;
+        top: 2rem;
+        width: auto;
+        z-index: 1000;
+        padding: 0;
+        margin-bottom: 0;
+      }
+      .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+      }
+      .sidebar nav a {
+        display: block;
+        color: #222;
+        text-decoration: none;
+        font-weight: 500;
+        text-transform: uppercase;
+        font-family: inherit;
+        letter-spacing: 0.01em;
+        font-size: 0.85rem;
+      }
+      .sidebar nav a:hover { text-decoration: underline; }
+      .main-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0;
+        text-align: center;
+      }
+      .success-icon {
+        font-size: 4rem;
+        margin: 2rem 0;
+      }
+      .success-message {
+        font-size: 1.5rem;
+        margin: 1rem 0;
+        font-weight: 500;
+      }
+      .success-description {
+        font-size: 1rem;
+        color: #666;
+        margin: 1rem 0 2rem 0;
+        line-height: 1.6;
+      }
+      .back-link {
+        display: inline-block;
+        background: #222;
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        transition: opacity 0.3s ease;
+      }
+      .back-link:hover {
+        opacity: 0.7;
+      }
+      .lang-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 10000;
+        display: flex;
+        gap: 0.5rem;
+      }
+      .lang-toggle button {
+        background: transparent;
+        border: none;
+        padding: 0;
+        font-size: 0.75rem;
+        transition: opacity 0.2s ease;
+        opacity: 0.3;
+        cursor: pointer;
+        font-weight: 500;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .lang-toggle button:hover {
+        opacity: 0.6;
+      }
+      .lang-toggle button.active {
+        opacity: 1;
+      }
+      @media (max-width: 768px) {
+        .sidebar {
+          position: relative;
+          left: 0;
+          top: 0;
+          width: 100%;
+          padding: 1rem;
+          margin-bottom: 1rem;
+        }
+        .sidebar nav {
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .sidebar nav a {
+          font-size: 0.9rem;
+        }
+        .container {
+          padding: 1rem;
+        }
+      }
+      @media (min-width: 600px) {
+        .container {
+          padding-left: 140px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="letterfall-canvas"></canvas>
+    <Cursor />
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en">ENG</button>
+      <button class="lang-btn" data-lang="et">EST</button>
+    </div>
+    <div class="container">
+      <div class="sidebar">
+        <nav>
+          <a href="/">HOME</a>
+          <a href="/studio">STUDIO</a>
+          <a href="/photos">PHOTOS</a>
+          <a href="/portfolio">PROJECTS</a>
+          <a href="/prices">PRICES</a>
+          <a href="/shop">SHOP</a>
+          <a href="/contact">CONTACT</a>
+        </nav>
+      </div>
+      <div class="main-content">
+        <div class="success-icon">✓</div>
+        <div class="success-message">Gift Card Purchase Successful!</div>
+        <div class="success-description">
+          Thank you for your purchase! Your gift card has been purchased successfully. 
+          You will receive a confirmation email shortly with your gift card details.
+        </div>
+        <a href="/contact" class="back-link">Back to Contact</a>
+      </div>
+    </div>
+
+    <script is:inline src="/scripts/letterfall.js"></script>
+    <script is:inline>
+      // Language functionality
+      const translations = {
+        en: {
+          successMessage: "Gift Card Purchase Successful!",
+          successDescription: "Thank you for your purchase! Your gift card has been purchased successfully. You will receive a confirmation email shortly with your gift card details.",
+          backLink: "Back to Contact"
+        },
+        et: {
+          successMessage: "Kinkekaardi ost edukas!",
+          successDescription: "Täname teie ostu eest! Teie kinkekaart on edukalt ostetud. Varsti saate e-postile kinnituse koos kinkekaardi üksikasjade ja andmetega.",
+          backLink: "Tagasi kontakti juurde"
+        }
+      };
+
+      let currentLang = localStorage.getItem('language') || 'en';
+
+      function updateLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('language', lang);
+        
+        // Update active button
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
+
+        // Update content
+        document.querySelector('.success-message').textContent = translations[lang].successMessage;
+        document.querySelector('.success-description').textContent = translations[lang].successDescription;
+        document.querySelector('.back-link').textContent = translations[lang].backLink;
+
+        document.documentElement.lang = lang;
+      }
+
+      // Language toggle
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.getAttribute('data-lang');
+          if (lang) updateLanguage(lang);
+        });
+      });
+
+      // Initialize
+      updateLanguage(currentLang);
+    </script>
+  </body>
+</html>

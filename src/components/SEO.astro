@@ -26,10 +26,10 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const siteTitle = 'Holden Laine - Photography';
-const siteTitleEt = 'Holden Laine - Fotograafia';
-const fullTitle = title === 'Holden Laine' ? title : `${title} - ${siteTitle}`;
-const fullTitleEt = titleEt === 'Holden Laine' ? titleEt : `${titleEt} - ${siteTitleEt}`;
+const siteTitle = 'Holden Laine Photography - Portrait & Fashion';
+const siteTitleEt = 'Holden Laine Fotograafia - Portree & Mood';
+const fullTitle = title === 'Holden Laine' ? siteTitle : `${title} - ${siteTitle}`;
+const fullTitleEt = titleEt === 'Holden Laine' ? siteTitleEt : `${titleEt} - ${siteTitleEt}`;
 
 // Get current language from localStorage (default to en)
 const currentLang = Astro.params.lang || 'en';
@@ -41,12 +41,14 @@ const locale = isEstonian ? 'et_EE' : 'en_US';
 
 // Schema.org structured data
 const baseUrl = Astro.site?.href || 'https://www.holdenlaine.com';
+const logoUrl = `${baseUrl}logo.svg`;
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   'name': 'Holden Laine Photography',
   'url': baseUrl,
   'description': displayDescription,
+  'logo': logoUrl,
   'image': image,
   'telephone': '',
   'priceRange': '€€',

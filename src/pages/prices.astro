@@ -124,6 +124,21 @@ import translations from '../data/translations.json';
         white-space: nowrap;
         margin-left: 2rem;
       }
+      .giftcard-btn {
+        background: #222;
+        color: #fff;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+        margin-top: 1rem;
+      }
+      .giftcard-btn:hover {
+        opacity: 0.7;
+      }
       .language-toggle {
         position: fixed;
         top: 1rem;
@@ -169,6 +184,7 @@ import translations from '../data/translations.json';
           <a href="/portfolio" data-i18n="nav.projects">PROJECTS</a>
           <a href="/prices" data-i18n="nav.prices">PRICES</a>
           <a href="/shop" data-i18n="nav.tshirts">SHOP</a>
+          <a href="/gift-cards">GIFT CARDS</a>
           <a href="/contact" data-i18n="nav.contact">CONTACT</a>
         </nav>
       </div>
@@ -227,6 +243,12 @@ import translations from '../data/translations.json';
             </div>
             <div class="price-amount" data-i18n="prices.commercialPrice">Contact for quote</div>
           </div>
+        </div>
+
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #ddd;">
+          <h2 data-i18n="prices.giftCards">Gift Cards</h2>
+          <p data-i18n="prices.giftCardDescription">Purchase a gift card for photography sessions and share the gift of professional photography with someone special.</p>
+          <button class="giftcard-btn" id="buyGiftcardBtn" data-i18n="prices.buyGiftCard">Buy a Gift Card</button>
         </div>
       </div>
     </div>
