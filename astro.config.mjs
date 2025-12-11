@@ -8,6 +8,5 @@ export default defineConfig({
   output: 'server',
   adapter: vercel({
     functionPerRoute: false,
-    nodeVersion: '22.x',
   }),
 });
