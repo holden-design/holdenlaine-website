@@ -2,6 +2,9 @@
 ---
 import SEO from '../components/SEO.astro';
 import Cursor from '../components/Cursor.astro';
+import HamburgerMenu from '../components/HamburgerMenu.astro';
+import MobileLogo from '../components/MobileLogo.astro';
+import Logo from '../components/Logo.astro';
 import projects from '../../public/data/projects.json';
 ---
 
@@ -84,10 +87,11 @@ import projects from '../../public/data/projects.json';
         grid-template-columns: 1fr 1fr;
         gap: 3rem;
         align-items: start;
+        margin-top: -3rem;
       }
       .projects-navigation {
         position: sticky;
-        top: 2rem;
+        top: 4rem;
       }
       .projects-nav {
         display: flex;
@@ -113,7 +117,6 @@ import projects from '../../public/data/projects.json';
         gap: 2rem;
       }
       .project-preview {
-        margin-bottom: 2rem;
         border-bottom: 1px solid #f0f0f0;
         padding-bottom: 2rem;
       }
@@ -141,33 +144,6 @@ import projects from '../../public/data/projects.json';
         border-radius: 8px;
         box-shadow: 0 2px 8px #eee;
       }
-      .lang-toggle {
-        position: fixed;
-        top: 1rem;
-        right: 1rem;
-        z-index: 10000;
-        display: flex;
-        gap: 0.5rem;
-      }
-      .lang-toggle button {
-        background: transparent;
-        border: none;
-        padding: 0;
-        font-size: 0.75rem;
-        transition: opacity 0.2s ease;
-        opacity: 0.3;
-        cursor: pointer;
-        font-weight: 500;
-        color: #333;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-      .lang-toggle button:hover {
-        opacity: 0.6;
-      }
-      .lang-toggle button.active {
-        opacity: 1;
-      }
       /* Video.js custom styling - hide context menu completely */
       .vjs-contextmenu-ui {
         display: none !important;
@@ -183,23 +159,18 @@ import projects from '../../public/data/projects.json';
       }
       @media (max-width: 768px) {
         .sidebar {
-          position: relative;
-          left: 0;
-          top: 0;
-          width: 100%;
-          padding: 1rem;
-          margin-bottom: 1rem;
-        }
-        .sidebar nav {
-          flex-direction: row;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-        }
-        .sidebar nav a {
-          font-size: 0.9rem;
+          display: none !important;
         }
         .container {
-          padding: 1rem;
+          padding: 0 1rem 1rem 1rem;
+        }
+        .content-wrapper {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+        .projects-navigation {
+          position: static;
+          top: auto;
         }
         .sub-project-card {
           flex: 0 1 100%;
@@ -214,18 +185,16 @@ import projects from '../../public/data/projects.json';
   </head>
   <body>
     <canvas id="letterfall-canvas"></canvas>
+    <Logo />
     <Cursor />
-    <div class="lang-toggle">
-      <button class="lang-btn active" data-lang="en">ENG</button>
-      <button class="lang-btn" data-lang="et">EST</button>
-    </div>
+    <HamburgerMenu />
     <div class="container">
       <div class="sidebar">
         <nav>
           <a href="/" data-i18n="nav.home">AVALEHT</a>
           <a href="/studio" data-i18n="nav.studio">STUUDIO</a>
           <a href="/photos" data-i18n="nav.portraits">FOTOD</a>
-          <a href="/portfolio" data-i18n="nav.projects">PROJEKTID</a>
+          <a href="/projects" data-i18n="nav.projects">PROJEKTID</a>
           <a href="/prices" data-i18n="nav.prices">HINNAKIRI</a>
           <a href="/shop" data-i18n="nav.tshirts">E-POOD</a>
           <a href="/contact" data-i18n="nav.contact">KONTAKT</a>
@@ -238,7 +207,7 @@ import projects from '../../public/data/projects.json';
               <div class="projects-navigation">
                 <nav class="projects-nav">
                   {mainProject.projects && mainProject.projects.map(sub => (
-                    <a href={`/portfolio/${sub.title.toLowerCase().replace(/\s+/g, '-')}`} class="projects-nav-link">
+                    <a href={`/projects/${sub.title.toLowerCase().replace(/\s+/g, '-')}`} class="projects-nav-link">
                       {sub.title}
                     </a>
                   ))}
@@ -328,21 +297,11 @@ import projects from '../../public/data/projects.json';
         setupVideojs();
       }
       
-      // Language toggle functionality
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const lang = btn.getAttribute('data-lang');
-          if (lang) {
-            localStorage.setItem('language', lang);
-            document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-btn').forEach(b => {
-              b.classList.toggle('active', b.getAttribute('data-lang') === lang);
-            });
-            // Update all elements with data-i18n attribute
-            updateTranslations(lang);
-          }
-        });
+      // Language toggle functionality - listen to header event
+      window.addEventListener('languageChange', (e) => {
+        const lang = e.detail.language;
+        document.documentElement.lang = lang;
+        updateTranslations(lang);
       });
       
       // Function to update translations
@@ -378,9 +337,6 @@ import projects from '../../public/data/projects.json';
       const savedLang = localStorage.getItem('language') || 'en';
       if (savedLang === 'et') {
         updateTranslations('et');
-        document.querySelectorAll('.lang-btn').forEach(b => {
-          b.classList.toggle('active', b.getAttribute('data-lang') === 'et');
-        });
       }
     </script>
   </body>

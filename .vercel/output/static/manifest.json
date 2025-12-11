@@ -1,0 +1,36 @@
+{
+  "name": "Holden Laine Photography - Portrait & Fashion",
+  "short_name": "Holden Laine",
+  "description": "Professional photography portfolio featuring portrait, fashion, editorial, and commercial content creation. Specialized in social media content, UGC, and automotive photography.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["photography", "portfolio"],
+  "screenshots": [
+    {
+      "src": "/images/og-image.jpg",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ],
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

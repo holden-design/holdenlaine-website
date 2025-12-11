@@ -1,0 +1,39 @@
+---
+// MobileLogo.astro: Mobile-only centered logo that links to home
+---
+
+<a href="/" class="mobile-logo-link" title="Go to home">
+  <img src="/logo.svg" alt="Holden Laine Logo" class="mobile-logo" />
+</a>
+
+<style is:global>
+.mobile-logo-link {
+  display: none;
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.mobile-logo-link:hover {
+  opacity: 0.7;
+  transform: translateX(-50%) scale(1.05);
+}
+
+.mobile-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .mobile-logo-link {
+    display: block;
+  }
+}
+</style>

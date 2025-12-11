@@ -1,7 +1,11 @@
 ---
 import SEO from '../../components/SEO.astro';
 import Cursor from '../../components/Cursor.astro';
+import HamburgerMenu from '../../components/HamburgerMenu.astro';
+import MobileLogo from '../../components/MobileLogo.astro';
 import projects from '../../../public/data/projects.json';
+
+export const prerender = true;
 
 export async function getStaticPaths() {
   const projectsWithSubs = projects.filter((p: any) => p.projects && p.projects.length > 0);
@@ -14,11 +18,29 @@ export async function getStaticPaths() {
   return allSubs;
 }
 
-const { sub, mainProjectTitle } = Astro.props;
+// Get slug from params and find the matching project
+const { slug } = Astro.params;
+let sub = Astro.props.sub;
+let mainProjectTitle = Astro.props.mainProjectTitle;
+
+// If props are not available (dev mode), look up the project by slug
+if (!sub) {
+  const projectsWithSubs = projects.filter((p: any) => p.projects && p.projects.length > 0);
+  for (const mainProject of projectsWithSubs) {
+    const found = mainProject?.projects?.find((p: any) => 
+      p.title.toLowerCase().replace(/\s+/g, '-') === slug
+    );
+    if (found) {
+      sub = found;
+      mainProjectTitle = mainProject.title;
+      break;
+    }
+  }
+}
 
 // Get first image as OG image
-const ogImage = sub.media?.find((item: any) => item.type !== 'video')?.src || 
-                sub.images?.[0] || 
+const ogImage = sub?.media?.find((item: any) => item.type !== 'video')?.src || 
+                sub?.images?.[0] || 
                 '/images/og-image.jpg';
 
 // Estonian translations for project descriptions
@@ -45,8 +67,7 @@ const projectTranslations: {[key: string]: {en: string, et: string}} = {
   }
 };
 
-const slug = sub.title.toLowerCase().replace(/\s+/g, '-');
-const translations = projectTranslations[slug] || { en: sub.description || '', et: sub.description || '' };
+const translations = projectTranslations[slug] || { en: sub?.description || '', et: sub?.description || '' };
 ---
 
 <html lang="en">
@@ -54,8 +75,8 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <SEO 
-      title={sub.title}
-      titleEt={sub.title}
+      title={sub?.title || 'Project'}
+      titleEt={sub?.title || 'Project'}
       description={translations.en}
       descriptionEt={translations.et}
       image={ogImage ? `/images/${ogImage}` : '/images/og-image.jpg'}
@@ -333,20 +354,7 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
       }
       @media (max-width: 768px) {
         .sidebar {
-          position: relative;
-          left: 0;
-          top: 0;
-          width: 100%;
-          padding: 1rem;
-          margin-bottom: 1rem;
-        }
-        .sidebar nav {
-          flex-direction: row;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-        }
-        .sidebar nav a {
-          font-size: 0.9rem;
+          display: none !important;
         }
         .container {
           padding: 1rem;
@@ -372,6 +380,8 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
   <body>
     <canvas id="letterfall-canvas"></canvas>
     <Cursor />
+    <HamburgerMenu />
+    <MobileLogo />
     <div class="lang-toggle">
       <button class="lang-btn active" data-lang="en">ENG</button>
       <button class="lang-btn" data-lang="et">EST</button>
@@ -391,19 +401,19 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
       </div>
       <main class="main-content">
         <div class="project-header">
-          <h1>{sub.title}</h1>
-          {sub.description && <p>{sub.description}</p>}
+          <h1>{sub?.title}</h1>
+          {sub?.description && <p>{sub?.description}</p>}
         </div>
 
         <div class="project-content" data-portrait={sub.media && sub.media[0]?.portrait === true ? "true" : "false"} class:list={{ 'video-only': sub.media && sub.media.some((item: any) => item.type === 'video') && (!sub.images || sub.images.length === 0) && (!sub.media.some((item: any) => item.type !== 'video')) }}>
           <div class="project-media">
-            {sub.media && sub.media.length > 0 && (
+            {sub?.media && sub.media.length > 0 && (
               <div class="image-grid">
                 {sub.media.map((item: any) => (
                   item.type !== 'video' ? (
                     <img 
                       src={`/images/${item.src}`} 
-                      alt={sub.title} 
+                      alt={sub?.title} 
                       loading="lazy" 
                     />
                   ) : null
@@ -411,12 +421,12 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
               </div>
             )}
             
-            {sub.images && sub.images.length > 0 && (
+            {sub?.images && sub.images.length > 0 && (
               <div class="image-grid">
                 {sub.images.map((img: any) => (
                   <img 
                     src={`/images/${img}`} 
-                    alt={sub.title} 
+                    alt={sub?.title} 
                     loading="lazy" 
                   />
                 ))}
@@ -425,7 +435,7 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
           </div>
           
           <div class="project-videos">
-            {sub.media && sub.media.length > 0 && (
+            {sub?.media && sub.media.length > 0 && (
               <div class="video-container" data-portrait={sub.media[0]?.portrait === true ? "true" : "false"}>
                 {sub.media.map((item: any) => (
                   item.type === 'video' ? (
@@ -444,7 +454,7 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
               </div>
             )}
             <div class="project-text">
-              {sub.caption && <p class="project-caption">{sub.caption}</p>}
+              {sub?.caption && <p class="project-caption">{sub?.caption}</p>}
             </div>
           </div>
         </div>
@@ -472,6 +482,11 @@ const translations = projectTranslations[slug] || { en: sub.description || '', e
       document.addEventListener('keydown', (e) => {
         if ((e.metaKey || e.ctrlKey) && e.key === 's') {
           e.preventDefault();
+          return false;
+        }
+        // Allow backspace to navigate back to projects page
+        if (e.key === 'Backspace') {
+          window.history.back();
           return false;
         }
       });
