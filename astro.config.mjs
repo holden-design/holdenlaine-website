@@ -6,5 +6,9 @@ import vercel from '@astrojs/vercel';
 export default defineConfig({
   site: 'https://www.holdenlaine.com',
   output: 'server',
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: {
+      enabled: true,
+    },
+  }),
 });
