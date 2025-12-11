@@ -1,8 +1,7 @@
 {
-  "nodeVersion": "20.x",
   "functions": {
     "api/**": {
-      "runtime": "nodejs20.x"
+      "runtime": "nodejs22.x"
     }
   }
 }
