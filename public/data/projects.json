@@ -79,6 +79,18 @@
           {"type": "image", "src": "portraits/Roseni2.jpg"},
           {"type": "image", "src": "portraits/Roseni3.jpg"}
         ]
+      },
+      {
+        "title": "Adidas",
+        "description": "Adidas photoshoots.",
+        "caption": "Adidas Estonian social media content creation.",
+        "media": [
+          {"type": "image", "src": "portraits/IMG_8797.jpg"},
+          {"type": "image", "src": "portraits/IMG_8803.jpg"},
+          {"type": "image", "src": "portraits/IMG_8875.jpg"},
+          {"type": "image", "src": "portraits/IMG_8897.jpg"},
+          {"type": "image", "src": "portraits/IMG_8906.jpg"}
+        ]
       }
     ]
   }

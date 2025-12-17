@@ -160,10 +160,12 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
       }
       .project-header {
         margin-bottom: 1.5rem;
+        margin-top: 0;
       }
       .project-header h1 {
         font-size: 1.75rem;
         margin: 0 0 0.3rem 0;
+        margin-top: 0;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.02em;
@@ -388,17 +390,66 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
           display: none !important;
         }
         .container {
-          padding: 1rem 1rem 1rem 1rem;
+          padding: 0.75rem;
+        }
+        .project-header {
+          margin-bottom: 0.75rem;
+        }
+        .project-header h1 {
+          font-size: 1.25rem;
+          margin-bottom: 0.25rem;
+        }
+        .project-header p {
+          font-size: 0.75rem;
         }
         .project-content {
           grid-template-columns: 1fr;
+          gap: 1rem;
         }
         .project-content.video-only {
           grid-template-columns: 1fr;
         }
-        /* Portrait videos on mobile - make full width with proper spacing */
+        .project-description {
+          font-size: 0.8rem;
+          margin: 0;
+        }
+        .project-caption {
+          font-size: 0.65rem;
+          margin-top: 1rem;
+        }
         .video-container[data-portrait="true"] {
-          max-width: min(100vw - 2rem, 360px);
+          max-width: min(100vw - 1.5rem, 360px);
+        }
+      }
+      @media (max-width: 480px) {
+        .container {
+          padding: 0.5rem;
+        }
+        .project-header h1 {
+          font-size: 1rem;
+          margin-bottom: 0.2rem;
+        }
+        .project-header p {
+          font-size: 0.65rem;
+        }
+        .back-arrow {
+          font-size: 1.25rem;
+          margin-right: 0.3rem;
+          margin-bottom: 0.75rem;
+        }
+        .project-content {
+          gap: 0.75rem;
+        }
+        .project-description {
+          font-size: 0.7rem;
+        }
+        .project-caption {
+          font-size: 0.6rem;
+          margin-top: 0.75rem;
+          line-height: 1.3;
+        }
+        .image-grid {
+          gap: 0.3rem;
         }
       }
       @media (min-width: 600px) {
@@ -440,7 +491,6 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
                 {sub.media.map((item: any) => (
                   item.type === 'video' ? (
                     <video 
-                      controls
                       playsinline
                       preload="metadata"
                       data-portrait={item.portrait === true ? "true" : "false"}
@@ -492,93 +542,55 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
 
     <script src="https://vjs.zencdn.net/7.20.3/video.js" is:inline></script>
     <script is:inline>
-      // Setup event listeners first
-      document.addEventListener('contextmenu', (e) => {
-        const target = e.target;
-        if (target.tagName === 'IMG' || target.tagName === 'VIDEO' || target.closest('video') || target.closest('.video-js')) {
+      // Simple click-to-play/pause for all videos
+      document.querySelectorAll('video').forEach(video => {
+        video.addEventListener('click', (e) => {
           e.preventDefault();
-          return false;
-        }
-      });
-      
-      document.addEventListener('dragstart', (e) => {
-        if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
-          e.preventDefault();
-          return false;
-        }
-      });
-      
-      document.addEventListener('keydown', (e) => {
-        if ((e.metaKey || e.ctrlKey) && e.key === 's') {
-          e.preventDefault();
-          return false;
-        }
-        // Allow backspace to navigate back to projects page
-        if (e.key === 'Backspace') {
-          window.history.back();
-          return false;
-        }
-      });
-      
-      document.addEventListener('copy', (e) => {
-        if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') {
-          e.preventDefault();
-          return false;
-        }
-      });
-      
-      // Make video clickable to play/pause
-      document.addEventListener('click', (e) => {
-        const video = e.target.closest('video');
-        if (video) {
           if (video.paused) {
             video.play().catch(err => console.log('Play error:', err));
           } else {
             video.pause();
           }
+        });
+        
+        // Show cursor pointer on hover
+        video.style.cursor = 'pointer';
+      });
+      
+      // Prevent right-click context menu on videos and images
+      document.addEventListener('contextmenu', (e) => {
+        if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG') {
+          e.preventDefault();
         }
       });
       
-      // Initialize Video.js
-      function setupVideojs() {
-        if (typeof videojs === 'undefined') {
-          setTimeout(setupVideojs, 50);
-          return;
+      // Prevent dragging images and videos
+      document.addEventListener('dragstart', (e) => {
+        if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG') {
+          e.preventDefault();
         }
-        
-        const videoElements = document.querySelectorAll('.video-js');
-        videoElements.forEach((el) => {
-          try {
-            if (!el.player) {
-              videojs(el, {
-                controls: true,
-                autoplay: false,
-                preload: 'metadata',
-                fluid: true,
-                aspectRatio: '16:9',
-                controlBar: {
-                  children: [
-                    'playToggle',
-                    'progressControl',
-                    'volumePanel',
-                    'fullscreenToggle'
-                  ]
-                }
-              });
-            }
-          } catch (e) {
-            console.error('Video.js init error:', e);
-          }
-        });
-      }
+      });
       
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupVideojs);
-      } else {
-        setupVideojs();
-      }
+      // Keyboard shortcuts
+      document.addEventListener('keydown', (e) => {
+        // Block Cmd+S / Ctrl+S
+        if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+          e.preventDefault();
+        }
+        // Allow Backspace to go back
+        if (e.key === 'Backspace') {
+          window.history.back();
+        }
+      });
       
-      // Translation object for navigation
+      // Prevent copying images and videos
+      document.addEventListener('copy', (e) => {
+        if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG') {
+          e.preventDefault();
+        }
+      });
+      
+      // Language toggle functionality
       const translations = {
         'en': {
           'nav.home': 'HOME',
@@ -617,7 +629,7 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
         b.classList.toggle('active', b.getAttribute('data-lang') === savedLang);
       });
 
-      // Language toggle functionality
+      // Language toggle button click handler
       document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.preventDefault();

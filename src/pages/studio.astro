@@ -49,7 +49,31 @@ import translations from '../data/translations.json';
       }
       @media (max-width: 768px) {
         .container {
-          padding: 1rem 1rem 1rem 1rem;
+          padding: 0.75rem;
+        }
+        .main-content h1 {
+          font-size: 1.1rem;
+          margin-bottom: 0.4rem;
+        }
+        .main-content p {
+          font-size: 0.8rem;
+          line-height: 1.4;
+        }
+        .studio-header {
+          margin-bottom: 0.75rem;
+          margin-top: 0;
+        }
+      }
+      @media (max-width: 480px) {
+        .container {
+          padding: 0.5rem;
+        }
+        .main-content h1 {
+          font-size: 0.9rem;
+          margin-bottom: 0.3rem;
+        }
+        .main-content p {
+          font-size: 0.7rem;
         }
       }
       .sidebar {
@@ -85,7 +109,7 @@ import translations from '../data/translations.json';
         padding: 0;
       }
       .studio-header {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         margin-top: 0;
       }
       .studio-header h1 {
@@ -215,42 +239,16 @@ import translations from '../data/translations.json';
           <a href="/projects" data-i18n="nav.projects">PROJECTS</a>
           <a href="/prices" data-i18n="nav.prices">PRICES</a>
           <a href="/shop" data-i18n="nav.tshirts">SHOP</a>
-          <a href="/gift-cards">GIFT CARDS</a>
           <a href="/contact" data-i18n="nav.contact">CONTACT</a>
         </nav>
       </div>
       <div class="main-content">
         <div class="studio-header">
           <h1 data-i18n="studio.heading">Studio</h1>
-          <p data-i18n="studio.subtitle">Professional Photography Space</p>
         </div>
 
         <div class="studio-content">
-          <div class="studio-section">
-            <h2 data-i18n="studio.about">About the Studio</h2>
-            <p data-i18n="studio.aboutText">Welcome to my professional photography studio, a creative space designed for portrait sessions, product photography, and collaborative creative projects. The studio features professional lighting equipment, diverse backdrops, and a comfortable environment for all types of photography.</p>
-          </div>
-
-          <div class="studio-section">
-            <h2 data-i18n="studio.amenities">Studio Amenities</h2>
-            <ul>
-              <li data-i18n="studio.amenity1">Professional lighting setup with adjustable intensity</li>
-              <li data-i18n="studio.amenity2">Variety of backdrops and set pieces</li>
-              <li data-i18n="studio.amenity3">Climate-controlled comfortable space</li>
-              <li data-i18n="studio.amenity4">Hair and makeup preparation area</li>
-              <li data-i18n="studio.amenity5">Digital and instant photo delivery</li>
-            </ul>
-          </div>
-
-          <div class="studio-section">
-            <h2 data-i18n="studio.sessions">Studio Sessions</h2>
-            <p data-i18n="studio.sessionsText">Whether you're looking for a professional headshot, family portrait, or creative fashion shoot, the studio is fully equipped to bring your vision to life. All sessions include professional editing and high-resolution digital files.</p>
-          </div>
-
-          <div class="studio-section">
-            <h2 data-i18n="studio.booking">Booking a Session</h2>
-            <p data-i18n="studio.bookingText">To book a studio session or inquire about availability, please visit the <a href="/contact" style="text-decoration: underline; color: #222;">contact page</a> or reach out directly via email or phone.</p>
-          </div>
+          <p style="font-size: 1rem; color: #555; letter-spacing: -0.02em;">PICTURES TO BE ADDED SOON, THANK YOU</p>
         </div>
       </div>
     </div>

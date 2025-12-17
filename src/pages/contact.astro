@@ -11,6 +11,7 @@ import translations from '../data/translations.json';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="mobile-web-app-capable" content="yes">
     <SEO 
       title="Contact"
       titleEt="Kontakt"
@@ -41,7 +42,55 @@ import translations from '../data/translations.json';
           display: none !important;
         }
         .container {
-          padding: 1rem !important;
+          padding: 0.75rem !important;
+        }
+        .main-content h1 {
+          font-size: 1.1rem;
+          margin-bottom: 0.4rem;
+        }
+        .form-group {
+          margin-bottom: 0.75rem;
+        }
+        label {
+          font-size: 0.8rem;
+          margin-bottom: 0.2rem;
+        }
+        input, select, textarea {
+          font-size: 0.8rem;
+          padding: 0.5rem;
+        }
+        button {
+          font-size: 0.8rem;
+          padding: 0.5rem 1rem;
+        }
+        .modal-content {
+          max-height: 85vh;
+        }
+      }
+      @media (max-width: 480px) {
+        .container {
+          padding: 0.5rem !important;
+        }
+        .main-content h1 {
+          font-size: 0.9rem;
+          margin-bottom: 0.3rem;
+        }
+        .form-group {
+          margin-bottom: 0.5rem;
+        }
+        label {
+          font-size: 0.7rem;
+        }
+        input, select, textarea {
+          font-size: 0.75rem;
+          padding: 0.4rem;
+        }
+        button {
+          font-size: 0.75rem;
+          padding: 0.4rem 0.75rem;
+        }
+        .modal-content {
+          max-height: 80vh;
         }
       }
       .container {
@@ -51,7 +100,7 @@ import translations from '../data/translations.json';
       }
       @media (max-width: 768px) {
         .container {
-          padding: 1rem 1rem 1rem 1rem;
+          padding: 0.75rem;
         }
       }
       .sidebar {
@@ -110,6 +159,7 @@ import translations from '../data/translations.json';
       h1 {
         font-size: 1.5rem;
         margin-bottom: 1rem;
+        margin-top: 0;
       }
       h2 {
         font-size: 1.2rem;
@@ -373,20 +423,59 @@ import translations from '../data/translations.json';
         max-width: 400px;
         width: 90%;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        max-height: 90vh;
+        overflow-y: auto;
       }
       .giftcard-modal-content h2 {
         margin-top: 0;
+        padding-right: 2rem;
       }
       .giftcard-modal-content .form-group {
         margin-bottom: 1rem;
       }
+      .giftcard-modal-content .form-group input[type="text"],
+      .giftcard-modal-content .form-group input[type="email"],
+      .giftcard-modal-content .form-group input[type="tel"],
+      .giftcard-modal-content .form-group select {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 1rem;
+      }
+      .giftcard-modal-content .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+      .giftcard-modal-content .form-group.checkbox label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0;
+      }
+      .giftcard-modal-content .form-group.checkbox input[type="checkbox"] {
+        width: auto;
+      }
+      .giftcard-modal-content .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
       .giftcard-modal-content .close-btn {
-        float: right;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
         background: none;
         border: none;
         font-size: 1.5rem;
         cursor: pointer;
         color: #999;
+        padding: 0;
+        width: 1.5rem;
+        height: 1.5rem;
       }
       .giftcard-modal-content .close-btn:hover {
         color: #333;
@@ -409,6 +498,69 @@ import translations from '../data/translations.json';
       .giftcard-modal-content .checkout-btn:disabled {
         opacity: 0.5;
         cursor: not-allowed;
+      }
+      .giftcard-showcase {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: center;
+      }
+      .giftcard-images {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .giftcard-card {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .giftcard-image {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+      .giftcard-info {
+        margin: 0;
+        font-size: 0.75rem;
+        line-height: 1.5;
+        color: #555;
+        text-align: center;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .giftcard-text {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .giftcard-text p {
+        margin: 0;
+        line-height: 1.6;
+      }
+      .security-notice {
+        background: #e3f2fd;
+        border: 1px solid #90caf9;
+        border-radius: 4px;
+        padding: 1rem;
+        margin-bottom: 2rem;
+        color: #1565c0;
+        font-size: 0.9rem;
+      }
+      .security-notice strong {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      @media (max-width: 768px) {
+        .giftcard-showcase {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+        .giftcard-images {
+          gap: 1rem;
+        }
       }
       .lang-toggle {
         position: fixed;
@@ -469,7 +621,6 @@ import translations from '../data/translations.json';
           <a href="/projects" data-i18n="nav.projects">PROJECTS</a>
           <a href="/prices" data-i18n="nav.prices">PRICES</a>
           <a href="/shop" data-i18n="nav.tshirts">SHOP</a>
-          <a href="/gift-cards">GIFT CARDS</a>
           <a href="/contact" data-i18n="nav.contact">CONTACT</a>
         </nav>
       </div>
@@ -479,8 +630,21 @@ import translations from '../data/translations.json';
         <!-- Gift Card Section at Top -->
         <div style="background: #f9f9f9; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
           <h2 style="margin-top: 0;" data-i18n="contact.giftCards">Gift Cards</h2>
-          <p data-i18n="contact.giftCardDescription">Purchase a gift card for photography sessions and share the gift of professional photography with someone special.</p>
-          <button class="giftcard-btn" id="buyGiftcardBtn" data-i18n="contact.buyGiftCard">Buy a Gift Card</button>
+          <div class="giftcard-showcase">
+            <div class="giftcard-images">
+              <div class="giftcard-card">
+                <img src="/images/100euri_150ppi.jpg" alt="€100 Gift Card" class="giftcard-image" />
+                <p class="giftcard-info">1H SESSION, 1-2 PEOPLE</p>
+              </div>
+              <div class="giftcard-card">
+                <img src="/images/150euri_150ppi.jpg" alt="€150 Gift Card" class="giftcard-image" />
+                <p class="giftcard-info">1.5-2H SESSION, 2+ PEOPLE</p>
+              </div>
+            </div>
+            <div class="giftcard-text">
+              <button class="giftcard-btn" id="buyGiftcardBtn" data-i18n="contact.buyGiftCard">Buy a Gift Card</button>
+            </div>
+          </div>
         </div>
         
         <div class="content-wrapper">
@@ -521,22 +685,13 @@ import translations from '../data/translations.json';
               <div class="form-group">
                 <label for="session-type"><span data-i18n="contact.sessionType">Session Type</span> <span data-i18n="contact.required">*</span></label>
                 <select id="session-type" name="session-type" required>
-                  <option value="" data-i18n="contact.selectSessionType">Select a session type</option>
-                  <option value="portrait" data-i18n="contact.portraitSession">Portrait Session</option>
-                  <option value="event" data-i18n="contact.eventPhotography">Event Photography</option>
-                  <option value="commercial" data-i18n="contact.commercialProject">Commercial Project</option>
-                  <option value="other" data-i18n="contact.other">Other</option>
+                  <option value="portrait" data-i18n="contact.portraitSession">Photo Studio Portrait Session</option>
                 </select>
               </div>
 
               <div class="form-group">
                 <label for="message" data-i18n="contact.message">Message</label>
                 <textarea id="message" name="message" data-placeholder-i18n="contact.messagePlaceholder" placeholder="Tell me about your project or any specific requirements..."></textarea>
-              </div>
-
-              <div class="form-group">
-                <label for="giftcard" data-i18n="contact.giftcardCode">Gift Card Code (Optional)</label>
-                <input type="text" id="giftcard" name="giftcard" data-placeholder-i18n="contact.giftcardCodePlaceholder" placeholder="Enter your gift card code if you have one" />
               </div>
 
               <button type="submit" class="submit-btn" data-i18n="contact.requestBooking">Request Booking</button>
@@ -567,11 +722,17 @@ import translations from '../data/translations.json';
           </div>
         </div>
 
+        <div class="security-notice">
+          <strong data-i18n="giftcard.securityNotice">🔒 Secure & Private</strong>
+          <span data-i18n="giftcard.securityMessage">All payment information is encrypted and processed securely through Stripe. We never store your credit card details.</span>
+        </div>
+
         <!-- Gift Card Modal -->
         <div class="giftcard-modal" id="giftcardModal">
           <div class="giftcard-modal-content">
             <button class="close-btn" id="closeModal">&times;</button>
             <h2 data-i18n="contact.selectGiftCardAmount">Select Gift Card Amount</h2>
+            
             <div class="form-group">
               <label for="giftcardAmount" data-i18n="contact.amount">Amount</label>
               <select id="giftcardAmount" name="giftcardAmount">
@@ -579,6 +740,53 @@ import translations from '../data/translations.json';
                 <option value="150">€150</option>
               </select>
             </div>
+
+            <div class="form-group">
+              <label for="giftcardName"><span data-i18n="contact.name">Name</span> <span data-i18n="contact.required">*</span></label>
+              <input type="text" id="giftcardName" name="giftcardName" required />
+            </div>
+
+            <div class="form-group">
+              <label for="giftcardEmail"><span data-i18n="contact.email">Email</span> <span data-i18n="contact.required">*</span></label>
+              <input type="email" id="giftcardEmail" name="giftcardEmail" required />
+            </div>
+
+            <div class="form-group">
+              <label for="giftcardPhone" data-i18n="contact.phone">Phone</label>
+              <input type="tel" id="giftcardPhone" name="giftcardPhone" />
+            </div>
+
+            <div class="form-group checkbox">
+              <label for="giftcardDelivery">
+                <input type="checkbox" id="giftcardDelivery" name="giftcardDelivery" />
+                <span data-i18n="contact.deliveryOption">I want the gift card to be delivered</span>
+              </label>
+            </div>
+
+            <div id="giftcardAddressFields" style="display: none;">
+              <div class="form-group">
+                <label for="giftcardAddress"><span data-i18n="contact.address">Address</span> <span data-i18n="contact.required">*</span></label>
+                <input type="text" id="giftcardAddress" name="giftcardAddress" />
+              </div>
+
+              <div class="form-group">
+                <label for="giftcardCity"><span data-i18n="contact.city">City</span> <span data-i18n="contact.required">*</span></label>
+                <input type="text" id="giftcardCity" name="giftcardCity" />
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="giftcardPostalCode"><span data-i18n="contact.postalCode">Postal Code</span> <span data-i18n="contact.required">*</span></label>
+                  <input type="text" id="giftcardPostalCode" name="giftcardPostalCode" />
+                </div>
+
+                <div class="form-group">
+                  <label for="giftcardCountry"><span data-i18n="contact.country">Country</span> <span data-i18n="contact.required">*</span></label>
+                  <input type="text" id="giftcardCountry" name="giftcardCountry" />
+                </div>
+              </div>
+            </div>
+
             <button class="checkout-btn" id="checkoutBtn" data-i18n="contact.proceedToPayment">Proceed to Payment</button>
             <div id="giftcardMessage" class="form-message"></div>
           </div>
@@ -1058,6 +1266,15 @@ import translations from '../data/translations.json';
       const closeModal = document.getElementById('closeModal');
       const checkoutBtn = document.getElementById('checkoutBtn');
       const giftcardAmount = document.getElementById('giftcardAmount');
+      const giftcardName = document.getElementById('giftcardName');
+      const giftcardEmail = document.getElementById('giftcardEmail');
+      const giftcardPhone = document.getElementById('giftcardPhone');
+      const giftcardDelivery = document.getElementById('giftcardDelivery');
+      const giftcardAddressFields = document.getElementById('giftcardAddressFields');
+      const giftcardAddress = document.getElementById('giftcardAddress');
+      const giftcardCity = document.getElementById('giftcardCity');
+      const giftcardPostalCode = document.getElementById('giftcardPostalCode');
+      const giftcardCountry = document.getElementById('giftcardCountry');
       const giftcardMessage = document.getElementById('giftcardMessage');
 
       if (buyGiftcardBtn) {
@@ -1084,8 +1301,55 @@ import translations from '../data/translations.json';
         });
       }
 
+      // Show/hide address fields based on delivery checkbox
+      if (giftcardDelivery) {
+        giftcardDelivery.addEventListener('change', () => {
+          if (giftcardDelivery.checked) {
+            giftcardAddressFields.style.display = 'block';
+          } else {
+            giftcardAddressFields.style.display = 'none';
+          }
+        });
+      }
+
       if (checkoutBtn) {
         checkoutBtn.addEventListener('click', async () => {
+          // Validate required fields
+          if (!giftcardName.value.trim()) {
+            giftcardMessage.className = 'form-message error';
+            giftcardMessage.textContent = 'Please enter your name';
+            return;
+          }
+          if (!giftcardEmail.value.trim()) {
+            giftcardMessage.className = 'form-message error';
+            giftcardMessage.textContent = 'Please enter your email';
+            return;
+          }
+
+          // Validate address fields if delivery is selected
+          if (giftcardDelivery.checked) {
+            if (!giftcardAddress.value.trim()) {
+              giftcardMessage.className = 'form-message error';
+              giftcardMessage.textContent = 'Please enter your address';
+              return;
+            }
+            if (!giftcardCity.value.trim()) {
+              giftcardMessage.className = 'form-message error';
+              giftcardMessage.textContent = 'Please enter your city';
+              return;
+            }
+            if (!giftcardPostalCode.value.trim()) {
+              giftcardMessage.className = 'form-message error';
+              giftcardMessage.textContent = 'Please enter your postal code';
+              return;
+            }
+            if (!giftcardCountry.value.trim()) {
+              giftcardMessage.className = 'form-message error';
+              giftcardMessage.textContent = 'Please enter your country';
+              return;
+            }
+          }
+
           const amount = parseInt(giftcardAmount.value);
           checkoutBtn.disabled = true;
           giftcardMessage.className = 'form-message';
@@ -1100,28 +1364,42 @@ import translations from '../data/translations.json';
               },
               body: JSON.stringify({
                 giftCardAmount: amount,
+                buyerName: giftcardName.value,
+                buyerEmail: giftcardEmail.value,
+                buyerPhone: giftcardPhone.value,
+                requestDelivery: giftcardDelivery.checked,
+                buyerAddress: giftcardDelivery.checked ? giftcardAddress.value : '',
+                buyerCity: giftcardDelivery.checked ? giftcardCity.value : '',
+                buyerPostalCode: giftcardDelivery.checked ? giftcardPostalCode.value : '',
+                buyerCountry: giftcardDelivery.checked ? giftcardCountry.value : '',
                 successUrl: window.location.origin + '/gift-card-success',
                 cancelUrl: window.location.origin + '/contact',
               }),
             });
 
-            if (!response.ok) {
-              throw new Error('Failed to create checkout session');
-            }
-
+            console.log('API Response status:', response.status);
             const data = await response.json();
-            console.log('Checkout response:', data);
+            console.log('API Response data:', data);
+
+            if (!response.ok) {
+              console.error('API Error:', data);
+              throw new Error(data.error || `API Error: ${response.status}`);
+            }
 
             if (!data.url) {
-              throw new Error('No checkout URL received from server');
+              console.error('No URL in response:', data);
+              throw new Error('No checkout URL received from server - ' + (data.error || 'Unknown error'));
             }
 
+            console.log('Redirecting to Stripe checkout:', data.url);
             // Redirect to Stripe hosted checkout
             window.location.href = data.url;
           } catch (error) {
-            console.error('Error:', error);
+            console.error('Checkout error:', error);
             giftcardMessage.className = 'form-message error';
-            giftcardMessage.textContent = (window.t && window.t[window.currentLang] && window.t[window.currentLang].contact && window.t[window.currentLang].contact.errorMessage) || 'Something went wrong. Please try again.';
+            const errorMsg = error instanceof Error ? error.message : 'Something went wrong';
+            giftcardMessage.textContent = errorMsg;
+            console.error('Full error:', error);
             checkoutBtn.disabled = false;
           }
         });

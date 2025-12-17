@@ -86,10 +86,12 @@ import translations from '../data/translations.json';
       .main-content {
         flex: 1;
         padding: 2rem 2rem 2rem 2rem;
+        box-sizing: border-box;
       }
       h1 {
         font-size: 1.5rem;
         margin-bottom: 2rem;
+        margin-top: 0;
         display: none;
       }
       .photo-categories {
@@ -229,7 +231,6 @@ import translations from '../data/translations.json';
           <a href="/projects" data-i18n="nav.projects">PROJECTS</a>
           <a href="/prices" data-i18n="nav.prices">PRICES</a>
           <a href="/shop" data-i18n="nav.tshirts">SHOP</a>
-          <a href="/gift-cards">GIFT CARDS</a>
           <a href="/contact" data-i18n="nav.contact">CONTACT</a>
         </nav>
       </div>
@@ -237,13 +238,6 @@ import translations from '../data/translations.json';
         <h1 data-i18n="photos.heading">Photos</h1>
         
         <div class="photo-categories">
-          <div class="category-card">
-            <a href="/photos/fashion">
-              <img src="/images/portraits/sonya1.jpg" alt="Fashion Photography" loading="lazy" />
-              <div class="category-label" data-i18n="photos.fashion">fashion</div>
-            </a>
-          </div>
-          
           <div class="category-card">
             <a href="/photos/editorial">
               <img src="/images/portraits/klara1.jpg" alt="Editorial Photography" loading="lazy" />
@@ -255,6 +249,13 @@ import translations from '../data/translations.json';
             <a href="/photos/portrait">
               <img src="/images/portraits/matcha1.jpg" alt="Portrait Photography" loading="lazy" />
               <div class="category-label" data-i18n="photos.portrait">portrait</div>
+            </a>
+          </div>
+          
+          <div class="category-card">
+            <a href="/photos/fashion">
+              <img src="/images/portraits/sonya1.jpg" alt="Fashion Photography" loading="lazy" />
+              <div class="category-label" data-i18n="photos.fashion">fashion</div>
             </a>
           </div>
           

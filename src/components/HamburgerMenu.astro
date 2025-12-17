@@ -26,7 +26,6 @@
   <a href="/projects">PROJECTS</a>
   <a href="/prices">PRICES</a>
   <a href="/shop">SHOP</a>
-  <a href="/gift-cards">GIFT CARDS</a>
   <a href="/contact">CONTACT</a>
 </nav>
 
@@ -140,9 +139,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background: transparent;
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 1000;
   flex-direction: column;
   justify-content: center;
@@ -155,13 +152,13 @@
 }
 
 .mobile-menu a {
-  color: #222;
+  color: #fff;
   text-decoration: none;
   font-size: 2rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  margin: 1.5rem 0;
+  margin: 0.75rem 0;
   transition: opacity 0.3s ease;
   position: relative;
   z-index: 1001;
@@ -171,20 +168,21 @@
   opacity: 0.5;
 }
 
+body.menu-open {
+  overflow: hidden;
+}
+
+body.menu-open > *:not(.mobile-header):not(.mobile-menu) {
+  filter: blur(4px);
+}
+
 @media (max-width: 768px) {
   .mobile-header {
     display: block;
   }
-  /* Add top padding to all containers to account for header */
+  /* Add top padding to account for fixed header */
   .container {
-    padding-top: 4rem !important;
-  }
-  .main-content {
-    padding-top: 4rem !important;
-  }
-  /* Add padding to main tags as well */
-  main {
-    padding-top: 4rem !important;
+    padding-top: 4.75rem !important;
   }
 }
 </style>
@@ -198,6 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburgerBtn.addEventListener('click', () => {
       hamburgerBtn.classList.toggle('active');
       mobileMenu.classList.toggle('active');
+      document.body.classList.toggle('menu-open');
     });
 
     // Close menu when a link is clicked
@@ -205,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
       link.addEventListener('click', () => {
         hamburgerBtn.classList.remove('active');
         mobileMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
       });
     });
 
@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'Escape') {
         hamburgerBtn.classList.remove('active');
         mobileMenu.classList.remove('active');
+        document.body.classList.remove('menu-open');
       }
     });
   }

@@ -48,7 +48,34 @@ import translations from '../data/translations.json';
           display: none !important;
         }
         .container {
-          padding: 1rem !important;
+          padding: 0.75rem !important;
+        }
+        h1 {
+          font-size: 1.1rem;
+          margin-bottom: 0.4rem;
+        }
+        .tshirt-grid {
+          gap: 0.75rem;
+          margin-top: 0.75rem;
+        }
+        .tshirt-item p {
+          font-size: 0.75rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .container {
+          padding: 0.5rem !important;
+        }
+        h1 {
+          font-size: 0.9rem;
+          margin-bottom: 0.3rem;
+        }
+        .tshirt-grid {
+          grid-template-columns: 1fr;
+          gap: 0.5rem;
+        }
+        .tshirt-item p {
+          font-size: 0.65rem;
         }
       }
       .container {
@@ -58,7 +85,7 @@ import translations from '../data/translations.json';
       }
       @media (max-width: 768px) {
         .container {
-          padding: 1rem 1rem 1rem 1rem;
+          padding: 0.75rem;
         }
       }
       .sidebar {
@@ -94,6 +121,7 @@ import translations from '../data/translations.json';
       h1 {
         font-size: 1.5rem;
         margin-bottom: 2rem;
+        margin-top: 0;
       }
       .tshirt-grid {
         display: grid;
@@ -192,7 +220,6 @@ import translations from '../data/translations.json';
           <a href="/projects" data-i18n="nav.projects">PROJECTS</a>
           <a href="/prices" data-i18n="nav.prices">PRICES</a>
           <a href="/shop" data-i18n="nav.tshirts">SHOP</a>
-          <a href="/gift-cards">GIFT CARDS</a>
           <a href="/contact" data-i18n="nav.contact">CONTACT</a>
         </nav>
       </div>

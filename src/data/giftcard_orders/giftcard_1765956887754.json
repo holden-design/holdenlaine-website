@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-12-17T07:34:47.754Z",
+  "giftCardAmount": 100,
+  "buyerName": "Holden",
+  "buyerEmail": "holdenlaine@outlook.com",
+  "buyerPhone": "55569043",
+  "requestDelivery": true,
+  "buyerAddress": "22a J. Köleri tänav",
+  "buyerCity": "Tallinn",
+  "buyerPostalCode": "10150",
+  "buyerCountry": "Estonia",
+  "sessionId": "cs_live_a1vytUPoj9VCZiA1ecvaDOn7ZRAoKFjwlXoIusOoAqdNCI4370i7xMRlrg"
+}

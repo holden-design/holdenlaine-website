@@ -155,6 +155,7 @@ const translations = categoryTranslations[category as string] || { titleEt: cate
       .page-header h1 {
         font-size: 1.75rem;
         margin: 0 0 0.5rem 0;
+        margin-top: 0;
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.02em;
@@ -185,32 +186,42 @@ const translations = categoryTranslations[category as string] || { titleEt: cate
           display: none !important;
         }
         .container {
-          padding: 1rem;
+          padding: 0.75rem;
           max-width: 100%;
           margin: 0;
         }
+        .page-header {
+          margin-bottom: 1rem;
+        }
         .page-header h1 {
-          font-size: 1.3rem;
+          font-size: 1.1rem;
+          margin-bottom: 0.25rem;
+        }
+        .page-header p {
+          font-size: 0.75rem;
         }
         .image-grid {
           grid-template-columns: repeat(2, 1fr);
-          gap: 0.5rem;
+          gap: 0.4rem;
         }
       }
       @media (max-width: 480px) {
         .image-grid {
           grid-template-columns: 1fr;
-          gap: 0.4rem;
+          gap: 0.3rem;
         }
         .sidebar nav a {
           font-size: 0.65rem;
         }
         .container {
-          padding: 0.75rem;
+          padding: 0.5rem;
         }
         .page-header h1 {
-          font-size: 1.1rem;
-          margin-bottom: 1rem;
+          font-size: 0.9rem;
+          margin-bottom: 0.5rem;
+        }
+        .page-header p {
+          font-size: 0.65rem;
         }
       }
     </style>
@@ -229,7 +240,6 @@ const translations = categoryTranslations[category as string] || { titleEt: cate
           <a href="/projects" data-i18n="nav.projects">PROJEKTID</a>
           <a href="/prices" data-i18n="nav.prices">HINNAKIRI</a>
           <a href="/shop" data-i18n="nav.tshirts">E-POOD</a>
-          <a href="/gift-cards">GIFT CARDS</a>
           <a href="/contact" data-i18n="nav.contact">KONTAKT</a>
         </nav>
       </div>
