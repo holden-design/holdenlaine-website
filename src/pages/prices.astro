@@ -169,6 +169,116 @@ import translations from '../data/translations.json';
       .giftcard-btn:hover {
         opacity: 0.7;
       }
+      .giftcard-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 10001;
+        align-items: center;
+        justify-content: center;
+      }
+      .giftcard-modal.open {
+        display: flex;
+      }
+      .giftcard-modal-content {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 8px;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        position: relative;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .giftcard-modal-content h2 {
+        margin-top: 0;
+        padding-right: 2rem;
+      }
+      .giftcard-modal-content .form-group {
+        margin-bottom: 1rem;
+      }
+      .giftcard-modal-content .form-group input[type="text"],
+      .giftcard-modal-content .form-group input[type="email"],
+      .giftcard-modal-content .form-group input[type="tel"],
+      .giftcard-modal-content .form-group select {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 1rem;
+      }
+      .giftcard-modal-content .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+      .giftcard-modal-content .form-group.checkbox label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0;
+      }
+      .giftcard-modal-content .form-group.checkbox input[type="checkbox"] {
+        width: auto;
+      }
+      .giftcard-modal-content .close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: #999;
+        padding: 0;
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+      .giftcard-modal-content .close-btn:hover {
+        color: #333;
+      }
+      .giftcard-modal-content .checkout-btn {
+        background: #222;
+        color: #fff;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        cursor: pointer;
+        transition: opacity 0.3s ease;
+      }
+      .giftcard-modal-content .checkout-btn:hover {
+        opacity: 0.7;
+      }
+      .giftcard-modal-content .checkout-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .form-message {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        border-radius: 4px;
+        text-align: center;
+        font-size: 0.9rem;
+        display: none;
+      }
+      .form-message.success {
+        background: #e8f5e9;
+        color: #2e7d32;
+        display: block;
+      }
+      .form-message.error {
+        background: #ffebee;
+        color: #c62828;
+        display: block;
+      }
       .language-toggle {
         position: fixed;
         top: 1rem;
@@ -236,24 +346,17 @@ import translations from '../data/translations.json';
           <h2 data-i18n="prices.portraitSessions">Portrait Sessions</h2>
           <div class="price-item">
             <div>
-              <div class="price-name" data-i18n="prices.individualPortrait">Individual Portrait</div>
-              <div class="price-description" data-i18n="prices.individualPortraitDesc">1 hour session, 10+ edited photos</div>
+              <div class="price-name" data-i18n="prices.portraitSessionTwoMax">Studio portrait session</div>
+              <div class="price-description" data-i18n="prices.individualPortraitDesc">1 hour session / 1 - 2 people max, 10+ edited photos</div>
             </div>
-            <div class="price-amount" data-i18n="prices.individualPortraitPrice">€100</div>
+            <div class="price-amount" data-i18n="prices.portraitSessionTwoMaxPrice">€100</div>
           </div>
           <div class="price-item">
             <div>
-              <div class="price-name" data-i18n="prices.couplePortrait">Couple Portrait</div>
-              <div class="price-description" data-i18n="prices.couplePortraitDesc">1.5 hour session, 15+ edited photos</div>
+              <div class="price-name" data-i18n="prices.portraitStudioSession">Studio portrait session</div>
+              <div class="price-description" data-i18n="prices.portraitStudioSessionDesc">3-4 people, 1.5-2h session, 15+ edited photos</div>
             </div>
-            <div class="price-amount" data-i18n="prices.couplePortraitPrice">€150</div>
-          </div>
-          <div class="price-item">
-            <div>
-              <div class="price-name" data-i18n="prices.familyPortrait">Family Portrait</div>
-              <div class="price-description" data-i18n="prices.familyPortraitDesc">2 hour session, 20+ edited photos</div>
-            </div>
-            <div class="price-amount" data-i18n="prices.familyPortraitPrice">€250</div>
+            <div class="price-amount" data-i18n="prices.portraitStudioSessionPrice">€150</div>
           </div>
         </div>
 
@@ -264,14 +367,14 @@ import translations from '../data/translations.json';
               <div class="price-name" data-i18n="prices.halfDay">Half Day</div>
               <div class="price-description" data-i18n="prices.halfDayDesc">Up to 4 hours coverage</div>
             </div>
-            <div class="price-amount" data-i18n="prices.halfDayPrice">€400</div>
+            <div class="price-amount" data-i18n="prices.halfDayPrice">€350</div>
           </div>
           <div class="price-item">
             <div>
               <div class="price-name" data-i18n="prices.fullDay">Full Day</div>
               <div class="price-description" data-i18n="prices.fullDayDesc">Up to 8 hours coverage</div>
             </div>
-            <div class="price-amount" data-i18n="prices.fullDayPrice">€700</div>
+            <div class="price-amount" data-i18n="prices.fullDayPrice">€600</div>
           </div>
         </div>
 
@@ -290,6 +393,69 @@ import translations from '../data/translations.json';
           <h2 data-i18n="prices.giftCards">Gift Cards</h2>
           <p data-i18n="prices.giftCardDescription">Purchase a gift card for photography sessions and share the gift of professional photography with someone special.</p>
           <button class="giftcard-btn" id="buyGiftcardBtn" data-i18n="prices.buyGiftCard">Buy a Gift Card</button>
+        </div>
+
+        <!-- Gift Card Modal -->
+        <div class="giftcard-modal" id="giftcardModal">
+          <div class="giftcard-modal-content">
+            <button class="close-btn" id="closeModal">&times;</button>
+            <h2 data-i18n="contact.selectGiftCardAmount">Select Gift Card Amount</h2>
+            
+            <div class="form-group">
+              <label for="giftcardAmount" data-i18n="contact.amount">Amount</label>
+              <select id="giftcardAmount" name="giftcardAmount">
+                <option value="100">€100</option>
+                <option value="150">€150</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="giftcardName"><span data-i18n="contact.name">Name</span> <span data-i18n="contact.required">*</span></label>
+              <input type="text" id="giftcardName" name="giftcardName" required />
+            </div>
+
+            <div class="form-group">
+              <label for="giftcardEmail"><span data-i18n="contact.email">Email</span> <span data-i18n="contact.required">*</span></label>
+              <input type="email" id="giftcardEmail" name="giftcardEmail" required />
+            </div>
+
+            <div class="form-group">
+              <label for="giftcardPhone" data-i18n="contact.phone">Phone</label>
+              <input type="tel" id="giftcardPhone" name="giftcardPhone" />
+            </div>
+
+            <div class="form-group checkbox">
+              <label for="giftcardDelivery">
+                <input type="checkbox" id="giftcardDelivery" name="giftcardDelivery" />
+                <span data-i18n="contact.deliveryOption">I want the gift card to be delivered</span>
+              </label>
+            </div>
+
+            <div id="giftcardAddressFields" style="display: none;">
+              <div class="form-group">
+                <label for="giftcardAddress"><span data-i18n="contact.address">Address</span> <span data-i18n="contact.required">*</span></label>
+                <input type="text" id="giftcardAddress" name="giftcardAddress" />
+              </div>
+
+              <div class="form-group">
+                <label for="giftcardCity"><span data-i18n="contact.city">City</span> <span data-i18n="contact.required">*</span></label>
+                <input type="text" id="giftcardCity" name="giftcardCity" />
+              </div>
+
+              <div class="form-group">
+                <label for="giftcardPostal"><span data-i18n="contact.postal">Postal Code</span> <span data-i18n="contact.required">*</span></label>
+                <input type="text" id="giftcardPostal" name="giftcardPostal" />
+              </div>
+
+              <div class="form-group">
+                <label for="giftcardCountry"><span data-i18n="contact.country">Country</span> <span data-i18n="contact.required">*</span></label>
+                <input type="text" id="giftcardCountry" name="giftcardCountry" />
+              </div>
+            </div>
+
+            <button class="checkout-btn" id="checkoutBtn" data-i18n="contact.proceedToPayment">Proceed to Payment</button>
+            <div id="giftcardMessage" class="form-message"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -340,6 +506,105 @@ import translations from '../data/translations.json';
           }
         });
       });
+
+      // Gift Card Modal
+      const buyGiftcardBtn = document.getElementById('buyGiftcardBtn');
+      const closeModal = document.getElementById('closeModal');
+      const giftcardModal = document.getElementById('giftcardModal');
+      const checkoutBtn = document.getElementById('checkoutBtn');
+      const giftcardDelivery = document.getElementById('giftcardDelivery');
+      const giftcardAddressFields = document.getElementById('giftcardAddressFields');
+      const giftcardMessage = document.getElementById('giftcardMessage');
+
+      if (buyGiftcardBtn) {
+        buyGiftcardBtn.addEventListener('click', () => {
+          giftcardModal.classList.add('open');
+        });
+      }
+
+      if (closeModal) {
+        closeModal.addEventListener('click', () => {
+          giftcardModal.classList.remove('open');
+          giftcardMessage.className = 'form-message';
+          giftcardMessage.textContent = '';
+        });
+      }
+
+      if (giftcardModal) {
+        giftcardModal.addEventListener('click', (e) => {
+          if (e.target === giftcardModal) {
+            giftcardModal.classList.remove('open');
+            giftcardMessage.className = 'form-message';
+            giftcardMessage.textContent = '';
+          }
+        });
+      }
+
+      if (giftcardDelivery) {
+        giftcardDelivery.addEventListener('change', () => {
+          giftcardAddressFields.style.display = giftcardDelivery.checked ? 'block' : 'none';
+        });
+      }
+
+      if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', async () => {
+          const amount = document.getElementById('giftcardAmount').value;
+          const name = document.getElementById('giftcardName').value.trim();
+          const email = document.getElementById('giftcardEmail').value.trim();
+          const phone = document.getElementById('giftcardPhone').value.trim();
+          const delivery = giftcardDelivery.checked;
+
+          if (!name || !email) {
+            giftcardMessage.className = 'form-message error';
+            giftcardMessage.textContent = 'Please fill in all required fields';
+            return;
+          }
+
+          if (delivery) {
+            const address = document.getElementById('giftcardAddress').value.trim();
+            const city = document.getElementById('giftcardCity').value.trim();
+            const postal = document.getElementById('giftcardPostal').value.trim();
+            const country = document.getElementById('giftcardCountry').value.trim();
+
+            if (!address || !city || !postal || !country) {
+              giftcardMessage.className = 'form-message error';
+              giftcardMessage.textContent = 'Please fill in all delivery address fields';
+              return;
+            }
+          }
+
+          try {
+            const response = await fetch('/api/stripe-checkout.json', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                type: 'giftcard',
+                amount: parseInt(amount),
+                name,
+                email,
+                phone,
+                delivery,
+                address: delivery ? document.getElementById('giftcardAddress').value : '',
+                city: delivery ? document.getElementById('giftcardCity').value : '',
+                postal: delivery ? document.getElementById('giftcardPostal').value : '',
+                country: delivery ? document.getElementById('giftcardCountry').value : ''
+              })
+            });
+
+            const data = await response.json();
+            if (data.url) {
+              window.location.href = data.url;
+            } else {
+              giftcardMessage.className = 'form-message error';
+              giftcardMessage.textContent = 'Error processing payment. Please try again.';
+            }
+          } catch (error) {
+            giftcardMessage.className = 'form-message error';
+            giftcardMessage.textContent = 'Error processing payment. Please try again.';
+            console.error('Error:', error);
+          }
+        });
+      }
     </script>
     <script is:inline src="/scripts/letterfall.js"></script>
   </body>

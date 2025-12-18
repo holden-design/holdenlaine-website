@@ -204,6 +204,18 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
         grid-column: 2;
         grid-row: 1;
       }
+      /* Images-only layout - full width grid */
+      .project-content.images-only {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .project-content.images-only .project-media {
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .project-content.images-only .project-videos {
+        display: none;
+      }
       .project-text {
         max-width: 800px;
         margin: 0;
@@ -369,6 +381,10 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
         .video-container[data-portrait="true"] {
           max-width: min(100vw - 2rem, 360px);
         }
+        .image-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1rem;
+        }
       }
       @media (min-width: 600px) {
         .container {
@@ -405,7 +421,7 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
           {sub?.description && <p>{sub?.description}</p>}
         </div>
 
-        <div class="project-content" data-portrait={sub.media && sub.media[0]?.portrait === true ? "true" : "false"} class:list={{ 'video-only': sub.media && sub.media.some((item: any) => item.type === 'video') && (!sub.images || sub.images.length === 0) && (!sub.media.some((item: any) => item.type !== 'video')) }}>
+        <div class="project-content" data-portrait={sub.media && sub.media[0]?.portrait === true ? "true" : "false"} class:list={{ 'video-only': sub.media && sub.media.some((item: any) => item.type === 'video') && (!sub.images || sub.images.length === 0) && (!sub.media.some((item: any) => item.type !== 'video')), 'images-only': sub.images && sub.images.length > 0 && (!sub.media || sub.media.length === 0) }}>
           <div class="project-media">
             {sub?.media && sub.media.length > 0 && (
               <div class="image-grid">
@@ -447,7 +463,7 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
                       data-portrait={item.portrait === true ? "true" : "false"}
                       poster={item.poster ? `/images/${item.poster}` : undefined}
                     >
-                      <source src={`/images/${item.src}`} type="video/mp4" />
+                      <source src={`/images/${item.src}`} type={item.src.endsWith('.mov') ? 'video/quicktime' : 'video/mp4'} />
                     </video>
                   ) : null
                 ))}

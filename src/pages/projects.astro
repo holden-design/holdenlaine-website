@@ -90,8 +90,13 @@ import projects from '../../public/data/projects.json';
         margin-top: -3rem;
       }
       .projects-navigation {
-        position: sticky;
+        position: fixed;
         top: 2rem;
+        left: 2rem;
+        width: auto;
+        z-index: 999;
+        pointer-events: auto;
+        padding-left: 120px;
       }
       .projects-nav {
         display: flex;
@@ -174,10 +179,22 @@ import projects from '../../public/data/projects.json';
           gap: 0.75rem;
         }
         .projects-navigation {
-          position: static;
-          top: auto;
-          padding-top: 2rem;
-          margin-top: 2rem;
+          position: fixed;
+          top: 4.75rem;
+          left: 0;
+          width: auto;
+          z-index: 999;
+          padding: 1rem;
+          padding-left: 0.75rem;
+        }
+        .projects-nav {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .projects-nav-link {
+          font-size: 1.5rem;
+          font-weight: 700;
         }
         .sub-project-card {
           flex: 0 1 100%;
@@ -203,8 +220,22 @@ import projects from '../../public/data/projects.json';
           gap: 0.5rem;
         }
         .projects-navigation {
-          padding-top: 1.5rem;
-          margin-top: 1.5rem;
+          position: fixed;
+          top: 4.75rem;
+          left: 0;
+          width: auto;
+          z-index: 999;
+          padding: 0.75rem;
+          padding-left: 0.5rem;
+        }
+        .projects-nav {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+        .projects-nav-link {
+          font-size: 1.3rem;
+          font-weight: 700;
         }
         .sub-project-card h3 {
           font-size: 0.8rem;

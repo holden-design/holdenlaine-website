@@ -2,30 +2,30 @@
   {
     "title": "Portrait Series",
     "description": "A series of portraits exploring light and emotion.",
-    "images": ["portraits/_F5A0975.jpg", "portraits/edit-10.jpg", "portraits/_F5A3447.jpg", "portraits/_F5A3477-2.jpg", "portraits/_F5A3510.jpg", "portraits/_F5A3518.jpg", "portraits/_F5A9374.jpg", "portraits/1x1spotify.jpg", "portraits/1X1X2 copy.jpg", "portraits/adventure.jpg", "portraits/adventure1.jpg", "portraits/col1.jpg", "portraits/damn.jpg", "portraits/edit-1.jpg", "portraits/edit-11.jpg", "portraits/edit-2.jpg", "portraits/edit-3.jpg", "portraits/edit-4.jpg", "portraits/edit-5.jpg", "portraits/edit-6.jpg", "portraits/edit-7.jpg", "portraits/edit-8.jpg", "portraits/edit-9.jpg", "portraits/edit.jpg", "portraits/fucku.jpg", "portraits/fucku2.jpg", "portraits/holden2.jpg", "portraits/holden3.jpg", "portraits/july1.jpg", "portraits/july2.jpg", "portraits/karin1.jpg", "portraits/klara1.jpg", "portraits/klara3.jpg", "portraits/klara4.jpg", "portraits/klara5.jpg", "portraits/klara6.jpg", "portraits/mad1.jpg", "portraits/mad2.jpg", "portraits/marielle1.jpg", "portraits/matcha1.jpg", "portraits/matcha2.jpg", "portraits/matcha3.jpg", "portraits/matcha4.jpg", "portraits/matcha5.jpg", "portraits/more1.jpg", "portraits/more2.jpg", "portraits/sonya1.jpg", "portraits/sonya10.jpg", "portraits/sonya11.jpg", "portraits/sonya12.jpg", "portraits/sonya13.jpg", "portraits/sonya14.jpg", "portraits/sonya2.jpg", "portraits/sonya3.jpg", "portraits/sonya5.jpg", "portraits/sonya6.jpg", "portraits/sonya7.jpg", "portraits/sonya8.jpg", "portraits/sonya9.jpg"]
+    "images": ["Chew/_F5A0975.jpg", "portraits/1x1spotify.jpg", "portraits/IMG_4487.jpg", "portraits/1X1X2 copy.jpg", "portraits/edit-10.jpg", "portraits/edit-11.jpg", "portraits/edit-3.jpg", "portraits/edit-4.jpg", "portraits/edit-5.jpg", "portraits/edit-6.jpg", "portraits/edit-7.jpg", "portraits/edit-8.jpg", "portraits/edit-9.jpg", "portraits/edit.jpg", "portraits/fucku.jpg", "portraits/fucku2.jpg", "portraits/holden2.jpg", "portraits/holden3.jpg", "portraits/july1.jpg", "portraits/july2.jpg", "portraits/karin1.jpg", "portraits/klara1.jpg", "portraits/klara3.jpg", "portraits/klara4.jpg", "portraits/klara5.jpg", "portraits/klara6.jpg", "portraits/mad1.jpg", "portraits/mad2.jpg", "portraits/marielle1.jpg", "portraits/more1.jpg", "portraits/more2.jpg", "portraits/sonya1.jpg", "portraits/sonya10.jpg", "portraits/sonya11.jpg", "portraits/sonya12.jpg", "portraits/sonya14.jpg", "portraits/sonya2.jpg", "portraits/sonya3.jpg", "portraits/sonya5.jpg", "portraits/sonya6.jpg", "portraits/sonya7.jpg", "portraits/sonya8.jpg", "portraits/victoria1.jpg", "portraits/_MG_0987-2.jpg", "portraits/_MG_0995.jpg", "portraits/_MG_9779-2.jpg", "portraits/edit-1.jpg", "portraits/edit-2.jpg"]
   },
   {
     "title": "Street / Events",
     "description": "Capturing candid moments from everyday life.",
-    "images": ["street1.jpg", "street2.jpg", "street3.jpg", "portraits/images:background.jpg", "portraits/P1100300.jpg", "portraits/P1100345.jpg", "portraits/P1100418.jpg", "portraits/P1100561.jpg", "portraits/P1100570.jpg", "portraits/P1100594.jpg", "portraits/P1100864.jpg", "portraits/_F5A9263.jpg", "portraits/_F5A9268.jpg", "portraits/_F5A9274.jpg", "portraits/_F5A9279.jpg", "portraits/_F5A9283-2.jpg", "portraits/_F5A9285.jpg", "portraits/_F5A9298.jpg", "portraits/_F5A9310.jpg", "portraits/_F5A9486.jpg", "portraits/_F5A9492.jpg", "portraits/_F5A9493.jpg", "portraits/_F5A9496-2.jpg", "portraits/_F5A9497.jpg", "portraits/_F5A9500.jpg", "portraits/_F5A9503.jpg"]
+    "images": ["Street/_F5A9263.jpg", "Street/_F5A9268.jpg", "Street/_F5A9274.jpg", "Street/_F5A9279.jpg", "Street/_F5A9283-2.jpg", "Street/_F5A9285.jpg", "Street/_F5A9298.jpg", "Street/_F5A9310.jpg", "Street/_F5A9486.jpg", "Street/_F5A9493.jpg", "Street/_F5A9496-2.jpg", "Street/_F5A9497.jpg", "Street/_F5A9500.jpg", "Street/_F5A9503.jpg", "Street/adventure.jpg", "Street/adventure1.jpg", "Street/P1100300.jpg", "Street/P1100345.jpg", "Street/P1100418.jpg", "Street/P1100561.jpg", "Street/P1100570.jpg", "Street/P1100594.jpg", "Street/P1100864.jpg", "Street/images:background.jpg"]
   },
   {
     "title": "Editorial",
     "description": "Editorial photography and styled shoots.",
-    "images": ["portraits/_F5A0743.jpg", "portraits/Screenshot 2025-11-25 at 21.20.01.png", "portraits/Screenshot 2025-11-25 at 21.20.15.png", "portraits/Screenshot 2025-11-25 at 21.20.22.png"]
+    "images": ["editorial/Screenshot 2025-11-25 at 21.20.01.png", "portraits/damn.jpg", "editorial/Screenshot 2025-11-25 at 21.20.15.png", "editorial/Screenshot 2025-11-25 at 21.20.22.png"]
   },
   {
     "title": "Fashion",
     "description": "Fashion photography and styled shoots.",
     "images": [
-      "portraits/eve1.jpg",
-      "portraits/DSC00681.jpg",
-      "portraits/sonya15.jpg",
-      "portraits/sonya16.jpg",
-      "portraits/sonya17.jpg",
-      "portraits/sonya18.jpg",
-      "portraits/sonyaa.jpg",
-      "portraits/sonyaa1.jpg"
+      "Fashion product photography/sonyaa.jpg",
+      "Fashion product photography/sonya18.jpg",
+      "Fashion product photography/eve1.jpg",
+      "Fashion product photography/sonya17.jpg",
+      "Fashion product photography/sonya16.jpg",
+      "Fashion product photography/sonya15.jpg",
+      "Fashion product photography/DSC00681.jpg",
+      "Fashion product photography/sonyaa1.jpg"
     ]
   },
   {
@@ -37,7 +37,7 @@
         "description": "A video project from Muhu island.",
         "caption": "Tõnise talu, Muhu video that shows the beauty of an Estonian summer and the beauty you can find at muhutonise.ee",
         "media": [
-          {"type": "video", "src": "tonise-talu.mp4", "poster": "tonise-talu-poster.jpg"}
+          {"type": "video", "src": "tonise-talu/tonise-talu.mp4", "poster": "tonise-talu/tonise-talu-poster.jpg"}
         ]
       },
       {
@@ -45,7 +45,10 @@
         "description": "User Generated Content projects.",
         "caption": "User generated content and collaborations",
         "media": [
-          {"type": "video", "src": "portraits/matcha_UGC.mp4", "portrait": true}
+          {"type": "video", "src": "Himatcha/matcha_UGC.mp4", "portrait": true},
+          {"type": "image", "src": "Himatcha/_F5A0423.jpg"},
+          {"type": "image", "src": "Himatcha/col1.jpg"},
+          {"type": "image", "src": "Himatcha/himatcha.jpg"}
         ]
       },
       {
@@ -53,17 +56,11 @@
         "description": "Social media content creation",
         "caption": "Peugeot social media video creation\nDirected by Holden Laine\nStyled by Kadri Kukk\nBTS - Andre Merilo\nModel - Christin Sandra Topkin",
           "media": [
-            {"type": "video", "src": "portraits/01_Peugeot_social_web.mp4", "portrait": true},
-            {"type": "image", "src": "portraits/Peugeot1.jpg"},
-            {"type": "image", "src": "portraits/Peugeot2.jpg"},
-            {"type": "image", "src": "portraits/Peugeot4.jpg"},
-            {"type": "image", "src": "portraits/Peugeot5.jpg"},
-            {"type": "image", "src": "portraits/Peugeot6.jpg"},
-            {"type": "image", "src": "portraits/Peugeot7.jpg"},
-            {"type": "image", "src": "portraits/Peugeot8.jpg"},
-            {"type": "image", "src": "portraits/Peugeot9.jpg"},
-            {"type": "image", "src": "portraits/Peugeot10.jpg"},
-            {"type": "image", "src": "portraits/Peugeot11.jpg"}
+            {"type": "video", "src": "Peugeot/01_Peugeot_social_compressed.mp4", "portrait": true},
+            {"type": "image", "src": "Peugeot/_F5A3447.jpg"},
+            {"type": "image", "src": "Peugeot/_F5A3477-2.jpg"},
+            {"type": "image", "src": "Peugeot/_F5A3510.jpg"},
+            {"type": "image", "src": "Peugeot/_F5A3518.jpg"}
           ]
       },
       {
@@ -88,24 +85,15 @@
       },
       {
         "title": "Roseni maja",
-        "description": "AI experimentation project exploring architectural videography.",
-        "caption": "AI experimentation project for Roseni maja in Tallinn.",
-        "media": [
-          {"type": "video", "src": "Roseni_2_1_äri.mov", "poster": ""},
-          {"type": "video", "src": "Roseni_1_1_büroo.mov", "poster": ""}
-        ]
+        "description": "Architectural photography of Roseni maja.",
+        "caption": "Architectural photography project for Roseni maja in Tallinn.",
+        "images": ["roseni/Roseni_1_1_buroo.mov", "roseni/Roseni_2_1_ari.mov"]
       },
       {
         "title": "Adidas",
         "description": "Adidas photoshoots.",
         "caption": "Adidas Estonian social media content creation.",
-        "media": [
-          {"type": "image", "src": "portraits/IMG_8797.jpg"},
-          {"type": "image", "src": "portraits/IMG_8803.jpg"},
-          {"type": "image", "src": "portraits/IMG_8875.jpg"},
-          {"type": "image", "src": "portraits/IMG_8897.jpg"},
-          {"type": "image", "src": "portraits/IMG_8906.jpg"}
-        ]
+        "images": ["adidas/_1488687 2.JPG", "adidas/222CC26D-71C6-4C88-B16F-69A6D33C4B3D.JPG", "adidas/4057922B-14E4-4127-8CDC-327F15AB1C1D 2.JPG", "adidas/7C57D228-0139-458F-A0B7-C60BE0BD425D.JPG", "adidas/AFBBCCE1-4AF4-421D-8C9C-02493FB35A1C.JPG", "adidas/AO8B2945.JPG", "adidas/B4C3D3DA-2398-4890-869C-70D4E92B49FB.JPG", "adidas/CB350799-5951-4F2B-9C6C-3E7F722CD99B.JPG", "adidas/DSC00111.JPG", "adidas/DSC00213-2.JPG", "adidas/DSC00247-2.JPG", "adidas/DSCF9041.JPG", "adidas/DSCF9045.JPG", "adidas/IMG_2575.JPG", "adidas/IMG_2580.JPG", "adidas/IMG_2587.JPG", "adidas/IMG_8797.jpg", "adidas/IMG_8803.jpg", "adidas/IMG_8875.jpg", "adidas/IMG_8897.jpg", "adidas/IMG_8906.jpg"]
       }
     ]
   }
