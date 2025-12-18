@@ -91,7 +91,7 @@ import projects from '../../public/data/projects.json';
       }
       .projects-navigation {
         position: sticky;
-        top: 4rem;
+        top: 2rem;
       }
       .projects-nav {
         display: flex;
@@ -163,6 +163,7 @@ import projects from '../../public/data/projects.json';
         }
         .container {
           padding: 0.75rem;
+          padding-top: 4.75rem !important;
         }
         .main-content h1 {
           font-size: 1.1rem;
@@ -175,6 +176,8 @@ import projects from '../../public/data/projects.json';
         .projects-navigation {
           position: static;
           top: auto;
+          padding-top: 2rem;
+          margin-top: 2rem;
         }
         .sub-project-card {
           flex: 0 1 100%;
@@ -190,6 +193,7 @@ import projects from '../../public/data/projects.json';
       @media (max-width: 480px) {
         .container {
           padding: 0.5rem;
+          padding-top: 4.75rem !important;
         }
         .main-content h1 {
           font-size: 0.9rem;
@@ -197,6 +201,10 @@ import projects from '../../public/data/projects.json';
         }
         .content-wrapper {
           gap: 0.5rem;
+        }
+        .projects-navigation {
+          padding-top: 1.5rem;
+          margin-top: 1.5rem;
         }
         .sub-project-card h3 {
           font-size: 0.8rem;
@@ -210,6 +218,38 @@ import projects from '../../public/data/projects.json';
           padding-left: 140px;
         }
       }
+      .language-toggle {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 10000;
+        display: none;
+        gap: 0.5rem;
+      }
+      .language-toggle button {
+        background: transparent;
+        border: none;
+        padding: 0;
+        font-size: 0.75rem;
+        transition: opacity 0.2s ease;
+        opacity: 0.3;
+        cursor: pointer;
+        font-weight: 500;
+        color: #333;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .language-toggle button:hover {
+        opacity: 0.6;
+      }
+      .language-toggle button.active {
+        opacity: 1;
+      }
+      @media (min-width: 769px) {
+        .language-toggle {
+          display: flex !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -217,6 +257,10 @@ import projects from '../../public/data/projects.json';
     <Logo />
     <Cursor />
     <HamburgerMenu />
+    <div class="language-toggle">
+      <button class="lang-btn active" data-lang="en">ENG</button>
+      <button class="lang-btn" data-lang="et">EST</button>
+    </div>
     <div class="container">
       <div class="sidebar">
         <nav>
@@ -367,6 +411,23 @@ import projects from '../../public/data/projects.json';
       if (savedLang === 'et') {
         updateTranslations('et');
       }
+      
+      // Language toggle button functionality
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-lang') === savedLang);
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const lang = btn.getAttribute('data-lang');
+          if (lang) {
+            localStorage.setItem('language', lang);
+            updateTranslations(lang);
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => {
+              b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+            });
+          }
+        });
+      });
     </script>
   </body>
 </html>

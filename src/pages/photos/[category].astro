@@ -8,9 +8,11 @@ import Logo from '../../components/Logo.astro';
 // Photo categories with their images
 const PHOTO_CATEGORIES = {
   'fashion': {
-    title: 'Fashion',
-    description: 'Fashion photography and styled shoots',
+    title: 'Fashion Product Photography',
+    description: 'Fashion product photography and styled shoots',
     images: [
+      "portraits/eve1.jpg",
+      "portraits/DSC00681.jpg",
       "portraits/sonya15.jpg",
       "portraits/sonya16.jpg",
       "portraits/sonya17.jpg",
@@ -22,17 +24,17 @@ const PHOTO_CATEGORIES = {
   'portrait': {
     title: 'Portrait Series',
     description: 'A series of portraits exploring light and emotion',
-    images: ["portraits/_F5A0743.jpg", "portraits/_F5A0975.jpg", "portraits/_F5A3447.jpg", "portraits/_F5A3477-2.jpg", "portraits/_F5A3510.jpg", "portraits/_F5A3518.jpg", "portraits/_F5A9374.jpg", "portraits/_F5A9493.jpg", "portraits/1x1spotify.jpg", "portraits/1X1X2 copy.jpg", "portraits/adventure.jpg", "portraits/adventure1.jpg", "portraits/col1.jpg", "portraits/damn.jpg", "portraits/DSC00681.jpg", "portraits/edit-1.jpg", "portraits/edit-10.jpg", "portraits/edit-11.jpg", "portraits/edit-2.jpg", "portraits/edit-3.jpg", "portraits/edit-4.jpg", "portraits/edit-5.jpg", "portraits/edit-6.jpg", "portraits/edit-7.jpg", "portraits/edit-8.jpg", "portraits/edit-9.jpg", "portraits/edit.jpg", "portraits/eve1.jpg", "portraits/fucku.jpg", "portraits/fucku2.jpg", "portraits/himatcha.jpg", "portraits/holden2.jpg", "portraits/holden3.jpg", "portraits/images:background.jpg", "portraits/july1.jpg", "portraits/july2.jpg", "portraits/karin1.jpg", "portraits/klara1.jpg", "portraits/klara3.jpg", "portraits/klara4.jpg", "portraits/klara5.jpg", "portraits/klara6.jpg", "portraits/mad1.jpg", "portraits/mad2.jpg", "portraits/marielle1.jpg", "portraits/matcha1.jpg", "portraits/matcha2.jpg", "portraits/matcha3.jpg", "portraits/matcha4.jpg", "portraits/matcha5.jpg", "portraits/more1.jpg", "portraits/more2.jpg", "portraits/P1100300.jpg", "portraits/P1100345.jpg", "portraits/P1100418.jpg", "portraits/P1100561.jpg", "portraits/P1100570.jpg", "portraits/P1100594.jpg", "portraits/P1100864.jpg", "portraits/sonya1.jpg", "portraits/sonya10.jpg", "portraits/sonya11.jpg", "portraits/sonya12.jpg", "portraits/sonya13.jpg", "portraits/sonya14.jpg", "portraits/sonya2.jpg", "portraits/sonya3.jpg", "portraits/sonya5.jpg", "portraits/sonya6.jpg", "portraits/sonya7.jpg", "portraits/sonya8.jpg", "portraits/sonya9.jpg"]
+    images: ["portraits/_F5A0975.jpg", "portraits/edit-10.jpg", "portraits/_F5A3447.jpg", "portraits/_F5A3477-2.jpg", "portraits/_F5A3510.jpg", "portraits/_F5A3518.jpg", "portraits/_F5A9374.jpg", "portraits/1x1spotify.jpg", "portraits/1X1X2 copy.jpg", "portraits/adventure.jpg", "portraits/adventure1.jpg", "portraits/col1.jpg", "portraits/damn.jpg", "portraits/edit-1.jpg", "portraits/edit-11.jpg", "portraits/edit-2.jpg", "portraits/edit-3.jpg", "portraits/edit-4.jpg", "portraits/edit-5.jpg", "portraits/edit-6.jpg", "portraits/edit-7.jpg", "portraits/edit-8.jpg", "portraits/edit-9.jpg", "portraits/edit.jpg", "portraits/fucku.jpg", "portraits/fucku2.jpg", "portraits/holden2.jpg", "portraits/holden3.jpg", "portraits/july1.jpg", "portraits/july2.jpg", "portraits/karin1.jpg", "portraits/klara1.jpg", "portraits/klara3.jpg", "portraits/klara4.jpg", "portraits/klara5.jpg", "portraits/klara6.jpg", "portraits/mad1.jpg", "portraits/mad2.jpg", "portraits/marielle1.jpg", "portraits/matcha1.jpg", "portraits/matcha2.jpg", "portraits/matcha3.jpg", "portraits/matcha4.jpg", "portraits/matcha5.jpg", "portraits/more1.jpg", "portraits/more2.jpg", "portraits/sonya1.jpg", "portraits/sonya10.jpg", "portraits/sonya11.jpg", "portraits/sonya12.jpg", "portraits/sonya13.jpg", "portraits/sonya14.jpg", "portraits/sonya2.jpg", "portraits/sonya3.jpg", "portraits/sonya5.jpg", "portraits/sonya6.jpg", "portraits/sonya7.jpg", "portraits/sonya8.jpg", "portraits/sonya9.jpg"]
   },
   'editorial': {
     title: 'Editorial',
     description: 'Editorial photography and styled shoots',
-    images: ["portraits/Screenshot 2025-11-25 at 21.20.01.png", "portraits/Screenshot 2025-11-25 at 21.20.15.png", "portraits/Screenshot 2025-11-25 at 21.20.22.png"]
+    images: ["portraits/_F5A0743.jpg", "portraits/Screenshot 2025-11-25 at 21.20.01.png", "portraits/Screenshot 2025-11-25 at 21.20.15.png", "portraits/Screenshot 2025-11-25 at 21.20.22.png"]
   },
   'street': {
-    title: 'Street Photography',
+    title: 'Street / Events',
     description: 'Capturing candid moments from everyday life',
-    images: ["portraits/_F5A9263.jpg", "portraits/_F5A9268.jpg", "portraits/_F5A9274.jpg", "portraits/_F5A9279.jpg", "portraits/_F5A9283-2.jpg", "portraits/_F5A9285.jpg", "portraits/_F5A9298.jpg", "portraits/_F5A9310.jpg", "portraits/_F5A9486.jpg", "portraits/_F5A9492.jpg", "portraits/_F5A9496-2.jpg", "portraits/_F5A9497.jpg", "portraits/_F5A9500.jpg", "portraits/_F5A9503.jpg"]
+    images: ["street1.jpg", "street2.jpg", "street3.jpg", "portraits/images:background.jpg", "portraits/P1100300.jpg", "portraits/P1100345.jpg", "portraits/P1100418.jpg", "portraits/P1100561.jpg", "portraits/P1100570.jpg", "portraits/P1100594.jpg", "portraits/P1100864.jpg", "portraits/_F5A9263.jpg", "portraits/_F5A9268.jpg", "portraits/_F5A9274.jpg", "portraits/_F5A9279.jpg", "portraits/_F5A9283-2.jpg", "portraits/_F5A9285.jpg", "portraits/_F5A9298.jpg", "portraits/_F5A9310.jpg", "portraits/_F5A9486.jpg", "portraits/_F5A9492.jpg", "portraits/_F5A9493.jpg", "portraits/_F5A9496-2.jpg", "portraits/_F5A9497.jpg", "portraits/_F5A9500.jpg", "portraits/_F5A9503.jpg"]
   }
 } as const;
 
@@ -67,7 +69,7 @@ const categoryTranslations: {[key: string]: {titleEt: string, descriptionEt: str
     descriptionEt: 'Toimetuslik fotograafia ja stiliseeritud pildistamised'
   },
   'street': {
-    titleEt: 'Tänavafotograafia',
+    titleEt: 'Tänavafotograafia / Sündmused',
     descriptionEt: 'Spontaansed hetked igapäevaelust'
   }
 };
@@ -162,19 +164,36 @@ const translations = categoryTranslations[category as string] || { titleEt: cate
       }
       .image-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
         grid-auto-rows: auto;
-        gap: 0.5rem;
-        margin-top: 0;
       }
       .image-grid img {
         width: 100%;
-        height: auto;
+        height: 100%;
         border-radius: 0;
-        box-shadow: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         display: block;
         position: relative;
         z-index: 10;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        object-fit: cover;
+      }
+      .image-grid img:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+      }
+      @media (min-width: 769px) {
+        .image-grid {
+          margin-top: 2rem;
+        }
+        .page-header {
+          margin-top: 0;
+        }
+        .container {
+          padding-left: 150px;
+        }
       }
       @media (max-width: 900px) {
         .image-grid {
@@ -186,42 +205,45 @@ const translations = categoryTranslations[category as string] || { titleEt: cate
           display: none !important;
         }
         .container {
-          padding: 0.75rem;
+          padding: 1rem;
+          padding-top: 4.75rem;
           max-width: 100%;
           margin: 0;
         }
         .page-header {
-          margin-bottom: 1rem;
+          margin-bottom: 1.5rem;
         }
         .page-header h1 {
-          font-size: 1.1rem;
+          font-size: 1.3rem;
           margin-bottom: 0.25rem;
         }
         .page-header p {
-          font-size: 0.75rem;
+          font-size: 0.85rem;
         }
         .image-grid {
           grid-template-columns: repeat(2, 1fr);
-          gap: 0.4rem;
+          gap: 1rem;
+          margin-top: 1rem;
         }
       }
       @media (max-width: 480px) {
         .image-grid {
           grid-template-columns: 1fr;
-          gap: 0.3rem;
+          gap: 0.75rem;
+          margin-top: 0.75rem;
         }
         .sidebar nav a {
           font-size: 0.65rem;
         }
         .container {
-          padding: 0.5rem;
+          padding: 0.75rem;
         }
         .page-header h1 {
-          font-size: 0.9rem;
+          font-size: 1.1rem;
           margin-bottom: 0.5rem;
         }
         .page-header p {
-          font-size: 0.65rem;
+          font-size: 0.75rem;
         }
       }
     </style>

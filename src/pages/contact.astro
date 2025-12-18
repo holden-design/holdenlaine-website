@@ -37,12 +37,18 @@ import translations from '../data/translations.json';
         pointer-events: none;
       }
       
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
       @media (max-width: 768px) {
         .sidebar {
           display: none !important;
         }
         .container {
-          padding: 0.75rem !important;
+          padding: 0.75rem;
+          padding-top: 4.75rem !important;
         }
         .main-content h1 {
           font-size: 1.1rem;
@@ -69,7 +75,8 @@ import translations from '../data/translations.json';
       }
       @media (max-width: 480px) {
         .container {
-          padding: 0.5rem !important;
+          padding: 0.5rem;
+          padding-top: 4.75rem !important;
         }
         .main-content h1 {
           font-size: 0.9rem;
@@ -91,16 +98,6 @@ import translations from '../data/translations.json';
         }
         .modal-content {
           max-height: 80vh;
-        }
-      }
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
-      }
-      @media (max-width: 768px) {
-        .container {
-          padding: 0.75rem;
         }
       }
       .sidebar {
@@ -420,7 +417,7 @@ import translations from '../data/translations.json';
         background: #fff;
         padding: 2rem;
         border-radius: 8px;
-        max-width: 400px;
+        max-width: 280px;
         width: 90%;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         position: relative;
@@ -490,7 +487,6 @@ import translations from '../data/translations.json';
         letter-spacing: 0.01em;
         cursor: pointer;
         transition: opacity 0.3s ease;
-        width: 100%;
       }
       .giftcard-modal-content .checkout-btn:hover {
         opacity: 0.7;
@@ -567,7 +563,7 @@ import translations from '../data/translations.json';
         top: 1rem;
         right: 1rem;
         z-index: 10000;
-        display: flex;
+        display: none;
         gap: 0.5rem;
       }
       .lang-toggle button {
@@ -588,6 +584,11 @@ import translations from '../data/translations.json';
       }
       .lang-toggle button.active {
         opacity: 1;
+      }
+      @media (min-width: 769px) {
+        .lang-toggle {
+          display: flex !important;
+        }
       }
       @media (max-width: 900px) {
         .content-wrapper {
@@ -612,6 +613,10 @@ import translations from '../data/translations.json';
     <Logo />
     <Cursor />
     <HamburgerMenu />
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en">ENG</button>
+      <button class="lang-btn" data-lang="et">EST</button>
+    </div>
     <div class="container">
       <div class="sidebar">
         <nav>
@@ -641,9 +646,9 @@ import translations from '../data/translations.json';
                 <p class="giftcard-info">1.5-2H SESSION, 2+ PEOPLE</p>
               </div>
             </div>
-            <div class="giftcard-text">
-              <button class="giftcard-btn" id="buyGiftcardBtn" data-i18n="contact.buyGiftCard">Buy a Gift Card</button>
-            </div>
+          </div>
+          <div class="giftcard-text">
+            <button class="giftcard-btn" id="buyGiftcardBtn" data-i18n="contact.buyGiftCard">Buy a Gift Card</button>
           </div>
         </div>
         
@@ -799,15 +804,17 @@ import translations from '../data/translations.json';
         background: #222;
         color: #fff;
         border: none;
-        padding: 0.75rem 1.5rem;
-        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
         letter-spacing: 0.01em;
         cursor: pointer;
         transition: opacity 0.3s ease;
+        margin-top: 1rem;
+        max-width: 545px;
       }
       .giftcard-btn:hover {
-        opacity: 0.7;
+        opacity: 0.8;
       }
     </style>
 

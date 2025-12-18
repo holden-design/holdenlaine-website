@@ -141,7 +141,7 @@ import translations from '../data/translations.json';
         top: 1rem;
         right: 1rem;
         z-index: 10000;
-        display: flex;
+        display: none;
         gap: 0.5rem;
       }
       .language-toggle button {
@@ -163,6 +163,14 @@ import translations from '../data/translations.json';
       .language-toggle button.active {
         opacity: 1;
       }
+      @media (min-width: 769px) {
+        .photo-categories {
+          margin-top: 10rem;
+        }
+        .language-toggle {
+          display: flex !important;
+        }
+      }
       @media (max-width: 768px) {
         .sidebar {
           display: none !important;
@@ -171,6 +179,7 @@ import translations from '../data/translations.json';
           flex-direction: column;
           width: 100%;
           min-height: auto;
+          padding-top: 4.75rem !important;
         }
         .sidebar nav a {
           font-size: 0.75rem;
@@ -222,6 +231,10 @@ import translations from '../data/translations.json';
     <Logo />
     <Cursor />
     <HamburgerMenu />
+    <div class="language-toggle">
+      <button class="lang-btn active" data-lang="en">ENG</button>
+      <button class="lang-btn" data-lang="et">EST</button>
+    </div>
     <div class="container">
       <div class="sidebar">
         <nav>
@@ -295,6 +308,21 @@ import translations from '../data/translations.json';
       }
       
       applyTranslations(currentLang);
+      
+      // Language toggle functionality
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const lang = btn.getAttribute('data-lang');
+          if (lang) {
+            localStorage.setItem('language', lang);
+            applyTranslations(lang);
+            document.querySelectorAll('.lang-btn').forEach(b => {
+              b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+            });
+          }
+        });
+      });
       
       // Listen for language change events from header
       window.addEventListener('languageChange', (e) => {

@@ -43,6 +43,7 @@ import translations from '../data/translations.json';
         }
         .container {
           padding: 0.75rem !important;
+          padding-top: 4.75rem !important;
         }
         h1 {
           font-size: 1.1rem;
@@ -65,6 +66,7 @@ import translations from '../data/translations.json';
       @media (max-width: 480px) {
         .container {
           padding: 0.5rem !important;
+          padding-top: 4.75rem !important;
         }
         h1 {
           font-size: 0.9rem;
@@ -85,11 +87,6 @@ import translations from '../data/translations.json';
         max-width: 900px;
         margin: 0 auto;
         padding: 2rem;
-      }
-      @media (max-width: 768px) {
-        .container {
-          padding: 0.75rem;
-        }
       }
       .sidebar {
         position: fixed;
@@ -177,7 +174,7 @@ import translations from '../data/translations.json';
         top: 1rem;
         right: 1rem;
         z-index: 10000;
-        display: flex;
+        display: none;
         gap: 0.5rem;
       }
       .language-toggle button {
@@ -199,6 +196,16 @@ import translations from '../data/translations.json';
       .language-toggle button.active {
         opacity: 1;
       }
+      @media (min-width: 769px) {
+        .language-toggle {
+          display: flex !important;
+        }
+      }
+      @media (max-width: 768px) {
+        .language-toggle {
+          display: none !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -206,6 +213,10 @@ import translations from '../data/translations.json';
     <Logo />
     <Cursor />
     <HamburgerMenu />
+    <div class="language-toggle">
+      <button class="lang-btn active" data-lang="en">ENG</button>
+      <button class="lang-btn" data-lang="et">EST</button>
+    </div>
     <div class="container">
       <div class="sidebar">
         <nav>
@@ -228,14 +239,14 @@ import translations from '../data/translations.json';
               <div class="price-name" data-i18n="prices.individualPortrait">Individual Portrait</div>
               <div class="price-description" data-i18n="prices.individualPortraitDesc">1 hour session, 10+ edited photos</div>
             </div>
-            <div class="price-amount" data-i18n="prices.individualPortraitPrice">€150</div>
+            <div class="price-amount" data-i18n="prices.individualPortraitPrice">€100</div>
           </div>
           <div class="price-item">
             <div>
               <div class="price-name" data-i18n="prices.couplePortrait">Couple Portrait</div>
               <div class="price-description" data-i18n="prices.couplePortraitDesc">1.5 hour session, 15+ edited photos</div>
             </div>
-            <div class="price-amount" data-i18n="prices.couplePortraitPrice">€200</div>
+            <div class="price-amount" data-i18n="prices.couplePortraitPrice">€150</div>
           </div>
           <div class="price-item">
             <div>

@@ -50,6 +50,7 @@ import translations from '../data/translations.json';
       @media (max-width: 768px) {
         .container {
           padding: 0.75rem;
+          padding-top: 4.75rem !important;
         }
         .main-content h1 {
           font-size: 1.1rem;
@@ -67,6 +68,7 @@ import translations from '../data/translations.json';
       @media (max-width: 480px) {
         .container {
           padding: 0.5rem;
+          padding-top: 4.75rem !important;
         }
         .main-content h1 {
           font-size: 0.9rem;
@@ -167,7 +169,7 @@ import translations from '../data/translations.json';
         top: 1rem;
         right: 1rem;
         z-index: 10000;
-        display: flex;
+        display: none;
         gap: 0.5rem;
       }
       .language-toggle button {
@@ -189,6 +191,11 @@ import translations from '../data/translations.json';
       .language-toggle button.active {
         opacity: 1;
       }
+      @media (min-width: 769px) {
+        .language-toggle {
+          display: flex !important;
+        }
+      }
       @media (max-width: 900px) {
         .container {
           padding: 1.5rem;
@@ -200,6 +207,7 @@ import translations from '../data/translations.json';
         }
         .container {
           padding: 1rem;
+          padding-top: 4.75rem !important;
           max-width: 100%;
           margin: 0;
         }
@@ -217,6 +225,7 @@ import translations from '../data/translations.json';
         }
         .container {
           padding: 0.75rem;
+          padding-top: 4.75rem !important;
         }
         .studio-header h1 {
           font-size: 1.1rem;
@@ -230,6 +239,10 @@ import translations from '../data/translations.json';
     <Logo />
     <Cursor />
     <HamburgerMenu />
+    <div class="language-toggle">
+      <button class="lang-btn active" data-lang="en">ENG</button>
+      <button class="lang-btn" data-lang="et">EST</button>
+    </div>
     <div class="container">
       <div class="sidebar">
         <nav>
@@ -284,6 +297,21 @@ import translations from '../data/translations.json';
       }
       
       applyTranslations(currentLang);
+      
+      // Language toggle functionality
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const lang = btn.getAttribute('data-lang');
+          if (lang) {
+            localStorage.setItem('language', lang);
+            applyTranslations(lang);
+            document.querySelectorAll('.lang-btn').forEach(b => {
+              b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+            });
+          }
+        });
+      });
       
       // Listen for language change events from header
       window.addEventListener('languageChange', (e) => {
