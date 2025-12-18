@@ -46,11 +46,16 @@ import translations from '../data/translations.json';
         max-width: 1200px;
         margin: 0 auto;
         padding: 2rem;
+        position: relative;
+        z-index: 1;
       }
       @media (max-width: 768px) {
         .container {
-          padding: 0.75rem;
+          padding: 0;
           padding-top: 4.75rem !important;
+        }
+        .main-content {
+          margin-left: 0;
         }
         .main-content h1 {
           font-size: 1.1rem;
@@ -63,6 +68,10 @@ import translations from '../data/translations.json';
         .studio-header {
           margin-bottom: 0.75rem;
           margin-top: 0;
+          margin-left: -70px;
+        }
+        .studio-content {
+          margin-left: -70px;
         }
       }
       @media (max-width: 480px) {
@@ -113,6 +122,7 @@ import translations from '../data/translations.json';
       .studio-header {
         margin-bottom: 1.5rem;
         margin-top: 0;
+        margin-left: 50px;
       }
       .studio-header h1 {
         font-size: 1.75rem;
@@ -131,6 +141,8 @@ import translations from '../data/translations.json';
       .studio-content {
         margin-bottom: 3rem;
         line-height: 1.8;
+        margin-left: 50px;
+      }
       }
       .studio-content p {
         color: #555;
@@ -211,6 +223,12 @@ import translations from '../data/translations.json';
           max-width: 100%;
           margin: 0;
         }
+        .studio-header {
+          margin-left: 10px;
+        }
+        .studio-content {
+          margin-left: 10px;
+        }
         .studio-header h1 {
           font-size: 1.3rem;
         }
@@ -261,14 +279,14 @@ import translations from '../data/translations.json';
         </div>
 
         <div class="studio-content">
-          <p style="font-size: 1rem; color: #555; letter-spacing: -0.02em;">PICTURES TO BE ADDED SOON, THANK YOU</p>
+          <p style="font-size: 1rem; color: #555; letter-spacing: -0.02em;" data-i18n="studio.picturesComingSoon">PICTURES TO BE ADDED SOON, THANK YOU</p>
         </div>
       </div>
     </div>
 
     <script is:inline src="/scripts/letterfall.js"></script>
     <script is:inline define:vars={{ translations }}>
-      const currentLang = localStorage.getItem('language') || 'en';
+      const currentLang = localStorage.getItem('language') || 'et';
       
       function applyTranslations(lang) {
         document.querySelectorAll('[data-i18n]').forEach(element => {

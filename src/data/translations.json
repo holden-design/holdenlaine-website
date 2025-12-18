@@ -131,6 +131,7 @@
       "pageTitle": "Studio - Holden Laine Photography",
       "heading": "Studio",
       "subtitle": "Professional Photography Space",
+      "picturesComingSoon": "PICTURES TO BE ADDED SOON, THANK YOU",
       "about": "About the Studio",
       "aboutText": "Welcome to my professional photography studio, a creative space designed for portrait sessions, product photography, and collaborative creative projects. The studio features professional lighting equipment, diverse backdrops, and a comfortable environment for all types of photography.",
       "amenities": "Studio Amenities",
@@ -268,7 +269,7 @@
     "photos": {
       "pageTitle": "Fotod - Holden Laine Fotograafia",
       "heading": "Fotod",
-      "fashion": "mood tootefotograafia",
+      "fashion": "MOE TOOTEFOTOGRAAFIA",
       "editorial": "toimetuslik",
       "portrait": "portree",
       "street": "tänav"
@@ -277,6 +278,7 @@
       "pageTitle": "Stuudio - Holden Laine Fotograafia",
       "heading": "Stuudio",
       "subtitle": "Professionaalne Fotograafiaruum",
+      "picturesComingSoon": "Pildid lisamisel :)",
       "about": "Stuudio Kohta",
       "aboutText": "Tere tulemast minu professionaalsesse fotograafiastuudiosse, loomingulisse ruumi, mis on kujundatud portreesessiooni, tootefotograafia ja koostööliste loominguliste projektide jaoks. Stuudio on varustatud professionaalse valgustusseadmega, mitmekesiste taustade ja muude asjadega ning hubaste keskkonnaga kõigi fotograafialiikide jaoks.",
       "amenities": "Stuudio Hüved",

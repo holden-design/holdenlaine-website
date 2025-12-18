@@ -4,9 +4,71 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const stripeKey = import.meta.env.STRIPE_SECRET_KEY;
+const web3FormsKey = import.meta.env.WEB3FORMS_KEY;
+const ownerEmail = import.meta.env.OWNER_EMAIL || 'holdenlaine@gmail.com';
 
 // Disable prerendering for this API endpoint
 export const prerender = false;
+
+// Helper function to send email notification
+async function sendEmailNotification(data: any) {
+  try {
+    if (!web3FormsKey) {
+      console.warn('WEB3FORMS_KEY not configured - skipping email notification');
+      return;
+    }
+
+    const emailBody = `
+New Gift Card Purchase - ${new Date().toLocaleString()}
+
+=== BUYER DETAILS ===
+Name: ${data.buyerName}
+Email: ${data.buyerEmail}
+Phone: ${data.buyerPhone || 'Not provided'}
+
+=== GIFT CARD DETAILS ===
+Amount: €${data.giftCardAmount}
+
+=== DELIVERY INFORMATION ===
+Delivery Requested: ${data.requestDelivery ? 'Yes' : 'No'}
+${data.requestDelivery ? `
+Address: ${data.buyerAddress}
+City: ${data.buyerCity}
+Postal Code: ${data.buyerPostalCode}
+Country: ${data.buyerCountry}
+` : 'Digital delivery'}
+
+=== SESSION DETAILS ===
+Session ID: ${data.sessionId}
+Timestamp: ${data.timestamp}
+
+---
+This is an automated notification from your website.
+    `.trim();
+
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        access_key: web3FormsKey,
+        subject: `New Gift Card Purchase - €${data.giftCardAmount} from ${data.buyerName}`,
+        from_name: 'Gift Card Notification',
+        email: ownerEmail,
+        message: emailBody,
+      }),
+    });
+
+    if (response.ok) {
+      console.log('Email notification sent to:', ownerEmail);
+    } else {
+      console.error('Failed to send email notification:', response.status);
+    }
+  } catch (error) {
+    console.error('Error sending email notification:', error);
+  }
+}
 
 // Helper function to save customer data
 async function saveCustomerData(data: any) {
@@ -132,7 +194,7 @@ export const POST: APIRoute = async ({ request }) => {
     console.log('Stripe session created:', session.id);
 
     // Save customer data
-    await saveCustomerData({
+    const customerData = {
       giftCardAmount,
       buyerName,
       buyerEmail,
@@ -143,9 +205,17 @@ export const POST: APIRoute = async ({ request }) => {
       buyerPostalCode,
       buyerCountry,
       sessionId: session.id
+    };
+
+    await saveCustomerData(customerData);
+
+    // Send email notification
+    await sendEmailNotification({
+      ...customerData,
+      timestamp: new Date().toISOString()
     });
 
-    console.log('Customer data saved successfully');
+    console.log('Customer data saved and email notification sent');
     console.log('Returning checkout URL:', !!session.url);
 
     // Return both sessionId and the Stripe-generated checkout URL

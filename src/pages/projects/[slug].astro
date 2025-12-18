@@ -19,12 +19,9 @@ export async function getStaticPaths() {
   return allSubs;
 }
 
-// Get slug from params and find the matching project
 const { slug } = Astro.params;
 let sub = Astro.props.sub;
-let mainProjectTitle = Astro.props.mainProjectTitle;
 
-// If props are not available (dev mode), look up the project by slug
 if (!sub) {
   const projectsWithSubs = projects.filter((p: any) => p.projects && p.projects.length > 0);
   for (const mainProject of projectsWithSubs) {
@@ -33,7 +30,6 @@ if (!sub) {
     );
     if (found) {
       sub = found;
-      mainProjectTitle = mainProject.title;
       break;
     }
   }
@@ -78,26 +74,23 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
     <SEO 
       title={sub?.title || 'Project'}
       titleEt={sub?.title || 'Project'}
-      description={translations.en}
-      descriptionEt={translations.et}
-      image={ogImage ? `/images/${ogImage}` : '/images/og-image.jpg'}
+      description={sub?.description || ''}
+      descriptionEt={sub?.description || ''}
+      image={sub?.images?.[0] || '/images/og-image.jpg'}
       type="article"
     />
-    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
     <style is:global>
       body {
         margin: 0;
         font-family: "Helvetica Neue", Helvetica;
         background: #fff;
         color: #222;
-        display: block;
         -webkit-user-select: none;
         user-select: none;
       }
       img, video {
         -webkit-user-drag: none;
         user-select: none;
-        -webkit-user-select: none;
       }
       #letterfall-canvas {
         position: fixed;
@@ -108,230 +101,109 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
         z-index: 0;
         pointer-events: none;
       }
+    </style>
+    <style>
       .container {
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
-        padding: 2rem 2rem 2rem 2rem;
+        padding: 2rem;
+        padding-left: 160px;
+        position: relative;
+        z-index: 1;
+      }
+      .header {
+        margin-bottom: 2rem;
+      }
+      .back-link {
+        color: #222;
+        text-decoration: none;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
+        display: inline-block;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+      }
+      .back-link:hover {
+        text-decoration: underline;
+      }
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+      .description {
+        color: #666;
+        font-size: 0.85rem;
+        margin-top: 0.3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+      }
+      .gallery-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        align-items: start;
+      }
+      .left-column {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 500px;
+      }
+      .main-image {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+        max-width: 600px;
+        cursor: pointer;
+      }
+      .left-column .main-image:first-of-type {
+        max-width: 100%;
+        margin-bottom: 1rem;
+      }
+      .secondary-images {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .secondary-images img,
+      .secondary-images video {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+        max-width: 500px;
       }
       .sidebar {
         position: fixed;
         left: 2rem;
         top: 2rem;
-        width: auto;
-        z-index: 1000;
-        padding: 0;
-        margin-bottom: 0;
+        z-index: 100;
       }
       .sidebar nav {
         display: flex;
         flex-direction: column;
-        gap: 0.3rem;
+        gap: 0.4rem;
       }
       .sidebar nav a {
-        display: block;
         color: #222;
         text-decoration: none;
+        font-size: 0.75rem;
         font-weight: 500;
         text-transform: uppercase;
-        font-family: inherit;
-        letter-spacing: 0.01em;
-        font-size: 0.85rem;
-      }
-      .sidebar nav a:hover { 
-        text-decoration: underline; 
-      }
-      .main-content {
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 0;
-      }
-      .breadcrumb {
-        margin-bottom: 1.5rem;
-        font-size: 0.85rem;
-        text-transform: uppercase;
         letter-spacing: 0.01em;
       }
-      .breadcrumb a {
-        color: #222;
-        text-decoration: none;
-      }
-      .breadcrumb a:hover {
+      .sidebar nav a:hover {
         text-decoration: underline;
-      }
-      .project-header {
-        margin-bottom: 1.5rem;
-        margin-top: 0;
-      }
-      .project-header h1 {
-        font-size: 1.75rem;
-        margin: 0 0 0.3rem 0;
-        margin-top: 0;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.02em;
-      }
-      .project-header p {
-        color: #555;
-        font-size: 0.9rem;
-        margin: 0;
-        text-transform: uppercase;
-        letter-spacing: 0.01em;
-      }
-      .back-arrow {
-        display: inline-block;
-        color: #222;
-        text-decoration: none;
-        font-size: 1.5rem;
-        margin-right: 0.5rem;
-        margin-bottom: 1rem;
-        transition: opacity 0.2s ease;
-        cursor: pointer;
-      }
-      .back-arrow:hover {
-        opacity: 0.5;
-      }
-      .project-content {
-        display: grid;
-        grid-template-columns: 1fr 450px;
-        gap: 2rem;
-        align-items: start;
-      }
-      /* When videos should appear first (with both videos and images) */
-      .project-content.videos-first {
-        grid-template-columns: 450px 1fr;
-      }
-      .project-content.videos-first .project-videos {
-        grid-column: 1;
-        grid-row: 1;
-      }
-      .project-content.videos-first .project-media {
-        grid-column: 2;
-        grid-row: 1;
-      }
-      /* When there are only videos and no images, display video on left with text on right */
-      .project-content.video-only {
-        grid-template-columns: 450px 1fr;
-      }
-      /* Portrait video - keep left/right layout */
-      .project-content.video-only[data-portrait="true"] {
-        grid-template-columns: 360px 1fr;
-      }
-      .project-content.video-only .project-media {
-        grid-column: 1;
-        grid-row: 1;
-      }
-      .project-content.video-only .project-text {
-        grid-column: 2;
-        grid-row: 1;
-      }
-      .project-content.video-only[data-portrait="true"] .project-text {
-        grid-column: 2;
-        grid-row: 1;
-      }
-      .project-text {
-        max-width: 800px;
-        margin: 0;
-      }
-      .project-media {
-        width: 100%;
-        margin: 0;
-      }
-      /* Regular landscape videos */
-      .video-container {
-        width: 100%;
-        max-width: 450px;
-        margin: 0 auto;
-      }
-      /* Portrait videos - phone format (Instagram-like) */
-      .video-container[data-portrait="true"] {
-        width: 360px;
-        max-width: 100%;
-        margin: 0;
-      }
-      .video-container video {
-        width: 100%;
-        height: auto;
-        display: block;
-        position: relative;
-        z-index: 10;
-      }
-      /* Portrait video - native element styling */
-      video[data-portrait="true"] {
-        width: 100%;
-        max-width: 360px !important;
-        height: auto !important;
-      }
-      /* Regular video.js styling */
-      .video-js {
-        width: 100% !important;
-        max-width: 450px !important;
-        height: auto;
-      }
-      /* Portrait video.js styling - override width constraint */
-      .video-js[data-portrait="true"] {
-        width: 100% !important;
-        max-width: 360px !important;
-        height: auto !important;
-      }
-      .video-js .vjs-video-container {
-        position: relative;
-      }
-      /* Default 16:9 aspect ratio */
-      .video-js .vjs-video-container {
-        padding-top: 56.25%;
-      }
-      /* Portrait video (9:16 aspect ratio) - override padding */
-      .video-js[data-portrait="true"] .vjs-video-container {
-        padding-top: 177.78% !important;
-      }
-      .video-js .vjs-tech {
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-      .video-js .vjs-big-play-button {
-        display: block;
-      }
-      .project-description {
-        color: #777;
-        font-size: 0.9rem;
-        line-height: 1.6;
-        margin: 0;
-        text-transform: uppercase;
-        letter-spacing: 0.01em;
-      }
-      .image-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-auto-rows: auto;
-        gap: 0.5rem;
-        margin-top: 0;
-      }
-      .image-grid img,
-      .image-grid video {
-        width: 100%;
-        height: auto;
-        border-radius: 0;
-        box-shadow: none;
-        display: block;
-        position: relative;
-        z-index: 10;
-      }
-      .project-caption {
-        color: #999;
-        font-size: 0.75rem;
-        margin-top: 2rem;
-        margin-left: 0;
-        text-transform: uppercase;
-        letter-spacing: 0.01em;
-        white-space: pre-line;
-        line-height: 1.4;
       }
       .lang-toggle {
         position: fixed;
         top: 1rem;
         right: 1rem;
-        z-index: 10000;
+        z-index: 100;
         display: flex;
         gap: 0.5rem;
       }
@@ -339,14 +211,12 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
         background: transparent;
         border: none;
         padding: 0;
-        font-size: 0.75rem;
-        transition: opacity 0.2s ease;
+        font-size: 0.7rem;
         opacity: 0.3;
         cursor: pointer;
-        font-weight: 500;
-        color: #333;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        transition: opacity 0.2s ease;
       }
       .lang-toggle button:hover {
         opacity: 0.6;
@@ -354,297 +224,161 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
       .lang-toggle button.active {
         opacity: 1;
       }
-      /* Video.js custom styling - hide context menu completely */
-      .vjs-contextmenu-ui {
-        display: none !important;
-      }
-      .video-js .vjs-control-bar {
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-      @media (max-width: 900px) {
-        .project-content {
+      @media (max-width: 1200px) {
+        .gallery-wrapper {
           grid-template-columns: 1fr;
-          gap: 2rem;
-        }
-        .project-content.video-only {
-          grid-template-columns: 1fr;
-        }
-        .project-content.video-only .project-media {
-          grid-column: 1;
-        }
-        .project-content.video-only .project-text {
-          grid-column: 1;
-        }
-        .project-content.videos-first {
-          grid-template-columns: 1fr;
-        }
-        .project-content.videos-first .project-videos {
-          grid-column: 1;
-        }
-        .project-content.videos-first .project-media {
-          grid-column: 1;
         }
       }
       @media (max-width: 768px) {
+        .container {
+          padding: 1rem;
+          padding-left: 1rem;
+        }
         .sidebar {
-          display: none !important;
+          display: none;
         }
-        .container {
-          padding: 0.75rem;
-        }
-        .project-header {
-          margin-bottom: 0.75rem;
-        }
-        .project-header h1 {
-          font-size: 1.25rem;
-          margin-bottom: 0.25rem;
-        }
-        .project-header p {
-          font-size: 0.75rem;
-        }
-        .project-content {
-          grid-template-columns: 1fr;
-          gap: 1rem;
-        }
-        .project-content.video-only {
+        .gallery-wrapper {
           grid-template-columns: 1fr;
         }
-        .project-description {
-          font-size: 0.8rem;
-          margin: 0;
-        }
-        .project-caption {
-          font-size: 0.65rem;
-          margin-top: 1rem;
-        }
-        .video-container[data-portrait="true"] {
-          max-width: min(100vw - 1.5rem, 360px);
-        }
-      }
-      @media (max-width: 480px) {
-        .container {
-          padding: 0.5rem;
-        }
-        .project-header h1 {
-          font-size: 1rem;
-          margin-bottom: 0.2rem;
-        }
-        .project-header p {
-          font-size: 0.65rem;
-        }
-        .back-arrow {
-          font-size: 1.25rem;
-          margin-right: 0.3rem;
-          margin-bottom: 0.75rem;
-        }
-        .project-content {
-          gap: 0.75rem;
-        }
-        .project-description {
-          font-size: 0.7rem;
-        }
-        .project-caption {
-          font-size: 0.6rem;
-          margin-top: 0.75rem;
-          line-height: 1.3;
-        }
-        .image-grid {
-          gap: 0.3rem;
-        }
-      }
-      @media (min-width: 600px) {
-        .container {
-          padding-left: 140px;
+        h1 {
+          font-size: 1.5rem;
         }
       }
     </style>
   </head>
   <body>
     <canvas id="letterfall-canvas"></canvas>
-    <Logo />
     <Cursor />
     <HamburgerMenu />
-    <div class="container">
-      <div class="sidebar">
-        <nav>
-          <a href="/" data-i18n="nav.home">AVALEHT</a>
-          <a href="/studio" data-i18n="nav.studio">STUUDIO</a>
-          <a href="/photos" data-i18n="nav.portraits">FOTOD</a>
-          <a href="/projects" data-i18n="nav.projects">PROJEKTID</a>
-          <a href="/prices" data-i18n="nav.prices">HINNAKIRI</a>
-          <a href="/shop" data-i18n="nav.tshirts">E-POOD</a>
-          <a href="/gift-cards">GIFT CARDS</a>
-          <a href="/contact" data-i18n="nav.contact">KONTAKT</a>
-        </nav>
-      </div>
-      <main class="main-content">
-        <div class="project-header">
-          <a href="/projects" class="back-arrow" title="Back to projects">←</a>
-          <h1>{sub?.title}</h1>
-          {sub?.description && <p>{sub?.description}</p>}
-        </div>
-
-        <div class="project-content" data-portrait={sub.media && sub.media[0]?.portrait === true ? "true" : "false"} class:list={{ 'video-only': sub.media && sub.media.some((item: any) => item.type === 'video') && (!sub.images || sub.images.length === 0) && (!sub.media.some((item: any) => item.type !== 'video')), 'videos-first': sub.media && sub.media.some((item: any) => item.type === 'video') && sub.media.some((item: any) => item.type !== 'video') }}>
-          <div class="project-media">
-            {sub?.media && sub.media.length > 0 && (
-              <div class="video-container" data-portrait={sub.media[0]?.portrait === true ? "true" : "false"}>
-                {sub.media.map((item: any) => (
-                  item.type === 'video' ? (
-                    <video 
-                      playsinline
-                      preload="metadata"
-                      data-portrait={item.portrait === true ? "true" : "false"}
-                      poster={item.poster ? `/images/${item.poster}` : undefined}
-                    >
-                      <source src={`/images/${item.src}`} type="video/mp4" />
-                    </video>
-                  ) : null
-                ))}
-              </div>
-            )}
-            
-            <div class="project-text">
-              {sub?.caption && <p class="project-caption">{sub?.caption}</p>}
-            </div>
-            
-            {sub?.media && sub.media.length > 0 && (
-              <div class="image-grid">
-                {sub.media.map((item: any) => (
-                  item.type !== 'video' ? (
-                    <img 
-                      src={`/images/${item.src}`} 
-                      alt={sub?.title} 
-                      loading="lazy" 
-                    />
-                  ) : null
-                ))}
-              </div>
-            )}
-            
-            {sub?.images && sub.images.length > 0 && (
-              <div class="image-grid">
-                {sub.images.map((img: any) => (
-                  <img 
-                    src={`/images/${img}`} 
-                    alt={sub?.title} 
-                    loading="lazy" 
-                  />
-                ))}
-              </div>
-            )}
-          </div>
-          
-          <div class="project-videos">
-          </div>
-        </div>
-      </main>
+    <MobileLogo />
+    
+    <div class="sidebar">
+      <nav>
+        <a href="/">HOME</a>
+        <a href="/photos">PHOTOS</a>
+        <a href="/studio">STUDIO</a>
+        <a href="/projects">PROJECTS</a>
+        <a href="/prices">PRICES</a>
+        <a href="/shop">SHOP</a>
+        <a href="/contact">CONTACT</a>
+      </nav>
     </div>
 
-    <script src="https://vjs.zencdn.net/7.20.3/video.js" is:inline></script>
-    <script is:inline>
-      // Simple click-to-play/pause for all videos
-      document.querySelectorAll('video').forEach(video => {
-        video.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (video.paused) {
-            video.play().catch(err => console.log('Play error:', err));
-          } else {
-            video.pause();
-          }
-        });
-        
-        // Show cursor pointer on hover
-        video.style.cursor = 'pointer';
-      });
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="et">ET</button>
+    </div>
+
+    <div class="container">
+      <a href="/projects" class="back-link">← BACK</a>
       
-      // Prevent right-click context menu on videos and images
+      <div class="header">
+        <h1>{sub?.title}</h1>
+        {sub?.description && <p class="description">{sub.description}</p>}
+      </div>
+
+      <div class="gallery-wrapper">
+        <div class="left-column">
+          {sub?.images && sub.images.length > 0 && (
+            <img src={`/images/${sub.images[0]}`} alt={sub.title} class="main-image" />
+          )}
+          {sub?.media && sub.media.length > 0 && sub.media[0]?.type === 'video' && (
+            <video controls preload="metadata" poster={sub.media[0].poster ? `/images/${sub.media[0].poster}` : undefined} class="main-image">
+              <source src={`/images/${sub.media[0].src}`} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
+          {sub?.media && sub.media.length > 0 && sub.media[0]?.type === 'image' && (
+            <img src={`/images/${sub.media[0].src}`} alt={sub.title} class="main-image" />
+          )}
+          
+          {sub?.images && sub.images.length > 2 && (
+            <div class="secondary-images">
+              {sub.images.slice(1, Math.ceil(sub.images.length / 2) + 1).map((img: string) => (
+                <img src={`/images/${img}`} alt={sub.title} loading="lazy" />
+              ))}
+            </div>
+          )}
+          {sub?.media && sub.media.filter((item: any) => item.type === 'image').length > 0 && (
+            <div class="secondary-images">
+              {sub.media.filter((item: any) => item.type === 'image').slice(0, Math.ceil(sub.media.filter((item: any) => item.type === 'image').length / 2)).map((item: any) => (
+                <img src={`/images/${item.src}`} alt={sub.title} loading="lazy" />
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div>
+          {sub?.images && sub.images.length > Math.ceil(sub.images.length / 2) + 1 && (
+            <div class="secondary-images">
+              {sub.images.slice(Math.ceil(sub.images.length / 2) + 1).map((img: string) => (
+                <img src={`/images/${img}`} alt={sub.title} loading="lazy" />
+              ))}
+            </div>
+          )}
+          {sub?.media && sub.media.filter((item: any) => item.type === 'image').length > 0 && (
+            <div class="secondary-images">
+              {sub.media.filter((item: any) => item.type === 'image').slice(Math.ceil(sub.media.filter((item: any) => item.type === 'image').length / 2)).map((item: any) => (
+                <img src={`/images/${item.src}`} alt={sub.title} loading="lazy" />
+              ))}
+            </div>
+          )}
+          {sub?.media && sub.media.filter((item: any) => item.type === 'video').length > 1 && (
+            <div class="secondary-images">
+              {sub.media.filter((item: any) => item.type === 'video').slice(1).map((item: any) => (
+                <video controls preload="metadata" poster={item.poster ? `/images/${item.poster}` : undefined}>
+                  <source src={`/images/${item.src}`} type="video/mp4" />
+                </video>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <script is:inline src="/scripts/letterfall.js"></script>
+    <script is:inline>
+      // Video click to play/pause
+      setTimeout(() => {
+        document.querySelectorAll('video').forEach(video => {
+          video.onclick = function(e) {
+            e.stopPropagation();
+            this.paused ? this.play() : this.pause();
+          };
+        });
+      }, 50);
+
+      // Language toggle
+      const savedLang = localStorage.getItem('language') || 'en';
+      document.documentElement.lang = savedLang;
+      document.querySelectorAll('.lang-btn').forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-lang') === savedLang);
+      });
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const lang = btn.getAttribute('data-lang');
+          localStorage.setItem('language', lang);
+          document.documentElement.lang = lang;
+          document.querySelectorAll('.lang-btn').forEach(b => {
+            b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+          });
+        });
+      });
+
+      // Prevent right-click and dragging on media
       document.addEventListener('contextmenu', (e) => {
         if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG') {
           e.preventDefault();
         }
       });
-      
-      // Prevent dragging images and videos
+
       document.addEventListener('dragstart', (e) => {
         if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG') {
           e.preventDefault();
         }
       });
-      
-      // Keyboard shortcuts
-      document.addEventListener('keydown', (e) => {
-        // Block Cmd+S / Ctrl+S
-        if ((e.metaKey || e.ctrlKey) && e.key === 's') {
-          e.preventDefault();
-        }
-        // Allow Backspace to go back
-        if (e.key === 'Backspace') {
-          window.history.back();
-        }
-      });
-      
-      // Prevent copying images and videos
-      document.addEventListener('copy', (e) => {
-        if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG') {
-          e.preventDefault();
-        }
-      });
-      
-      // Language toggle functionality
-      const translations = {
-        'en': {
-          'nav.home': 'HOME',
-          'nav.portraits': 'PHOTOS',
-          'nav.studio': 'STUDIO',
-          'nav.projects': 'PROJECTS',
-          'nav.prices': 'PRICES',
-          'nav.tshirts': 'SHOP',
-          'nav.contact': 'CONTACT'
-        },
-        'et': {
-          'nav.home': 'AVALEHT',
-          'nav.portraits': 'FOTOD',
-          'nav.studio': 'STUUDIO',
-          'nav.projects': 'PROJEKTID',
-          'nav.prices': 'HINNAKIRI',
-          'nav.tshirts': 'E-POOD',
-          'nav.contact': 'KONTAKT'
-        }
-      };
-
-      function updateTranslations(lang) {
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-          const key = el.getAttribute('data-i18n');
-          if (translations[lang] && translations[lang][key]) {
-            el.textContent = translations[lang][key];
-          }
-        });
-      }
-
-      // Restore language preference on page load
-      const savedLang = localStorage.getItem('language') || 'en';
-      document.documentElement.lang = savedLang;
-      updateTranslations(savedLang);
-      document.querySelectorAll('.lang-btn').forEach(b => {
-        b.classList.toggle('active', b.getAttribute('data-lang') === savedLang);
-      });
-
-      // Language toggle button click handler
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const lang = btn.getAttribute('data-lang');
-          if (lang) {
-            localStorage.setItem('language', lang);
-            document.documentElement.lang = lang;
-            updateTranslations(lang);
-            document.querySelectorAll('.lang-btn').forEach(b => {
-              b.classList.toggle('active', b.getAttribute('data-lang') === lang);
-            });
-          }
-        });
-      });
     </script>
-    <script is:inline src="/scripts/letterfall.js"></script>
   </body>
 </html>

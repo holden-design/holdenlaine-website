@@ -42,6 +42,8 @@ import translations from '../data/translations.json';
         max-width: 900px;
         margin: 0 auto;
         padding: 2rem;
+        position: relative;
+        z-index: 1;
       }
       @media (max-width: 768px) {
         .container {
@@ -328,7 +330,7 @@ import translations from '../data/translations.json';
     <script is:inline src="/scripts/letterfall.js"></script>
     <script define:vars={{ translations }}>
       const t = translations;
-      let currentLang = localStorage.getItem('language') || 'en';
+      let currentLang = localStorage.getItem('language') || 'et';
 
       // Language functionality
       function updateLanguage(lang) {

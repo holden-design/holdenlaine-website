@@ -45,10 +45,7 @@
         "description": "User Generated Content projects.",
         "caption": "User generated content and collaborations",
         "media": [
-          {"type": "video", "src": "Himatcha/matcha_UGC.mp4", "portrait": true},
-          {"type": "image", "src": "Himatcha/_F5A0423.jpg"},
-          {"type": "image", "src": "Himatcha/col1.jpg"},
-          {"type": "image", "src": "Himatcha/himatcha.jpg"}
+          {"type": "video", "src": "Himatcha/matcha_UGC.mp4", "portrait": true}
         ]
       },
       {
@@ -60,34 +57,35 @@
             {"type": "image", "src": "Peugeot/_F5A3447.jpg"},
             {"type": "image", "src": "Peugeot/_F5A3477-2.jpg"},
             {"type": "image", "src": "Peugeot/_F5A3510.jpg"},
-            {"type": "image", "src": "Peugeot/_F5A3518.jpg"}
+            {"type": "image", "src": "Peugeot/_F5A3518.jpg"},
+            {"type": "image", "src": "Peugeot/Peugeot1-compressed.jpg"},
+            {"type": "image", "src": "Peugeot/Peugeot2-compressed.jpg"},
+            {"type": "image", "src": "Peugeot/Peugeot 3-compressed.jpg"},
+            {"type": "image", "src": "Peugeot/Peugeot4-compressed.jpg"},
+            {"type": "image", "src": "Peugeot/Peugeot5-compressed.jpg"},
+            {"type": "image", "src": "Peugeot/Peugeot6-compressed.jpg"},
+            {"type": "image", "src": "Peugeot/Peugeot7-compressed.jpg"},
+            {"type": "image", "src": "Peugeot/Peugeot8-compressed.jpg"},
+            {"type": "image", "src": "Peugeot/Peugeot9-compressed.jpg"},
+            {"type": "image", "src": "Peugeot/Peugeot10-compressed.jpg"},
+            {"type": "image", "src": "Peugeot/Peugeot11-compressed.jpg"},
+            {"type": "image", "src": "Peugeot/Peugeot12-compressed.jpg"}
           ]
       },
       {
         "title": "Lexus",
         "description": "Lexus UX campaign.",
         "caption": "",
-        "media": [
-          {"type": "image", "src": "lexus/IMG_3871-compressed.jpg"},
-          {"type": "image", "src": "lexus/IMG_3934-compressed.jpg"},
-          {"type": "image", "src": "lexus/IMG_3936-compressed.jpg"},
-          {"type": "image", "src": "lexus/IMG_3984-compressed.jpg"},
-          {"type": "image", "src": "lexus/IMG_4011-compressed.jpg"},
-          {"type": "image", "src": "lexus/IMG_4027-compressed.jpg"},
-          {"type": "image", "src": "lexus/IMG_4038-4-compressed.jpg"},
-          {"type": "image", "src": "lexus/IMG_4052-compressed.jpg"},
-          {"type": "image", "src": "lexus/IMG_4191-compressed.jpg"},
-          {"type": "image", "src": "lexus/IMG_4205-compressed.jpg"},
-          {"type": "image", "src": "lexus/IMG_4234-compressed.jpg"},
-          {"type": "image", "src": "lexus/IMG_4263-compressed.jpg"},
-          {"type": "image", "src": "lexus/IMG_4312-compressed.jpg"}
-        ]
+        "images": ["lexus/IMG_3871-compressed.jpg", "lexus/IMG_3936-compressed.jpg", "lexus/IMG_3984-compressed.jpg", "lexus/IMG_4011-compressed.jpg", "lexus/IMG_4027-compressed.jpg", "lexus/IMG_4038-4-compressed.jpg", "lexus/IMG_4052-compressed.jpg", "lexus/IMG_4191-compressed.jpg", "lexus/IMG_4205-compressed.jpg", "lexus/IMG_4234-compressed.jpg", "lexus/IMG_4263-compressed.jpg", "lexus/IMG_4312-compressed.jpg"]
       },
       {
         "title": "Roseni maja",
         "description": "Architectural photography of Roseni maja.",
         "caption": "Architectural photography project for Roseni maja in Tallinn.",
-        "images": ["roseni/Roseni_1_1_buroo.mov", "roseni/Roseni_2_1_ari.mov"]
+        "media": [
+          {"type": "video", "src": "roseni/Roseni_1_1_buroo.mov", "poster": ""},
+          {"type": "video", "src": "roseni/Roseni_2_1_ari.mov", "poster": ""}
+        ]
       },
       {
         "title": "Adidas",

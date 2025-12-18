@@ -87,6 +87,8 @@ import translations from '../data/translations.json';
         max-width: 900px;
         margin: 0 auto;
         padding: 2rem;
+        position: relative;
+        z-index: 1;
       }
       .sidebar {
         position: fixed;
@@ -461,7 +463,7 @@ import translations from '../data/translations.json';
     </div>
 
     <script is:inline define:vars={{ translations }}>
-      const currentLang = localStorage.getItem('language') || 'en';
+      const currentLang = localStorage.getItem('language') || 'et';
       
       function applyTranslations(lang) {
         document.querySelectorAll('[data-i18n]').forEach(element => {

@@ -24,7 +24,7 @@ const PHOTO_CATEGORIES = {
   'portrait': {
     title: 'Portrait Series',
     description: 'A series of portraits exploring light and emotion',
-    images: ["Chew/_F5A0975.jpg", "portraits/1x1spotify.jpg", "portraits/IMG_4487.jpg", "portraits/1X1X2 copy.jpg", "portraits/edit-10.jpg", "portraits/edit-11.jpg", "portraits/edit-3.jpg", "portraits/edit-4.jpg", "portraits/edit-5.jpg", "portraits/edit-6.jpg", "portraits/edit-7.jpg", "portraits/edit-8.jpg", "portraits/edit-9.jpg", "portraits/edit.jpg", "portraits/fucku.jpg", "portraits/fucku2.jpg", "portraits/holden2.jpg", "portraits/holden3.jpg", "portraits/july1.jpg", "portraits/july2.jpg", "portraits/karin1.jpg", "portraits/klara1.jpg", "portraits/klara3.jpg", "portraits/klara4.jpg", "portraits/klara5.jpg", "portraits/klara6.jpg", "portraits/mad1.jpg", "portraits/mad2.jpg", "portraits/marielle1.jpg", "portraits/more1.jpg", "portraits/more2.jpg", "portraits/sonya1.jpg", "portraits/sonya10.jpg", "portraits/sonya11.jpg", "portraits/sonya12.jpg", "portraits/sonya14.jpg", "portraits/sonya2.jpg", "portraits/sonya3.jpg", "portraits/sonya5.jpg", "portraits/sonya6.jpg", "portraits/sonya7.jpg", "portraits/sonya8.jpg", "portraits/victoria1.jpg", "portraits/_MG_0987-2.jpg", "portraits/_MG_0995.jpg", "portraits/_MG_9779-2.jpg", "portraits/edit-1.jpg", "portraits/edit-2.jpg"]
+    images: ["portraits/_1533493.jpg", "Chew/_F5A0975.jpg", "portraits/1x1spotify.jpg", "portraits/IMG_4487.jpg", "portraits/1X1X2 copy.jpg", "portraits/sonya1.jpg", "portraits/edit-10.jpg", "portraits/edit-11.jpg", "portraits/edit-3.jpg", "portraits/sonya6.jpg", "portraits/edit-4.jpg", "portraits/edit-5.jpg", "portraits/_MG_9779-2.jpg", "portraits/edit-6.jpg", "portraits/edit-7.jpg", "portraits/edit-8.jpg", "portraits/edit-9.jpg", "portraits/edit.jpg", "portraits/fucku.jpg", "portraits/fucku2.jpg", "portraits/holden2.jpg", "portraits/holden3.jpg", "portraits/july1.jpg", "portraits/july2.jpg", "portraits/karin1.jpg", "portraits/klara1.jpg", "portraits/klara3.jpg", "portraits/klara4.jpg", "portraits/klara5.jpg", "portraits/klara6.jpg", "portraits/mad1.jpg", "portraits/mad2.jpg", "portraits/marielle1.jpg", "portraits/more1.jpg", "portraits/more2.jpg", "portraits/sonya10.jpg", "portraits/sonya11.jpg", "portraits/sonya12.jpg", "portraits/sonya14.jpg", "portraits/sonya2.jpg", "portraits/sonya3.jpg", "portraits/sonya5.jpg", "portraits/sonya7.jpg", "portraits/sonya8.jpg", "portraits/victoria1.jpg", "portraits/_MG_0987-2.jpg", "portraits/_MG_0995.jpg", "portraits/edit-1.jpg", "portraits/edit-2.jpg"]
   },
   'editorial': {
     title: 'Editorial',
@@ -34,7 +34,7 @@ const PHOTO_CATEGORIES = {
   'street': {
     title: 'Street / Events',
     description: 'Capturing candid moments from everyday life',
-    images: ["Street/_F5A9263.jpg", "Street/_F5A9268.jpg", "Street/_F5A9274.jpg", "Street/_F5A9279.jpg", "Street/_F5A9283-2.jpg", "Street/_F5A9285.jpg", "Street/_F5A9298.jpg", "Street/_F5A9310.jpg", "Street/_F5A9486.jpg", "Street/_F5A9493.jpg", "Street/_F5A9496-2.jpg", "Street/_F5A9497.jpg", "Street/_F5A9500.jpg", "Street/_F5A9503.jpg", "Street/adventure.jpg", "Street/adventure1.jpg", "Street/P1100300.jpg", "Street/P1100345.jpg", "Street/P1100418.jpg", "Street/P1100561.jpg", "Street/P1100570.jpg", "Street/P1100594.jpg", "Street/P1100864.jpg", "Street/images:background.jpg"]
+    images: ["Street/_F5A7588.jpg", "Street/_F5A7623-2 2.jpg", "Street/_F5A7631.jpg", "Street/_F5A7654.jpg", "Street/_F5A7661-2.jpg", "Street/_F5A7662.jpg", "Street/_F5A7710-2.jpg", "Street/_F5A7714.jpg", "Street/_F5A7725-2.jpg", "Street/_F5A7791-2.jpg", "Street/_F5A7791.jpg", "Street/_F5A7795.jpg", "Street/_F5A7814.jpg", "Street/_F5A7837.jpg", "Street/_F5A7846.jpg", "Street/_F5A7852.jpg", "Street/_F5A7855.jpg", "Street/_F5A7870.jpg", "Street/_F5A7873.jpg", "Street/_F5A7911.jpg", "Street/_F5A7940.jpg", "Street/_F5A9263.jpg", "Street/_F5A9268.jpg", "Street/_F5A9274.jpg", "Street/_F5A9279.jpg", "Street/_F5A9283-2.jpg", "Street/_F5A9285.jpg", "Street/_F5A9298.jpg", "Street/_F5A9310.jpg", "Street/_F5A9374.jpg", "Street/_F5A9486.jpg", "Street/_F5A9492.jpg", "Street/_F5A9493.jpg", "Street/_F5A9496-2.jpg", "Street/_F5A9497.jpg", "Street/_F5A9500.jpg", "Street/_F5A9503.jpg", "Street/adventure.jpg", "Street/adventure1.jpg", "Street/P1100300.jpg", "Street/P1100345.jpg", "Street/P1100418.jpg", "Street/P1100561.jpg", "Street/P1100570.jpg", "Street/P1100594.jpg", "Street/P1100864.jpg", "Street/images:background.jpg"]
   }
 } as const;
 
@@ -117,6 +117,8 @@ const translations = categoryTranslations[category as string] || { titleEt: cate
         max-width: 1200px;
         margin: 0 auto;
         padding: 2rem 2rem 2rem 2rem;
+        position: relative;
+        z-index: 1;
       }
       .sidebar {
         position: fixed;

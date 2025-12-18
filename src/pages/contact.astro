@@ -41,6 +41,8 @@ import translations from '../data/translations.json';
         max-width: 1200px;
         margin: 0 auto;
         padding: 2rem;
+        position: relative;
+        z-index: 1;
       }
       @media (max-width: 768px) {
         .sidebar {
@@ -821,7 +823,7 @@ import translations from '../data/translations.json';
     <script define:vars={{ translations }}>
       console.log('Translations loaded:', translations);
       window.t = translations || {};
-      window.currentLang = localStorage.getItem('language') || 'en';
+      window.currentLang = localStorage.getItem('language') || 'et';
       console.log('Current language:', window.currentLang);
       const t = window.t;
       let currentLang = window.currentLang;

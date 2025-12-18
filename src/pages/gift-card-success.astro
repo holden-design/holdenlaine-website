@@ -38,6 +38,8 @@ import Logo from '../components/Logo.astro';
         max-width: 900px;
         margin: 0 auto;
         padding: 2rem;
+        position: relative;
+        z-index: 1;
       }
       @media (max-width: 768px) {
         .container {
@@ -160,7 +162,7 @@ import Logo from '../components/Logo.astro';
         }
       };
 
-      let currentLang = localStorage.getItem('language') || 'en';
+      let currentLang = localStorage.getItem('language') || 'et';
 
       function updateLanguage(lang) {
         currentLang = lang;

@@ -251,12 +251,7 @@ import translations from '../data/translations.json';
         <h1 data-i18n="photos.heading">Photos</h1>
         
         <div class="photo-categories">
-          <div class="category-card">
-            <a href="/photos/editorial">
-              <img src="/images/portraits/klara1.jpg" alt="Editorial Photography" loading="lazy" />
-              <div class="category-label" data-i18n="photos.editorial">editorial</div>
-            </a>
-          </div>
+          <!-- Editorial photo category hidden for now -->
           
           <div class="category-card">
             <a href="/photos/portrait">
@@ -283,7 +278,7 @@ import translations from '../data/translations.json';
     </div>
 
     <script is:inline define:vars={{ translations }}>
-      const currentLang = localStorage.getItem('language') || 'en';
+      const currentLang = localStorage.getItem('language') || 'et';
       
       function applyTranslations(lang) {
         document.querySelectorAll('[data-i18n]').forEach(element => {
