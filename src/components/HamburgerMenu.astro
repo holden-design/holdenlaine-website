@@ -1,32 +1,32 @@
 ---
-// HamburgerMenu.astro: Mobile hamburger menu for navigation
+// HamburgerMenu.astro: Mobile header — logo top-left, hamburger top-right
 ---
 
 <header class="mobile-header">
   <div class="header-content">
+    <a href="/" class="header-logo" title="Go to home">
+      <img src="/logo.svg" alt="Holden Laine Logo" class="logo-image" />
+    </a>
     <button class="hamburger-btn" id="hamburger-btn" aria-label="Toggle navigation menu">
       <span></span>
       <span></span>
       <span></span>
     </button>
-    <a href="/" class="header-logo" title="Go to home">
-      <img src="/logo.svg" alt="Holden Laine Logo" class="logo-image" />
-    </a>
-    <div class="header-lang-toggle">
-      <button class="lang-btn active" data-lang="en">ENG</button>
-      <button class="lang-btn" data-lang="et">EST</button>
-    </div>
   </div>
 </header>
 
 <nav class="mobile-menu" id="mobile-menu">
-  <a href="/">HOME</a>
-  <a href="/studio">STUDIO</a>
-  <a href="/photos">PHOTOS</a>
-  <a href="/projects">PROJECTS</a>
-  <a href="/prices">PRICES</a>
-  <a href="/shop">SHOP</a>
-  <a href="/contact">CONTACT</a>
+  <a href="/" data-i18n="nav.home">HOME</a>
+  <a href="/studio" data-i18n="nav.studio">STUDIO</a>
+  <a href="/photos" data-i18n="nav.portraits">PHOTOS</a>
+  <a href="/projects" data-i18n="nav.projects">PROJECTS</a>
+  <a href="/prices" data-i18n="nav.prices">PRICES</a>
+  <a href="/shop" data-i18n="nav.tshirts">SHOP</a>
+  <a href="/contact" data-i18n="nav.contact">CONTACT</a>
+  <div class="mobile-lang-toggle">
+    <button class="lang-btn active" data-lang="en">ENG</button>
+    <button class="lang-btn" data-lang="et">EST</button>
+  </div>
 </nav>
 
 <style is:global>
@@ -52,6 +52,19 @@
   max-width: 100%;
 }
 
+.header-logo {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-logo .logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .hamburger-btn {
   display: flex;
   flex-direction: column;
@@ -72,64 +85,14 @@
   display: block;
 }
 
-.header-logo {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.header-logo:hover {
-  opacity: 0.7;
-  transform: translateX(-50%) scale(1.05);
-}
-
-.header-logo .logo-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.header-lang-toggle {
-  display: flex;
-  gap: 0.5rem;
-  z-index: 1003;
-}
-
-.header-lang-toggle .lang-btn {
-  background: none;
-  border: none;
-  color: #222;
-  cursor: pointer;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.25rem 0.5rem;
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-.header-lang-toggle .lang-btn.active {
-  opacity: 1;
-}
-
 .hamburger-btn.active span:nth-child(1) {
-  transform: rotate(45deg) translate(8px, 8px);
+  transform: rotate(45deg) translate(6px, 6px);
 }
-
 .hamburger-btn.active span:nth-child(2) {
   opacity: 0;
 }
-
 .hamburger-btn.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(8px, -8px);
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
 .mobile-menu {
@@ -139,11 +102,12 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.92);
   z-index: 1000;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 0.25rem;
   padding: 2rem;
 }
 
@@ -158,7 +122,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  margin: 0.75rem 0;
+  margin: 0.5rem 0;
   transition: opacity 0.3s ease;
   position: relative;
   z-index: 1001;
@@ -168,19 +132,36 @@
   opacity: 0.5;
 }
 
-body.menu-open {
-  overflow: hidden;
+.mobile-lang-toggle {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.mobile-lang-toggle .lang-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.5rem;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.mobile-lang-toggle .lang-btn.active {
+  opacity: 1;
 }
 
-body.menu-open > *:not(.mobile-header):not(.mobile-menu) {
-  filter: blur(4px);
+body.menu-open {
+  overflow: hidden;
 }
 
 @media (max-width: 768px) {
   .mobile-header {
     display: block;
   }
-  /* Add top padding to account for fixed header */
   .container {
     padding-top: 4.75rem !important;
   }
@@ -199,7 +180,6 @@ document.addEventListener('DOMContentLoaded', () => {
       document.body.classList.toggle('menu-open');
     });
 
-    // Close menu when a link is clicked
     mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         hamburgerBtn.classList.remove('active');
@@ -208,7 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Close menu when escape key is pressed
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         hamburgerBtn.classList.remove('active');
@@ -218,20 +197,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Handle language toggle
-  const langButtons = document.querySelectorAll('.header-lang-toggle .lang-btn');
-  langButtons.forEach(btn => {
+  // Handle all language toggle buttons (mobile menu + topnav)
+  document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      langButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
       const lang = btn.getAttribute('data-lang');
       if (lang) {
+        // Update all lang buttons across all components
+        document.querySelectorAll('.lang-btn').forEach(b => {
+          b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+        });
         document.documentElement.lang = lang;
         localStorage.setItem('language', lang);
-        // Dispatch custom event for other components
         window.dispatchEvent(new CustomEvent('languageChange', { detail: { language: lang } }));
       }
     });
+  });
+
+  // Restore saved language on load
+  const savedLang = localStorage.getItem('language') || 'en';
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-lang') === savedLang);
   });
 });
 </script>

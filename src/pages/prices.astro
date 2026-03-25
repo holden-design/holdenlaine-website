@@ -2,8 +2,7 @@
 import SEO from '../components/SEO.astro';
 import Cursor from '../components/Cursor.astro';
 import HamburgerMenu from '../components/HamburgerMenu.astro';
-import MobileLogo from '../components/MobileLogo.astro';
-import Logo from '../components/Logo.astro';
+import TopNav from '../components/TopNav.astro';
 import translations from '../data/translations.json';
 ---
 
@@ -324,25 +323,10 @@ import translations from '../data/translations.json';
   </head>
   <body>
     <canvas id="letterfall-canvas"></canvas>
-    <Logo />
+    <TopNav />
     <Cursor />
     <HamburgerMenu />
-    <div class="language-toggle">
-      <button class="lang-btn active" data-lang="en">ENG</button>
-      <button class="lang-btn" data-lang="et">EST</button>
-    </div>
     <div class="container">
-      <div class="sidebar">
-        <nav>
-          <a href="/" data-i18n="nav.home">HOME</a>
-          <a href="/studio" data-i18n="nav.studio">STUDIO</a>
-          <a href="/photos" data-i18n="nav.portraits">PHOTOS</a>
-          <a href="/projects" data-i18n="nav.projects">PROJECTS</a>
-          <a href="/prices" data-i18n="nav.prices">PRICES</a>
-          <a href="/shop" data-i18n="nav.tshirts">SHOP</a>
-          <a href="/contact" data-i18n="nav.contact">CONTACT</a>
-        </nav>
-      </div>
       <div class="main-content">
         <h1 data-i18n="prices.heading">Prices</h1>
         

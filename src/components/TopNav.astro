@@ -1,0 +1,103 @@
+---
+// TopNav.astro: Desktop navigation — logo top-left, vertical nav links top-right
+---
+
+<a href="/" class="topnav-logo" title="Go to home">
+  <img src="/logo.svg" alt="Holden Laine Logo" />
+</a>
+
+<nav class="topnav">
+  <a href="/" data-i18n="nav.home">HOME</a>
+  <a href="/studio" data-i18n="nav.studio">STUDIO</a>
+  <a href="/photos" data-i18n="nav.portraits">PHOTOS</a>
+  <a href="/projects" data-i18n="nav.projects">PROJECTS</a>
+  <a href="/prices" data-i18n="nav.prices">PRICES</a>
+  <a href="/shop" data-i18n="nav.tshirts">SHOP</a>
+  <a href="/contact" data-i18n="nav.contact">CONTACT</a>
+  <div class="topnav-lang">
+    <button class="lang-btn active" data-lang="en">ENG</button>
+    <button class="lang-btn" data-lang="et">EST</button>
+  </div>
+</nav>
+
+<style is:global>
+  .topnav-logo {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 10000;
+    width: 50px;
+    height: 50px;
+    display: block;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .topnav-logo:hover {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+  .topnav-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .topnav {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.35rem;
+  }
+  .topnav a {
+    color: #222;
+    text-decoration: none;
+    font-weight: 500;
+    text-transform: uppercase;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    letter-spacing: 0.02em;
+    font-size: 0.85rem;
+    transition: opacity 0.2s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .topnav a:hover {
+    text-decoration: underline;
+  }
+
+  .topnav-lang {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .topnav-lang .lang-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 0.7rem;
+    transition: opacity 0.2s ease;
+    opacity: 0.3;
+    cursor: pointer;
+    font-weight: 500;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  .topnav-lang .lang-btn:hover {
+    opacity: 0.6;
+  }
+  .topnav-lang .lang-btn.active {
+    opacity: 1;
+  }
+
+  /* Hide desktop nav on mobile */
+  @media (max-width: 768px) {
+    .topnav,
+    .topnav-logo {
+      display: none;
+    }
+  }
+</style>

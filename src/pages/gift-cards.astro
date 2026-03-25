@@ -2,8 +2,7 @@
 import SEO from '../components/SEO.astro';
 import Cursor from '../components/Cursor.astro';
 import HamburgerMenu from '../components/HamburgerMenu.astro';
-import MobileLogo from '../components/MobileLogo.astro';
-import Logo from '../components/Logo.astro';
+import TopNav from '../components/TopNav.astro';
 import translations from '../data/translations.json';
 ---
 
@@ -57,33 +56,7 @@ import translations from '../data/translations.json';
           padding-top: 4.75rem !important;
         }
       }
-      .sidebar {
-        position: fixed;
-        left: 2rem;
-        top: 2rem;
-        width: auto;
-        z-index: 1000;
-        padding: 0;
-        margin-bottom: 0;
-      }
-      .sidebar nav {
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
-      }
-      .sidebar nav a {
-        display: block;
-        color: #222;
-        text-decoration: none;
-        font-weight: 500;
-        text-transform: uppercase;
-        font-family: inherit;
-        letter-spacing: 0.01em;
-        font-size: 0.85rem;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      .sidebar nav a:hover { text-decoration: underline; }
+
       .main-content {
         max-width: 900px;
         margin: 0 auto;
@@ -239,9 +212,6 @@ import translations from '../data/translations.json';
         margin-bottom: 0.5rem;
       }
       @media (max-width: 768px) {
-        .sidebar {
-          display: none !important;
-        }
         .container {
           padding: 1rem;
           padding-top: 4.75rem !important;
@@ -253,31 +223,14 @@ import translations from '../data/translations.json';
           width: 100%;
         }
       }
-      @media (min-width: 600px) {
-        .container {
-          padding-left: 140px;
-        }
-      }
     </style>
   </head>
   <body>
     <canvas id="letterfall-canvas"></canvas>
-    <Logo />
+    <TopNav />
     <Cursor />
     <HamburgerMenu />
     <div class="container">
-      <div class="sidebar">
-        <nav>
-          <a href="/">HOME</a>
-          <a href="/studio">STUDIO</a>
-          <a href="/photos">PHOTOS</a>
-          <a href="/projects">PROJECTS</a>
-          <a href="/prices">PRICES</a>
-          <a href="/shop">SHOP</a>
-          <a href="/gift-cards">GIFT CARDS</a>
-          <a href="/contact">CONTACT</a>
-        </nav>
-      </div>
       <div class="main-content">
         <h1 data-i18n="giftcard.heading">Gift Cards</h1>
 

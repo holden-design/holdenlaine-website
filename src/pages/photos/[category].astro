@@ -2,10 +2,8 @@
 import SEO from '../../components/SEO.astro';
 import Cursor from '../../components/Cursor.astro';
 import HamburgerMenu from '../../components/HamburgerMenu.astro';
-import MobileLogo from '../../components/MobileLogo.astro';
-import Logo from '../../components/Logo.astro';
+import TopNav from '../../components/TopNav.astro';
 
-// Photo categories with their images
 const PHOTO_CATEGORIES = {
   'fashion': {
     title: 'Fashion Product Photography',
@@ -54,24 +52,11 @@ const categoryDescription = categoryData?.description || 'Photography gallery';
 const images = categoryData?.images || [];
 const ogImage = images[0] ? `/images/${images[0]}` : '/images/og-image.jpg';
 
-// Estonian translations for categories
 const categoryTranslations: {[key: string]: {titleEt: string, descriptionEt: string}} = {
-  'fashion': {
-    titleEt: 'Mood',
-    descriptionEt: 'Moofotograafia ja stiliseeritud fotosessioond'
-  },
-  'portrait': {
-    titleEt: 'Portreede Seeria',
-    descriptionEt: 'Portreede seeria, mis uurib valgust ja emotsioone'
-  },
-  'editorial': {
-    titleEt: 'Toimetuslik',
-    descriptionEt: 'Toimetuslik fotograafia ja stiliseeritud pildistamised'
-  },
-  'street': {
-    titleEt: 'Tänavafotograafia / Sündmused',
-    descriptionEt: 'Spontaansed hetked igapäevaelust'
-  }
+  'fashion': { titleEt: 'Mood', descriptionEt: 'Moofotograafia ja stiliseeritud fotosessioond' },
+  'portrait': { titleEt: 'Portreede Seeria', descriptionEt: 'Portreede seeria, mis uurib valgust ja emotsioone' },
+  'editorial': { titleEt: 'Toimetuslik', descriptionEt: 'Toimetuslik fotograafia ja stiliseeritud pildistamised' },
+  'street': { titleEt: 'T\u00e4navafotograafia / S\u00fcndmused', descriptionEt: 'Spontaansed hetked igap\u00e4evaelust' }
 };
 
 const translations = categoryTranslations[category as string] || { titleEt: categoryTitle, descriptionEt: categoryDescription };
@@ -92,10 +77,9 @@ const translations = categoryTranslations[category as string] || { titleEt: cate
     <style is:global>
       body {
         margin: 0;
-        font-family: "Helvetica Neue", Helvetica;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         background: #fff;
         color: #222;
-        display: block;
         -webkit-user-select: none;
         user-select: none;
       }
@@ -114,389 +98,235 @@ const translations = categoryTranslations[category as string] || { titleEt: cate
         pointer-events: none;
       }
       .container {
-        max-width: 1200px;
+        max-width: 1400px;
         margin: 0 auto;
-        padding: 2rem 2rem 2rem 2rem;
+        padding: 2rem;
         position: relative;
         z-index: 1;
       }
-      .sidebar {
-        position: fixed;
-        left: 2rem;
-        top: 2rem;
-        width: auto;
-        z-index: 1000;
-        padding: 0;
-        margin-bottom: 0;
-      }
-      .sidebar nav {
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
-      }
-      .sidebar nav a {
-        display: block;
-        color: #222;
-        text-decoration: none;
-        font-weight: 500;
-        text-transform: uppercase;
-        font-family: inherit;
-        letter-spacing: 0.01em;
-        font-size: 0.85rem;
-      }
-      .sidebar nav a:hover { 
-        text-decoration: underline; 
-      }
-      .main-content {
-        max-width: 100%;
-        margin: 0 auto;
-        padding: 0;
-      }
       .page-header {
         margin-bottom: 2rem;
-        margin-top: 0;
       }
       .page-header h1 {
-        font-size: 1.75rem;
-        margin: 0 0 0.5rem 0;
-        margin-top: 0;
+        font-size: 1.8rem;
         font-weight: 700;
+        margin: 0;
         text-transform: uppercase;
         letter-spacing: 0.02em;
       }
-      .image-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 1.5rem;
-        margin-top: 2rem;
-        grid-auto-rows: auto;
+
+      /* Masonry gallery */
+      .masonry {
+        columns: 4;
+        column-gap: 0.75rem;
       }
-      .image-grid img {
+      .masonry-item {
+        break-inside: avoid;
+        margin-bottom: 0.75rem;
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .masonry-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .masonry-item img {
         width: 100%;
-        height: 100%;
-        border-radius: 0;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        height: auto;
         display: block;
-        position: relative;
-        z-index: 10;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        object-fit: cover;
-      }
-      .image-grid img:hover {
-        transform: scale(1.02);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-      }
-      .image-grid img {
         cursor: pointer;
+        border-radius: 2px;
       }
-      .fullscreen-modal {
+
+      /* Lightbox */
+      .lightbox {
         display: none;
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.95);
-        z-index: 10000;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0,0,0,0.92);
         align-items: center;
         justify-content: center;
-        animation: fadeIn 0.3s ease;
+        cursor: pointer;
       }
-      .fullscreen-modal.active {
-        display: flex;
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
-      .fullscreen-modal img {
+      .lightbox.active { display: flex; }
+      .lightbox img {
         max-width: 90vw;
         max-height: 90vh;
         object-fit: contain;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        cursor: default;
+        opacity: 0;
+        transition: opacity 0.2s ease;
       }
-      .fullscreen-close {
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
+      .lightbox img.loaded { opacity: 1; }
+      .lightbox-counter {
+        position: fixed;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255,255,255,0.7);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        pointer-events: none;
+      }
+      .lightbox-close {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.2s;
         background: none;
         border: none;
-        color: #fff;
-        font-size: 2rem;
-        cursor: pointer;
-        padding: 0;
-        width: 3rem;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.3s ease;
-        z-index: 10001;
+        z-index: 10000;
+        line-height: 1;
       }
-      .fullscreen-close:hover {
-        opacity: 0.7;
-      }
-      .fullscreen-nav {
-        position: absolute;
+      .lightbox-close:hover { opacity: 1; }
+      .lightbox-nav {
+        position: fixed;
         top: 50%;
         transform: translateY(-50%);
-        background: none;
-        border: none;
         color: #fff;
         font-size: 2rem;
         cursor: pointer;
-        padding: 1rem;
-        transition: opacity 0.3s ease;
-        z-index: 10001;
-      }
-      .fullscreen-nav:hover {
         opacity: 0.7;
+        transition: opacity 0.2s;
+        background: none;
+        border: none;
+        padding: 1rem;
+        z-index: 10000;
       }
-      .fullscreen-nav.prev {
-        left: 2rem;
-      }
-      .fullscreen-nav.next {
-        right: 2rem;
-      }
-      @media (max-width: 768px) {
-        .fullscreen-modal {
-          display: none !important;
-        }
-      }
-      @media (min-width: 769px) {
-        .image-grid {
-          margin-top: 2rem;
-        }
-        .page-header {
-          margin-top: 0;
-        }
-        .container {
-          padding-left: 150px;
-        }
-      }
-      @media (max-width: 900px) {
-        .image-grid {
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        }
+      .lightbox-nav:hover { opacity: 1; }
+      .lightbox-prev { left: 1rem; }
+      .lightbox-next { right: 1rem; }
+
+      @media (max-width: 1024px) {
+        .masonry { columns: 3; column-gap: 0.6rem; }
       }
       @media (max-width: 768px) {
-        .sidebar {
-          display: none !important;
-        }
-        .container {
-          padding: 1rem;
-          padding-top: 4.75rem;
-          max-width: 100%;
-          margin: 0;
-        }
-        .page-header {
-          margin-bottom: 1.5rem;
-        }
-        .page-header h1 {
-          font-size: 1.3rem;
-          margin-bottom: 0.25rem;
-        }
-        .page-header p {
-          font-size: 0.85rem;
-        }
-        .image-grid {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 1rem;
-          margin-top: 1rem;
-        }
+        .container { padding: 1rem; }
+        .masonry { columns: 3; column-gap: 0.5rem; }
+        .masonry-item { margin-bottom: 0.5rem; }
+        .page-header h1 { font-size: 1.4rem; }
       }
       @media (max-width: 480px) {
-        .image-grid {
-          grid-template-columns: 1fr;
-          gap: 0.75rem;
-          margin-top: 0.75rem;
-        }
-        .sidebar nav a {
-          font-size: 0.65rem;
-        }
-        .container {
-          padding: 0.75rem;
-        }
-        .page-header h1 {
-          font-size: 1.1rem;
-          margin-bottom: 0.5rem;
-        }
-        .page-header p {
-          font-size: 0.75rem;
-        }
+        .masonry { columns: 2; column-gap: 0.4rem; }
+        .masonry-item { margin-bottom: 0.4rem; }
+        .container { padding: 0.5rem; }
       }
     </style>
   </head>
   <body>
     <canvas id="letterfall-canvas"></canvas>
-    <Logo />
+    <TopNav />
     <Cursor />
     <HamburgerMenu />
-    
-    <!-- Fullscreen Modal -->
-    <div id="fullscreenModal" class="fullscreen-modal">
-      <button id="closeBtn" class="fullscreen-close" aria-label="Close fullscreen">&times;</button>
-      <button id="prevBtn" class="fullscreen-nav prev" aria-label="Previous image">&#10094;</button>
-      <img id="fullscreenImage" src="" alt="Fullscreen view" />
-      <button id="nextBtn" class="fullscreen-nav next" aria-label="Next image">&#10095;</button>
-    </div>
 
     <div class="container">
-      <div class="sidebar">
-        <nav>
-          <a href="/" data-i18n="nav.home">AVALEHT</a>
-          <a href="/studio" data-i18n="nav.studio">STUUDIO</a>
-          <a href="/photos" data-i18n="nav.portraits">FOTOD</a>
-          <a href="/projects" data-i18n="nav.projects">PROJEKTID</a>
-          <a href="/prices" data-i18n="nav.prices">HINNAKIRI</a>
-          <a href="/shop" data-i18n="nav.tshirts">E-POOD</a>
-          <a href="/contact" data-i18n="nav.contact">KONTAKT</a>
-        </nav>
+      <div class="page-header">
+        <h1>{categoryTitle}</h1>
       </div>
-      <main class="main-content">
-        <div class="page-header">
-          <h1>{categoryTitle}</h1>
-        </div>
 
-        {images.length > 0 && (
-          <div class="image-grid">
-            {images.map((img: string) => (
-              <img 
-                src={`/images/${img}`} 
-                alt={categoryTitle} 
-                loading="lazy" 
-              />
-            ))}
+      <div class="masonry">
+        {images.map((img: string, i: number) => (
+          <div class="masonry-item">
+            <img src={`/images/${img}`} alt={`${categoryTitle} ${i + 1}`} loading="lazy" data-index={i} />
           </div>
-        )}
-      </main>
+        ))}
+      </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev">&#8249;</button>
+      <button class="lightbox-nav lightbox-next" id="lightbox-next">&#8250;</button>
+      <img id="lightbox-img" alt="" />
+      <div class="lightbox-counter" id="lightbox-counter"></div>
     </div>
 
     <script is:inline src="/scripts/letterfall.js"></script>
     <script is:inline>
-      // Fullscreen gallery functionality (desktop only)
-      const isMobile = window.innerWidth <= 768;
-      
-      if (!isMobile) {
-        const modal = document.getElementById('fullscreenModal');
-        const fullscreenImage = document.getElementById('fullscreenImage');
-        const closeBtn = document.getElementById('closeBtn');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const images = Array.from(document.querySelectorAll('.image-grid img'));
-        let currentIndex = 0;
+      (function() {
+        // IntersectionObserver staggered fade-in
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry, i) {
+            if (entry.isIntersecting) {
+              setTimeout(function() { entry.target.classList.add('visible'); }, i * 60);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.05 });
+        document.querySelectorAll('.masonry-item').forEach(function(el) { obs.observe(el); });
 
-        // Open fullscreen on image click
-        images.forEach((img, index) => {
-          img.addEventListener('click', () => {
-            currentIndex = index;
-            openFullscreen(img.src);
+        // Lightbox
+        var lightbox = document.getElementById('lightbox');
+        var lbImg = document.getElementById('lightbox-img');
+        var lbCounter = document.getElementById('lightbox-counter');
+        var allImgs = Array.from(document.querySelectorAll('.masonry-item img'));
+        var currentIdx = 0;
+
+        function showImage(idx) {
+          if (idx < 0 || idx >= allImgs.length) return;
+          currentIdx = idx;
+          lbImg.classList.remove('loaded');
+          lbImg.onload = function() { lbImg.classList.add('loaded'); };
+          lbImg.src = allImgs[idx].src;
+          lbCounter.textContent = (idx + 1) + ' / ' + allImgs.length;
+          // Preload adjacent
+          if (allImgs[idx + 1]) { var p = new Image(); p.src = allImgs[idx + 1].src; }
+          if (allImgs[idx - 1]) { var p = new Image(); p.src = allImgs[idx - 1].src; }
+        }
+
+        allImgs.forEach(function(img, i) {
+          img.addEventListener('click', function() {
+            showImage(i);
+            lightbox.classList.add('active');
           });
         });
 
-        function openFullscreen(src) {
-          fullscreenImage.src = src;
-          modal.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        }
-
-        function closeFullscreen() {
-          modal.classList.remove('active');
-          document.body.style.overflow = '';
-        }
-
-        function showImage(index) {
-          if (index < 0) {
-            currentIndex = images.length - 1;
-          } else if (index >= images.length) {
-            currentIndex = 0;
-          } else {
-            currentIndex = index;
-          }
-          fullscreenImage.src = images[currentIndex].src;
-        }
-
-        closeBtn.addEventListener('click', closeFullscreen);
-        prevBtn.addEventListener('click', () => showImage(currentIndex - 1));
-        nextBtn.addEventListener('click', () => showImage(currentIndex + 1));
-
-        // Close on escape key
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') {
-            closeFullscreen();
-          } else if (e.key === 'ArrowLeft') {
-            showImage(currentIndex - 1);
-          } else if (e.key === 'ArrowRight') {
-            showImage(currentIndex + 1);
-          }
+        document.getElementById('lightbox-close').addEventListener('click', function(e) {
+          e.stopPropagation();
+          lightbox.classList.remove('active');
+        });
+        lightbox.addEventListener('click', function(e) {
+          if (e.target === lightbox) lightbox.classList.remove('active');
+        });
+        document.getElementById('lightbox-prev').addEventListener('click', function(e) {
+          e.stopPropagation();
+          showImage(currentIdx - 1);
+        });
+        document.getElementById('lightbox-next').addEventListener('click', function(e) {
+          e.stopPropagation();
+          showImage(currentIdx + 1);
         });
 
-        // Close on background click
-        modal.addEventListener('click', (e) => {
-          if (e.target === modal) {
-            closeFullscreen();
-          }
+        document.addEventListener('keydown', function(e) {
+          if (!lightbox.classList.contains('active')) return;
+          if (e.key === 'Escape') lightbox.classList.remove('active');
+          if (e.key === 'ArrowLeft') showImage(currentIdx - 1);
+          if (e.key === 'ArrowRight') showImage(currentIdx + 1);
         });
-      }
-      
-      // Translation object for navigation
-      const translations = {
-        'en': {
-          'nav.home': 'HOME',
-          'nav.portraits': 'PHOTOS',
-          'nav.studio': 'STUDIO',
-          'nav.projects': 'PROJECTS',
-          'nav.prices': 'PRICES',
-          'nav.tshirts': 'SHOP',
-          'nav.contact': 'CONTACT'
-        },
-        'et': {
-          'nav.home': 'AVALEHT',
-          'nav.portraits': 'FOTOD',
-          'nav.studio': 'STUUDIO',
-          'nav.projects': 'PROJEKTID',
-          'nav.prices': 'HINNAKIRI',
-          'nav.tshirts': 'E-POOD',
-          'nav.contact': 'KONTAKT'
-        }
-      };
 
-      function updateTranslations(lang) {
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-          const key = el.getAttribute('data-i18n');
-          if (translations[lang] && translations[lang][key]) {
-            el.textContent = translations[lang][key];
-          }
+        // Touch swipe
+        var touchStartX = 0;
+        lightbox.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        lightbox.addEventListener('touchend', function(e) {
+          var dx = e.changedTouches[0].screenX - touchStartX;
+          if (Math.abs(dx) > 50) showImage(currentIdx + (dx < 0 ? 1 : -1));
         });
-      }
 
-      // Restore language preference on page load
-      const savedLang = localStorage.getItem('language') || 'en';
-      document.documentElement.lang = savedLang;
-      updateTranslations(savedLang);
-      document.querySelectorAll('.lang-btn').forEach(b => {
-        b.classList.toggle('active', b.getAttribute('data-lang') === savedLang);
-      });
-
-      // Language toggle functionality
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const lang = btn.getAttribute('data-lang');
-          if (lang) {
-            localStorage.setItem('language', lang);
-            document.documentElement.lang = lang;
-            updateTranslations(lang);
-            document.querySelectorAll('.lang-btn').forEach(b => {
-              b.classList.toggle('active', b.getAttribute('data-lang') === lang);
-            });
-          }
+        // Prevent right-click on media
+        document.addEventListener('contextmenu', function(e) {
+          if (e.target.tagName === 'IMG') e.preventDefault();
         });
-      });
+        document.addEventListener('dragstart', function(e) {
+          if (e.target.tagName === 'IMG') e.preventDefault();
+        });
+      })();
     </script>
   </body>
 </html>

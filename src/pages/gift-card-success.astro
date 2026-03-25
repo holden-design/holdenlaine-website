@@ -2,8 +2,7 @@
 import SEO from '../components/SEO.astro';
 import Cursor from '../components/Cursor.astro';
 import HamburgerMenu from '../components/HamburgerMenu.astro';
-import MobileLogo from '../components/MobileLogo.astro';
-import Logo from '../components/Logo.astro';
+import TopNav from '../components/TopNav.astro';
 ---
 
 <html lang="en">
@@ -47,31 +46,7 @@ import Logo from '../components/Logo.astro';
           padding-top: 4.75rem !important;
         }
       }
-      .sidebar {
-        position: fixed;
-        left: 2rem;
-        top: 2rem;
-        width: auto;
-        z-index: 1000;
-        padding: 0;
-        margin-bottom: 0;
-      }
-      .sidebar nav {
-        display: flex;
-        flex-direction: column;
-        gap: 0.3rem;
-      }
-      .sidebar nav a {
-        display: block;
-        color: #222;
-        text-decoration: none;
-        font-weight: 500;
-        text-transform: uppercase;
-        font-family: inherit;
-        letter-spacing: 0.01em;
-        font-size: 0.85rem;
-      }
-      .sidebar nav a:hover { text-decoration: underline; }
+
       .main-content {
         max-width: 800px;
         margin: 0 auto;
@@ -108,9 +83,6 @@ import Logo from '../components/Logo.astro';
         opacity: 0.7;
       }
       @media (max-width: 768px) {
-        .sidebar {
-          display: none !important;
-        }
         .container {
           padding: 1rem;
           padding-top: 4.75rem !important;
@@ -120,21 +92,10 @@ import Logo from '../components/Logo.astro';
   </head>
   <body>
     <canvas id="letterfall-canvas"></canvas>
-    <Logo />
+    <TopNav />
     <Cursor />
     <HamburgerMenu />
     <div class="container">
-      <div class="sidebar">
-        <nav>
-          <a href="/">HOME</a>
-          <a href="/studio">STUDIO</a>
-          <a href="/photos">PHOTOS</a>
-          <a href="/projects">PROJECTS</a>
-          <a href="/prices">PRICES</a>
-          <a href="/shop">SHOP</a>
-          <a href="/contact">CONTACT</a>
-        </nav>
-      </div>
       <div class="main-content">
         <div class="success-icon">✓</div>
         <div class="success-message">Gift Card Purchase Successful!</div>

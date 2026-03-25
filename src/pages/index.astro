@@ -1,6 +1,6 @@
 ---
 import SEO from '../components/SEO.astro';
-import Logo from '../components/Logo.astro';
+import TopNav from '../components/TopNav.astro';
 import HamburgerMenu from '../components/HamburgerMenu.astro';
 import translations from '../data/translations.json';
 ---
@@ -142,49 +142,13 @@ import translations from '../data/translations.json';
           cursor: auto !important;
         }
       }
-      .lang-toggle {
-        position: fixed;
-        top: 1rem;
-        right: 1rem;
-        z-index: 10000;
-        display: none;
-        gap: 0.5rem;
-      }
-      .lang-toggle button {
-        background: transparent;
-        border: none;
-        padding: 0;
-        font-size: 0.75rem;
-        transition: opacity 0.2s ease;
-        opacity: 0.3;
-        cursor: pointer;
-        font-weight: 500;
-        color: #333;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-      .lang-toggle button:hover {
-        opacity: 0.6;
-      }
-      .lang-toggle button.active {
-        opacity: 1;
-      }
-      @media (min-width: 769px) {
-        .lang-toggle {
-          display: flex !important;
-        }
-      }
     </style>
   </head>
   <body>
     <canvas id="letterfall-canvas"></canvas>
-    <Logo />
+    <TopNav />
     <div class="custom-cursor"></div>
     <HamburgerMenu />
-    <div class="lang-toggle">
-      <button class="lang-btn active" data-lang="en">ENG</button>
-      <button class="lang-btn" data-lang="et">EST</button>
-    </div>
     <div class="wrap">
       <nav id="nav">
         <a href="/" data-i18n="nav.home">HOME</a>
@@ -317,19 +281,6 @@ import translations from '../data/translations.json';
         }
       });
 
-      // Language toggle
-      const langButtons = document.querySelectorAll('.lang-toggle .lang-btn');
-      langButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-          langButtons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          const lang = btn.getAttribute('data-lang');
-          if (lang) {
-            localStorage.setItem('language', lang);
-            window.dispatchEvent(new CustomEvent('languageChange', { detail: { language: lang } }));
-          }
-        });
-      });
     </script>
   </body>
 </html>

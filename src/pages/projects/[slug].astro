@@ -2,8 +2,7 @@
 import SEO from '../../components/SEO.astro';
 import Cursor from '../../components/Cursor.astro';
 import HamburgerMenu from '../../components/HamburgerMenu.astro';
-import MobileLogo from '../../components/MobileLogo.astro';
-import Logo from '../../components/Logo.astro';
+import TopNav from '../../components/TopNav.astro';
 import projects from '../../../public/data/projects.json';
 
 export const prerender = true;
@@ -35,36 +34,23 @@ if (!sub) {
   }
 }
 
-// Get first image as OG image
 const ogImage = sub?.media?.find((item: any) => item.type !== 'video')?.src || 
                 sub?.images?.[0] || 
                 '/images/og-image.jpg';
 
-// Estonian translations for project descriptions
-const projectTranslations: {[key: string]: {en: string, et: string}} = {
-  'tõnise-talu': {
-    en: 'A video project from Muhu island showcasing Estonian summer beauty',
-    et: 'Videoprojekt Muhu saarelt, mis näitab Eesti suve ilu'
-  },
-  'ugc': {
-    en: 'User Generated Content creation and collaborations',
-    et: 'Kasutaja loodud sisu loomine ja koostööd'
-  },
-  'peugeot': {
-    en: 'Professional social media content creation for Peugeot',
-    et: 'Professionaalne sotsiaalmeedia sisutootmine Peugeot\'ile'
-  },
-  'lexus': {
-    en: 'Automotive photography for Lexus campaigns',
-    et: 'Autofotograafia Lexuse kampaaniatele'
-  },
-  'roseni-maja': {
-    en: 'Architecture and interior photography of Roseni maja in Tallinn',
-    et: 'Roseni maja arhitektuuri ja sisustuse fotograafia Tallinnas'
-  }
-};
+// Collect all media items in a unified list
+const allMedia: { type: string; src: string; poster?: string }[] = [];
+if (sub?.media) {
+  sub.media.forEach((item: any) => {
+    allMedia.push({ type: item.type, src: item.src, poster: item.poster });
+  });
+} else if (sub?.images) {
+  sub.images.forEach((img: string) => {
+    allMedia.push({ type: 'image', src: img });
+  });
+}
 
-const translations = projectTranslations[slug] || { en: sub?.description || '', et: sub?.description || '' };
+const imageItems = allMedia.filter(m => m.type === 'image');
 ---
 
 <html lang="en">
@@ -76,13 +62,13 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
       titleEt={sub?.title || 'Project'}
       description={sub?.description || ''}
       descriptionEt={sub?.description || ''}
-      image={sub?.images?.[0] || '/images/og-image.jpg'}
+      image={ogImage}
       type="article"
     />
     <style is:global>
       body {
         margin: 0;
-        font-family: "Helvetica Neue", Helvetica;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         background: #fff;
         color: #222;
         -webkit-user-select: none;
@@ -91,6 +77,7 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
       img, video {
         -webkit-user-drag: none;
         user-select: none;
+        -webkit-user-select: none;
       }
       #letterfall-canvas {
         position: fixed;
@@ -101,284 +88,279 @@ const translations = projectTranslations[slug] || { en: sub?.description || '', 
         z-index: 0;
         pointer-events: none;
       }
-    </style>
-    <style>
       .container {
-        max-width: 1400px;
+        max-width: 1100px;
         margin: 0 auto;
         padding: 2rem;
-        padding-left: 160px;
         position: relative;
         z-index: 1;
-      }
-      .header {
-        margin-bottom: 2rem;
       }
       .back-link {
         color: #222;
         text-decoration: none;
-        font-size: 0.85rem;
-        margin-bottom: 1rem;
-        display: inline-block;
+        font-size: 0.8rem;
         text-transform: uppercase;
-        letter-spacing: 0.01em;
+        letter-spacing: 0.04em;
+        display: inline-block;
+        margin-bottom: 1.5rem;
+        opacity: 0.6;
+        transition: opacity 0.2s;
       }
-      .back-link:hover {
-        text-decoration: underline;
+      .back-link:hover { opacity: 1; }
+      .header {
+        margin-bottom: 2rem;
       }
-      h1 {
-        font-size: 2rem;
+      .header h1 {
+        font-size: 1.8rem;
         font-weight: 700;
         margin: 0;
         text-transform: uppercase;
         letter-spacing: 0.02em;
       }
-      .description {
+      .header .description {
         color: #666;
-        font-size: 0.85rem;
+        font-size: 0.8rem;
         margin-top: 0.3rem;
         text-transform: uppercase;
         letter-spacing: 0.01em;
       }
-      .gallery-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        align-items: start;
+
+      /* Masonry gallery */
+      .masonry {
+        columns: 3;
+        column-gap: 1rem;
       }
-      .left-column {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        max-width: 500px;
-      }
-      .main-image {
-        width: 100%;
-        height: auto;
-        display: block;
-        object-fit: contain;
-        max-width: 600px;
-        cursor: pointer;
-      }
-      .left-column .main-image:first-of-type {
-        max-width: 100%;
+      .masonry-item {
+        break-inside: avoid;
         margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
       }
-      .secondary-images {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+      .masonry-item.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
-      .secondary-images img,
-      .secondary-images video {
+      .masonry-item img {
         width: 100%;
         height: auto;
         display: block;
-        object-fit: contain;
-        max-width: 500px;
-      }
-      .sidebar {
-        position: fixed;
-        left: 2rem;
-        top: 2rem;
-        z-index: 100;
-      }
-      .sidebar nav {
-        display: flex;
-        flex-direction: column;
-        gap: 0.4rem;
-      }
-      .sidebar nav a {
-        color: #222;
-        text-decoration: none;
-        font-size: 0.75rem;
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.01em;
-      }
-      .sidebar nav a:hover {
-        text-decoration: underline;
-      }
-      .lang-toggle {
-        position: fixed;
-        top: 1rem;
-        right: 1rem;
-        z-index: 100;
-        display: flex;
-        gap: 0.5rem;
-      }
-      .lang-toggle button {
-        background: transparent;
-        border: none;
-        padding: 0;
-        font-size: 0.7rem;
-        opacity: 0.3;
         cursor: pointer;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+        border-radius: 2px;
+      }
+      .masonry-item video {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 2px;
+      }
+
+      /* Lightbox */
+      .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(0,0,0,0.92);
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .lightbox.active { display: flex; }
+      .lightbox img {
+        max-width: 90vw;
+        max-height: 90vh;
+        object-fit: contain;
+        cursor: default;
+        opacity: 0;
         transition: opacity 0.2s ease;
       }
-      .lang-toggle button:hover {
-        opacity: 0.6;
+      .lightbox img.loaded { opacity: 1; }
+      .lightbox-counter {
+        position: fixed;
+        bottom: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255,255,255,0.7);
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+        pointer-events: none;
       }
-      .lang-toggle button.active {
-        opacity: 1;
+      .lightbox-close {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        color: #fff;
+        font-size: 1.5rem;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+        background: none;
+        border: none;
+        z-index: 10000;
+        line-height: 1;
       }
-      @media (max-width: 1200px) {
-        .gallery-wrapper {
-          grid-template-columns: 1fr;
-        }
+      .lightbox-close:hover { opacity: 1; }
+      .lightbox-nav {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #fff;
+        font-size: 2rem;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+        background: none;
+        border: none;
+        padding: 1rem;
+        z-index: 10000;
+      }
+      .lightbox-nav:hover { opacity: 1; }
+      .lightbox-prev { left: 1rem; }
+      .lightbox-next { right: 1rem; }
+
+      @media (max-width: 900px) {
+        .masonry { columns: 2; column-gap: 0.75rem; }
       }
       @media (max-width: 768px) {
-        .container {
-          padding: 1rem;
-          padding-left: 1rem;
-        }
-        .sidebar {
-          display: none;
-        }
-        .gallery-wrapper {
-          grid-template-columns: 1fr;
-        }
-        h1 {
-          font-size: 1.5rem;
-        }
+        .container { padding: 1rem; }
+        .masonry { columns: 2; column-gap: 0.5rem; }
+        .masonry-item { margin-bottom: 0.5rem; }
+        .header h1 { font-size: 1.4rem; }
+      }
+      @media (max-width: 480px) {
+        .masonry { columns: 1; }
+        .container { padding: 0.75rem; }
       }
     </style>
   </head>
   <body>
     <canvas id="letterfall-canvas"></canvas>
+    <TopNav />
     <Cursor />
     <HamburgerMenu />
-    <MobileLogo />
-    
-    <div class="sidebar">
-      <nav>
-        <a href="/">HOME</a>
-        <a href="/photos">PHOTOS</a>
-        <a href="/studio">STUDIO</a>
-        <a href="/projects">PROJECTS</a>
-        <a href="/prices">PRICES</a>
-        <a href="/shop">SHOP</a>
-        <a href="/contact">CONTACT</a>
-      </nav>
-    </div>
-
-    <div class="lang-toggle">
-      <button class="lang-btn active" data-lang="en">EN</button>
-      <button class="lang-btn" data-lang="et">ET</button>
-    </div>
 
     <div class="container">
-      <a href="/projects" class="back-link">← BACK</a>
-      
+      <a href="/projects" class="back-link">&#8592; Back to Projects</a>
       <div class="header">
         <h1>{sub?.title}</h1>
         {sub?.description && <p class="description">{sub.description}</p>}
       </div>
 
-      <div class="gallery-wrapper">
-        <div class="left-column">
-          {sub?.images && sub.images.length > 0 && (
-            <img src={`/images/${sub.images[0]}`} alt={sub.title} class="main-image" />
-          )}
-          {sub?.media && sub.media.length > 0 && sub.media[0]?.type === 'video' && (
-            <video controls preload="metadata" poster={sub.media[0].poster ? `/images/${sub.media[0].poster}` : undefined} class="main-image">
-              <source src={`/images/${sub.media[0].src}`} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          )}
-          {sub?.media && sub.media.length > 0 && sub.media[0]?.type === 'image' && (
-            <img src={`/images/${sub.media[0].src}`} alt={sub.title} class="main-image" />
-          )}
-          
-          {sub?.images && sub.images.length > 2 && (
-            <div class="secondary-images">
-              {sub.images.slice(1, Math.ceil(sub.images.length / 2) + 1).map((img: string) => (
-                <img src={`/images/${img}`} alt={sub.title} loading="lazy" />
-              ))}
-            </div>
-          )}
-          {sub?.media && sub.media.filter((item: any) => item.type === 'image').length > 0 && (
-            <div class="secondary-images">
-              {sub.media.filter((item: any) => item.type === 'image').slice(0, Math.ceil(sub.media.filter((item: any) => item.type === 'image').length / 2)).map((item: any) => (
-                <img src={`/images/${item.src}`} alt={sub.title} loading="lazy" />
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div>
-          {sub?.images && sub.images.length > Math.ceil(sub.images.length / 2) + 1 && (
-            <div class="secondary-images">
-              {sub.images.slice(Math.ceil(sub.images.length / 2) + 1).map((img: string) => (
-                <img src={`/images/${img}`} alt={sub.title} loading="lazy" />
-              ))}
-            </div>
-          )}
-          {sub?.media && sub.media.filter((item: any) => item.type === 'image').length > 0 && (
-            <div class="secondary-images">
-              {sub.media.filter((item: any) => item.type === 'image').slice(Math.ceil(sub.media.filter((item: any) => item.type === 'image').length / 2)).map((item: any) => (
-                <img src={`/images/${item.src}`} alt={sub.title} loading="lazy" />
-              ))}
-            </div>
-          )}
-          {sub?.media && sub.media.filter((item: any) => item.type === 'video').length > 1 && (
-            <div class="secondary-images">
-              {sub.media.filter((item: any) => item.type === 'video').slice(1).map((item: any) => (
-                <video controls preload="metadata" poster={item.poster ? `/images/${item.poster}` : undefined}>
-                  <source src={`/images/${item.src}`} type="video/mp4" />
-                </video>
-              ))}
-            </div>
-          )}
-        </div>
+      <div class="masonry">
+        {allMedia.map((item, i) => (
+          <div class="masonry-item" data-index={i}>
+            {item.type === 'video' ? (
+              <video controls preload="metadata" poster={item.poster ? `/images/${item.poster}` : undefined}>
+                <source src={`/images/${item.src}`} type="video/mp4" />
+              </video>
+            ) : (
+              <img src={`/images/${item.src}`} alt={`${sub?.title} ${i + 1}`} loading="lazy" data-lightbox-index={imageItems.indexOf(item)} />
+            )}
+          </div>
+        ))}
       </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev">&#8249;</button>
+      <button class="lightbox-nav lightbox-next" id="lightbox-next">&#8250;</button>
+      <img id="lightbox-img" alt="" />
+      <div class="lightbox-counter" id="lightbox-counter"></div>
     </div>
 
     <script is:inline src="/scripts/letterfall.js"></script>
     <script is:inline>
-      // Video click to play/pause
-      setTimeout(() => {
-        document.querySelectorAll('video').forEach(video => {
-          video.onclick = function(e) {
-            e.stopPropagation();
-            this.paused ? this.play() : this.pause();
-          };
+      (function() {
+        // IntersectionObserver staggered fade-in
+        var obs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry, i) {
+            if (entry.isIntersecting) {
+              setTimeout(function() { entry.target.classList.add('visible'); }, i * 60);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.05 });
+        document.querySelectorAll('.masonry-item').forEach(function(el) { obs.observe(el); });
+
+        // Lightbox for images
+        var lightbox = document.getElementById('lightbox');
+        var lbImg = document.getElementById('lightbox-img');
+        var lbCounter = document.getElementById('lightbox-counter');
+        var images = [];
+        document.querySelectorAll('.masonry-item img[data-lightbox-index]').forEach(function(img) {
+          var idx = parseInt(img.getAttribute('data-lightbox-index'));
+          if (idx >= 0) images.push(img.src);
         });
-      }, 50);
 
-      // Language toggle
-      const savedLang = localStorage.getItem('language') || 'en';
-      document.documentElement.lang = savedLang;
-      document.querySelectorAll('.lang-btn').forEach(b => {
-        b.classList.toggle('active', b.getAttribute('data-lang') === savedLang);
-      });
+        var currentIdx = 0;
+        function showImage(idx) {
+          if (idx < 0 || idx >= images.length) return;
+          currentIdx = idx;
+          lbImg.classList.remove('loaded');
+          lbImg.onload = function() { lbImg.classList.add('loaded'); };
+          lbImg.src = images[idx];
+          lbCounter.textContent = (idx + 1) + ' / ' + images.length;
+          if (images[idx + 1]) { var p = new Image(); p.src = images[idx + 1]; }
+          if (images[idx - 1]) { var p = new Image(); p.src = images[idx - 1]; }
+        }
 
-      document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          e.preventDefault();
-          const lang = btn.getAttribute('data-lang');
-          localStorage.setItem('language', lang);
-          document.documentElement.lang = lang;
-          document.querySelectorAll('.lang-btn').forEach(b => {
-            b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+        document.querySelectorAll('.masonry-item img[data-lightbox-index]').forEach(function(img) {
+          img.addEventListener('click', function() {
+            var idx = parseInt(img.getAttribute('data-lightbox-index'));
+            if (idx >= 0) {
+              showImage(idx);
+              lightbox.classList.add('active');
+            }
           });
         });
-      });
 
-      // Prevent right-click and dragging on media
-      document.addEventListener('contextmenu', (e) => {
-        if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG') {
-          e.preventDefault();
-        }
-      });
+        document.getElementById('lightbox-close').addEventListener('click', function(e) {
+          e.stopPropagation();
+          lightbox.classList.remove('active');
+        });
+        lightbox.addEventListener('click', function(e) {
+          if (e.target === lightbox) lightbox.classList.remove('active');
+        });
+        document.getElementById('lightbox-prev').addEventListener('click', function(e) {
+          e.stopPropagation();
+          showImage(currentIdx - 1);
+        });
+        document.getElementById('lightbox-next').addEventListener('click', function(e) {
+          e.stopPropagation();
+          showImage(currentIdx + 1);
+        });
 
-      document.addEventListener('dragstart', (e) => {
-        if (e.target.tagName === 'VIDEO' || e.target.tagName === 'IMG') {
-          e.preventDefault();
-        }
-      });
+        document.addEventListener('keydown', function(e) {
+          if (!lightbox.classList.contains('active')) return;
+          if (e.key === 'Escape') lightbox.classList.remove('active');
+          if (e.key === 'ArrowLeft') showImage(currentIdx - 1);
+          if (e.key === 'ArrowRight') showImage(currentIdx + 1);
+        });
+
+        // Touch swipe
+        var touchStartX = 0;
+        lightbox.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, { passive: true });
+        lightbox.addEventListener('touchend', function(e) {
+          var dx = e.changedTouches[0].screenX - touchStartX;
+          if (Math.abs(dx) > 50) showImage(currentIdx + (dx < 0 ? 1 : -1));
+        });
+
+        // Video click to play/pause
+        document.querySelectorAll('.masonry-item video').forEach(function(video) {
+          video.onclick = function(e) { e.stopPropagation(); this.paused ? this.play() : this.pause(); };
+        });
+
+        // Prevent right-click on media
+        document.addEventListener('contextmenu', function(e) {
+          if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') e.preventDefault();
+        });
+        document.addEventListener('dragstart', function(e) {
+          if (e.target.tagName === 'IMG' || e.target.tagName === 'VIDEO') e.preventDefault();
+        });
+      })();
     </script>
   </body>
 </html>
